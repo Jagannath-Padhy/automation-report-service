@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-      "target": "ES6",
+      "target": "ES2017",
+      "lib": ["ES2017", "DOM"],
       "moduleResolution": "node",
       "module": "CommonJS",
       "outDir": "./dist",
       "strict": true,
-      "types": ["jest"],
       "esModuleInterop": true,
       "resolveJsonModule": true,
       "skipLibCheck": true,

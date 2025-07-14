@@ -34,9 +34,28 @@ export async function validationModule(
   );
   sessionDetails = JSON.parse(sessionDetails);
 
+  logInfo({
+    message: "Session details retrieved",
+    meta: { 
+      sessionID, 
+      domain: sessionDetails?.domain,
+      version: sessionDetails?.version,
+      isRetailDomain: sessionDetails?.domain?.startsWith("ONDC:RET")
+    }
+  });
+
   let domainConfig: any;
   if (sessionDetails) {
     domainConfig = loadConfig(sessionDetails?.domain, sessionDetails?.version);
+    logInfo({
+      message: "Domain configuration loaded",
+      meta: { 
+        domain: sessionDetails?.domain,
+        version: sessionDetails?.version,
+        configFound: !!domainConfig,
+        flowsCount: domainConfig?.flows ? Object.keys(domainConfig.flows).length : 0
+      }
+    });
   }
   const Report: Report = { finalReport: {}, flowErrors: {} };
   const flowsReport: { [flowId: string]: FlowValidationResult } = {}; // Initialize an object to store the final validation report
@@ -111,10 +130,16 @@ export async function validationModule(
     const errors: string[] = []; // Initialize an array to store errors for the flow
     const messages: any = {}; // Initialize an object to store validation messages for each action
     let validSequence = true; // Flag to track whether the sequence of actions is valid
-    // logger.info(`Validating ${flowId}......`);
+    
     logInfo({
-      message: `Validating ${flowId}...`,
-      meta: { flowId },
+      message: `Starting validation for flow: ${flowId}`,
+      meta: { 
+        flowId,
+        payloadCount: payloads.length,
+        expectedSequence: requiredSequence,
+        actualActions: payloads.map(p => p.action),
+        isRetailDomain: sessionDetails?.domain?.startsWith("ONDC:RET")
+      },
     });
     // Step 1: Validate Action Sequence for each flow
 

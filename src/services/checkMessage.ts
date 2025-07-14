@@ -62,22 +62,52 @@ export const checkMessage = async (
   flowId: string,
   domainConfig: any
 ): Promise<object> => {
+  const isRetailDomain = domain?.startsWith("ONDC:RET");
+  
   logInfo({
-    message: "Entering checkMessage function.",
-    meta: { domain, element, action, sessionId, flowId },
+    message: "[CHECK MESSAGE] Starting message validation",
+    meta: { 
+      domain, 
+      action, 
+      sessionId, 
+      flowId,
+      isRetailDomain,
+      messageId: element?.jsonRequest?.context?.message_id,
+      transactionId: element?.jsonRequest?.context?.transaction_id
+    },
   });
+  
   // Get the module path and function name based on the version, or fall back to the default configuration
   const modulePathWithFunc = domainConfig?.validationModules;
+  
   logInfo({
-    message: "Exiting checkMessage function. Calling dynamicValidator.",
-    meta: { modulePathWithFunc },
+    message: "[CHECK MESSAGE] Routing to validator",
+    meta: { 
+      modulePathWithFunc,
+      isRetailValidator: modulePathWithFunc?.includes("retail/validator"),
+      domain,
+      action
+    },
   });
+  
   // Call the dynamicValidator to load and execute the validation function for the given domain, element, and action
-  return dynamicValidator(
+  const result = await dynamicValidator(
     modulePathWithFunc,
     element,
     action,
     sessionId,
     flowId
   );
+  
+  logInfo({
+    message: "[CHECK MESSAGE] Validation completed",
+    meta: {
+      domain,
+      action,
+      isRetailDomain,
+      hasResult: !!result
+    }
+  });
+  
+  return result;
 };

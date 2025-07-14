@@ -463,3 +463,858 @@ domains:
           - PICKUP_DELIVERY_ATTEMPT
           - FEATURE_DISCOVERY
         validationModules: "../validations/ONDC:LOG11/validator#validate"
+
+  ONDC:RET10:
+    versions:
+      "1.2.5":
+        flows:
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search_inc_close
+            - on_search_inc_open
+            - search_inc
+
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+
+          Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          RTO_And_Part_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+
+          Self_Pickup_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+
+          Slotted_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Buyer_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - update
+
+          Buyer_Instructions_And_Delivery_Update_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+            - on_status
+
+          Multi_Option_Fulfillment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+
+          Forced_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+
+        optional_flows:
+          - Discovery_Flow_incremental_catalog
+          - Out_Of_Stock_Flow
+          - RTO_And_Part_Cancellation_Flow
+          - Return_Flow
+          - Cash_On_Delivery_Flow
+          - Self_Pickup_Flow
+          - Slotted_Delivery_Flow
+          - Buyer_Delivery_Flow
+          - Buyer_Instructions_And_Delivery_Update_Flow
+          - Multi_Option_Fulfillment_Flow
+          - Forced_Cancellation_Flow
+        validationModules: "../validations/retail/validator#validate"
+
+  ONDC:RET11:
+    versions:
+      "1.2.5":
+        flows:
+          FULL_CATALOG:
+            - search
+            - on_search
+
+          INCREMENTAL_CATALOG:
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - search
+
+          ORDER_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+
+          OUT_OF_STOCK:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          BUYER_CANCEL:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          RTO_PLUS_PART_CANCELLATION:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+          RETURN_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - update
+
+          FORCE_CANCEL:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+
+          OFFERS_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          SELF_PICKUP:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+
+          SLOTTED_DELIVERY:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          BUYER_DELIVERY:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+
+          BUYER_INSTRUCTIONS_AND_ADDRESS_UPDATE_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+            - on_status
+
+          MULTI_OPTION_FULFILLMENT_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+        optional_flows:
+          - INCREMENTAL_CATALOG
+          - OUT_OF_STOCK
+          - RTO_PLUS_PART_CANCELLATION
+          - RETURN_FLOW
+          - FORCE_CANCEL
+          - OFFERS_FLOW
+          - SELF_PICKUP
+          - SLOTTED_DELIVERY
+          - BUYER_DELIVERY
+          - BUYER_INSTRUCTIONS_AND_ADDRESS_UPDATE_FLOW
+          - MULTI_OPTION_FULFILLMENT_FLOW
+        validationModules: "../validations/retail/validator#validate"
+
+  ONDC:RET12:
+    versions:
+      "1.2.5":
+        flows:
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+          Seller_Cred_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Cancel_Return_Request_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - cancel
+            - on_cancel
+
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+
+        optional_flows:
+          - Discovery_Flow_incremental_catalog
+          - Out_Of_Stock_Flow
+          - Seller_Cancellation_Flow
+          - Seller_Cred_Flow
+          - Return_Flow
+          - Cash_On_Delivery_Flow
+          - Replacement_Flow
+          - Cancel_Return_Request_Flow
+          - Force_Cancellation_Flow
+        validationModules: "../validations/retail/validator#validate"
+
+  ONDC:RET13:
+    versions:
+      "1.2.5":
+        flows:
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Cross_Category_Cart_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+          Seller_Cred_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Offers_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+        optional_flows:
+          - Discovery_Flow_incremental_catalog
+          - Cross_Category_Cart_Flow
+          - Out_Of_Stock_Flow
+          - Seller_Cancellation_Flow
+          - Seller_Cred_Flow
+          - Cash_On_Delivery_Flow
+          - Offers_Flow
+        validationModules: "../validations/retail/validator#validate"
+
+  ONDC:RET14:
+    versions:
+      "1.2.5":
+        flows:
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+
+          SNP_Collecting_Payment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Purchase_Finance_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          Customization_Input_Text_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+        optional_flows:
+          - Discovery_Flow_incremental_catalog
+          - Out_Of_Stock_Flow
+          - Seller_Cancellation_Flow
+          - SNP_Collecting_Payment_Flow
+          - Purchase_Finance_Flow
+          - Customization_Input_Text_Flow
+        validationModules: "../validations/retail/validator#validate"

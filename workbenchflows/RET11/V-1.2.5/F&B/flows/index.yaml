@@ -1,0 +1,1588 @@
+flows:
+  - id: FULL_CATALOG
+    description: Retail 1.2.5 (Discovery Flow)
+    sequence:
+      - key: search
+        type: search
+        unsolicited: false
+        description: BAP sends the search request
+        pair: on_search
+        owner: BAP
+        expect: true
+        input:
+          - label: Options
+            name: options
+            type: checkbox
+            options:
+              - code: "promo"
+                name: "Promotions"
+              - code: "demandSignal"
+                name: "Demand Signal"
+      - key: on_search
+        type: on_search
+        unsolicited: false
+        description: BPP returns the full catalog refresh
+        pair: null
+        owner: BPP
+        input:
+          - name: offers
+            label: Select offers
+            type: checkbox
+            options:
+              - code: "discount"
+                name: "Discount"
+              # - code: "buyXgetY"
+              #   name: "BuyXGetY"
+  - id: INCREMENTAL_CATALOG
+    description: "Retail 1.2.5 (Discovery Flow Incremental Catalog)"
+    sequence:
+      - key: search_1
+        type: search
+        unsolicited: false
+        description: Bap begins search for incremental changes
+        pair: on_search_1
+        owner: BAP
+        expect: true
+        input:
+          - name: search_mode
+            display: false
+            default: start
+      - key: on_search_1
+        type: on_search
+        unsolicited: false
+        description: BPP returns the incremental changes
+        pair: null
+        owner: BPP
+      - key: on_search_3
+        type: on_search
+        unsolicited: true
+        description: BPP returns the incremental changes
+        pair: null
+        owner: BPP
+      - key: on_search_2
+        type: on_search
+        unsolicited: true
+        description: BPP returns the incremental changes
+        pair: null
+        owner: BPP
+      - key: search_1
+        type: search
+        unsolicited: false
+        description: Bap stops search for incremental changes
+        pair: ""
+        owner: BAP
+        expect: true
+        input:
+          - name: search_mode
+            type: text
+            display: false
+            default: stop
+  - id: ORDER_FLOW
+    description: Retail 1.2.5 (Order Flow)
+    sequence:
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        description: BAP select the item
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description:
+          BPP returns item breakup when item is in stock and offer applied
+          (if any)
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        description: Buyer initiate the product and send the updated fulfillment id
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Respond to init
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+        description: Buyer confirms product
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller Accepts confirmation
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order accepted
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order packed
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - agent assigned
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order picked up
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      # - key: update_document
+      #   type: update
+      #   unsolicited: false
+      #   pair: null
+      #   owner: BAP
+      #   expect: false
+      - key: track
+        type: track
+        unsolicited: false
+        description: BAP request to track the order
+        pair: on_track
+        owner: BAP
+        expect: false
+      - key: on_track
+        type: on_track
+        unsolicited: false
+        description: BPP sends the tracking information
+        pair: null
+        owner: BPP
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order out for delivery
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order delivered
+  - id: OUT_OF_STOCK
+    description: Retail 1.2.5 (Out Of Stock)
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select_oos
+        type: select
+        unsolicited: false
+        pair: on_select_oos
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+        description: BAP may add unavailable or out-of-stock items to the cart
+      - key: on_select_oos
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: BPP returns item breakup when item is out of stock
+        input:
+          - label: Enter Item id for Out of stock item
+            name: oosItem
+            type: text
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: false
+        description: BAP select the item
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description:
+          BPP returns item breakup when item is in stock and offer applied
+          (if any)
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        description: Buyer initiate the product and send the updated fulfillment id
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Respond to init
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+        description: Buyer confirms product
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller Accepts confirmation
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order accepted
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order packed
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - agent assigned
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order picked up
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - Order picked up
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - At delivery
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Status updates - order delivered
+  - id: BUYER_CANCEL
+    description: Retail 1.2.5 (Buyer Side Order Cancellation)
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        description: BAP select the item
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description:
+          BPP returns item breakup when item is in stock and offer applied
+          (if any)
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        description: Buyer initiate the product and send the updated fulfillment id
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Respond to init
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: cancel
+        type: cancel
+        unsolicited: false
+        pair: on_cancel
+        owner: BAP
+        expect: false
+        # cancellation "001"
+        description: Buyer request for the cancellation of the order
+      - key: on_cancel
+        type: on_cancel
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller confirms the cancellation of the order
+  - id: RTO_PLUS_PART_CANCELLATION
+    description: Retail 1.2.5 (Seller Side Order Cancellation RTO)
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_update_part_cancel
+        type: on_update
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        input:
+          - label: Select item id to cancel
+            name: partCancelItemId
+            type: text
+            # cancellation "002"
+      - key: update_settelment_part_cancel
+        type: update
+        unsolicited: false
+        pair: null
+        owner: BAP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_cancel_rto
+        type: on_cancel
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller confirms the cancellation of the order
+      # send input code "013" as cancel code
+      - key: on_status_rto_disposed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+  - id: RETURN_FLOW
+    description: Retail 1.2.5 (Liquidation)
+    sequence:
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_return
+        type: update
+        unsolicited: false
+        pair: null
+        owner: BAP
+        expect: false
+        input:
+          - label: Select Item id to return
+            name: returnItemId
+            type: text
+          - label: Select Return reason
+            name: returnReason
+            type: select
+            values:
+              - "001"
+              - "002"
+              - "003"
+              - "004"
+              - "005"
+      - key: on_update_return_intermin
+        type: on_update
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_update_return_final
+        type: on_update
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_settelment_return
+        type: update
+        unsolicited: false
+        pair: null
+        owner: BAP
+        expect: false
+  - id: FORCE_CANCEL
+    description: Retail 1.2.5 (Buyer Side Order Cancellation)
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: cancel
+        type: cancel
+        unsolicited: false
+        pair: null
+        owner: BAP
+        expect: false
+        description: Buyer request for the cancellation of the order
+        # caceellation id "006"
+      - key: cancel_force
+        type: cancel
+        unsolicited: true
+        pair: on_cancel
+        owner: BAP
+        expect: false
+        description: Buyer request for the cancellation of the order
+      - key: on_cancel
+        type: on_cancel
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller confirms the cancellation of the order
+        input:
+          - name: isForceCancel
+            label: Enter provider id
+            type: text
+            default: "yes"
+            display: false
+      - key: update_settelment_cancel
+        type: update
+        unsolicited: false
+        pair: null
+        owner: BAP
+        expect: false
+        input:
+          - name: isRefund
+            type: text
+            default: "yes"
+            display: false
+  - id: OFFERS_FLOW
+    description: Retail 1.2.5 (Buyer Side Order Cancellation)
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      #     - name: offers
+      #       label: Select offers
+      #       type: select
+      #       values:
+      #         - Discount
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - label: Select offer Id
+            name: offerId
+            type: text
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: cancel
+        type: cancel
+        unsolicited: false
+        pair: on_cancel
+        owner: BAP
+        expect: false
+        description: Buyer request for the cancellation of the order
+        # add input with reason code "001"
+      - key: on_cancel
+        type: on_cancel
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        description: Seller confirms the cancellation of the order
+  - id: SELF_PICKUP
+    description: User pickes the order themselfs
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select_multiple_fulfillment
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select_multiple_fulfillment
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        input:
+          - name: fulfillmentType
+            label: Fulfillment type
+            type: text
+            display: false
+            default: Self-Pickup
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_self_delivery_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+  - id: SLOTTED_DELIVERY
+    description: User pickes the order themselfs
+    sequence:
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select_slotted
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "560001"
+      - key: on_select_slotted
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init_multiple_fulfillment
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        input:
+          - name: selectedFulfillment
+            label: Select Fulfillment Id
+            type: text
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        input:
+          - name: isSlottedDelivery
+            label: Enter location id
+            type: text
+            default: "yes"
+            display: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+        input:
+          - name: isSlottedDelivery
+            label: Enter location id
+            type: text
+            default: "yes"
+            display: false
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+  - id: BUYER_DELIVERY
+    description: User uses station code for searching bus
+    sequence:
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select_multiple_fulfillment
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+      - key: on_select_multiple_fulfillment
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+        input:
+          - name: fulfillmentType
+            label: Fulfillment type
+            type: text
+            display: false
+            default: Buyer-Delivery
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_buyer_delivery_intermin
+        type: update
+        unsolicited: false
+        pair: on_update_buyer_delivery_intermin
+        owner: BAP
+        expect: false
+      - key: on_update_buyer_delivery_intermin
+        type: on_update
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_buyer_delivery_final
+        type: update
+        unsolicited: false
+        pair: on_update_buyer_delivery_final
+        owner: BAP
+        expect: false
+      - key: on_update_buyer_delivery_final
+        type: on_update
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+  - id: BUYER INSTRUCTIONS AND ADDRESS UPDATE FLOW
+    description: User uses station code for searching bus
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+          - label: Options
+            name: options
+            type: checkbox
+            options:
+              - code: "demandSignal"
+                name: "Demand Signal"
+            display: false
+            default: demandSignal
+      - key: on_select
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_address
+        type: update
+        unsolicited: false
+        pair: on_update_address
+        owner: BAP
+        expect: false
+      - key: on_update_address
+        type: on_update
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: update_buyer_inst
+        type: update
+        unsolicited: false
+        pair: on_update_buyer_inst
+        owner: BAP
+        expect: false
+      - key: on_update_buyer_inst
+        type: on_update
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_update_delivery_auth
+        type: on_update
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+  - id: MULTI_OPTION_FULFILLMENT_FLOW
+    description: User uses station code for searching bus
+    sequence:
+      # - key: search
+      #   type: search
+      #   unsolicited: false
+      #   description: LBNP sends a search request
+      #   pair: on_search
+      #   owner: BAP
+      #   expect: true
+      # - key: on_search
+      #   type: on_search
+      #   unsolicited: false
+      #   description: LSP responds with catalog
+      #   pair: null
+      #   owner: BPP
+      #   input:
+      #     - name: npType
+      #       label: Select a type
+      #       type: text
+      #       default: MSN
+      #       display: false
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select_fulfillment_array
+        owner: BAP
+        expect: true
+        input:
+          - label: Items
+            name: items
+            type: nestedSelect
+          - name: providerId
+            label: Enter provider id
+            type: text
+          - name: locationId
+            label: Enter location id
+            type: text
+          - name: gps
+            label: Enter gps coordinates
+            type: text
+            default: 77.1976,28.5671
+          - name: area_code
+            label: Enter area code
+            type: text
+            default: "110088"
+      - key: on_select_fulfillment_array
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init_fulfillment_array
+        type: init
+        unsolicited: false
+        pair: on_init_fulfillment_array
+        owner: BAP
+        expect: false
+      - key: on_init_fulfillment_array
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_pending
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_packed
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_agent_assigned
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_pickup
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_picked
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_at_delivery
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_status_order_delivered
+        type: on_status
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false

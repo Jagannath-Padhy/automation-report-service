@@ -30,6 +30,11 @@ export const ENABLED_DOMAINS: String[] = [
   "nic2004:60232",
   "ONDC:LOG10",
   "ONDC:LOG11",
+  "ONDC:RET10",
+  "ONDC:RET11",
+  "ONDC:RET12",
+  "ONDC:RET13",
+  "ONDC:RET14",
 ];
 
 export const FLOW_MAPPINGS: Record<string, string> = {
@@ -45,6 +50,12 @@ export const VALIDATION_URL: Record<string, string> = {
   "ONDC:RET10": "https://log-validation.ondc.org/api/validate",
   "ONDC:RET11": "https://log-validation.ondc.org/api/validate",
   "ONDC:RET12": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET13": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET14": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET15": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET16": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET17": "https://log-validation.ondc.org/api/validate",
+  "ONDC:RET18": "https://log-validation.ondc.org/api/validate",
   "ONDC:FIS12": "https://log-validation.ondc.org/api/validate/fis/fis12",
 };
 
