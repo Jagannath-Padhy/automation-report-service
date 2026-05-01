@@ -493,6 +493,15 @@ export const FLOW_ID_MAP: Record<
       },
     },
   },
+  "ONDC:RETeB2B": {
+    "1.2.5": {
+      "eB2B": {
+        "Discovery_flow_broadcast_search": "RET_9_EB2B",
+        "Order_to_confirm_to_fulfillment_(cod)": "RET_1B_EB2B",
+      },
+    },
+  },
+  
   "ONDC:RET11": {
     "1.2.5": {
       "F&B": {
@@ -748,6 +757,7 @@ export const typeMapping: Record<string, string> = {
   "ride-Logistics (P2P)": "LOG",
   "gift-card": "GIFTCARD",
   "GROCERY": "RETAIL",
+  "eB2B": "RETAIL",
   "F&B": "RETAIL",
   "FASHION": "RETAIL",
   "BPC": "RETAIL",
