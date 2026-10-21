@@ -6276,4 +6276,20 @@ domains:
             - on_status_out_for_delivery
             - on_status_order_delivered
 
+        # action_id of each step, aligned 1:1 with that flow's `flows` list above. Only read
+        # by the log-upload report (POST /logs-report): downloaded logs carry no action_id, and
+        # the validators key their per-leg contract on it (on_status_packed, …). Copied from
+        # automation-specifications config/flows/eB2B/*.yaml (`action_id` per step, in order).
+        # Live sessions get action_id from the backend's flow state and never read this.
+        flow_action_ids:
+          Discovery_flow_broadcast_search: [search-0, on_search, search-1, on_search-1]
+          "Order_to_confirm_to_fulfillment_(cod)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Order_to_confirm_to_fulfillment_(Prepaid)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          Buyer_Side_Order_Cancellation: [select, on_select, init, on_init, confirm, on_confirm, cancel, on_cancel]
+          "Out_of_Stock(Error_code)": [select0, on_select_out_of_stock, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow: [select, on_select, init, on_init, confirm, on_confirm, on_update_part_cancel, update_settlement_trail, on_status_packed, on_status_agent_assigned, on_status_picked, on_status_out_for_delivery, on_cancel_rto, on_status_rto_delivered]
+          "Order_to_confirm_to_fulfillment_with_offers(Prepaid)": [search, on_search, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Order_to_confirm_to_fulfillment_with_offers(cod)": [search, on_search, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Buyer_Initiated_Return_(Full_Order_and_Partial_Order)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, on_status_out_for_delivery, on_status_order_delivered, update_return, on_update_return_init, on_update_return_approved, on_update_return_picked, update_settlement_trail, on_update_settlement_trail]
+
         validationModules: "../validations/ONDC:RETeB2B/validator#validate"
