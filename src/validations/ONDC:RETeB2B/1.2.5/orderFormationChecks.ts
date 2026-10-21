@@ -1530,6 +1530,45 @@ export function validateFulfillmentContactAndTracking(
 }
 
 /**
+ * The buyer's delivery locality (`end.location.address.locality`) must be a non-empty string.
+ * The contract's /init and /confirm both carry it ("MG Road"), as do all 18 init/confirm
+ * reference payloads across the nine flows. L1 only asserts it EXISTS, and its `are present`
+ * treats `""` as present; L0's empty-field sweep is disabled for v1.x — so an empty locality
+ * (raised by the manual tester, docs/RETeB2B-tester-bugs-coverage.md B4) passed every layer.
+ * A fulfillment without an `end` is left to L1.
+ */
+export function validateDeliveryLocality(order: any, label: string, result: TestResult): void {
+  const fulfillments = order?.fulfillments;
+  if (!Array.isArray(fulfillments) || fulfillments.length === 0) return;
+
+  const cleanRun = failureGate(result);
+  let checked = 0;
+
+  for (const fulfillment of fulfillments) {
+    if (!fulfillment?.end) continue;
+    checked++;
+    const ref = `fulfillment ${fulfillment?.id ?? "?"}`;
+    const locality = fulfillment.end.location?.address?.locality;
+
+    if (isAbsent(locality)) {
+      result.failed.push(`${label}: ${ref} end.location.address.locality is missing`);
+    } else if (typeof locality !== "string") {
+      result.failed.push(
+        `${label}: ${ref} end.location.address.locality must be a string, got ${Array.isArray(locality) ? "array" : typeof locality}`
+      );
+    } else if (!locality.trim()) {
+      result.failed.push(`${label}: ${ref} end.location.address.locality must not be empty`);
+    }
+  }
+
+  if (checked > 0 && cleanRun()) {
+    result.passed.push(
+      `${label}: delivery locality is a non-empty string on all ${checked} fulfillment(s)`
+    );
+  }
+}
+
+/**
  * The two ISO-8601 durations this leg carries: each fulfillment's `@ondc/org/TAT` and the
  * quote's own `ttl`. Present in all nine flows at both legs (`P2D`/`PT4H` and `P1D`), and
  * L1 only checks that they exist, never that they parse.

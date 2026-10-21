@@ -98,6 +98,7 @@ interface ReturnRequest {
   id?: string;
   itemId?: string;
   quantity?: string;
+  images?: unknown;
 }
 
 function returnRequestOf(fulfillment: any): ReturnRequest | null {
@@ -107,7 +108,27 @@ function returnRequestOf(fulfillment: any): ReturnRequest | null {
     id: tagValue(list, "id"),
     itemId: tagValue(list, "item_id"),
     quantity: tagValue(list, "item_quantity"),
+    images: tagValue(list, "images"),
   };
+}
+
+const HTTP_URL = /^https?:\/\/\S+$/i;
+
+/**
+ * `return_request.images`: every /update return example in the contract carries it (a
+ * comma-separated list of https URLs) with no "optional" annotation, and both the spec
+ * example and the workbench buyer mock send one https URL. Raised by the manual tester
+ * (docs/RETeB2B-tester-bugs-coverage.md B13); L1 only validates it when sent.
+ */
+function returnImagesProblem(images: unknown): string | null {
+  if (images === undefined || images === null) return "return_request.images is missing";
+  if (typeof images !== "string" || !images.trim()) {
+    return "return_request.images must be a non-empty, comma-separated list of image URLs";
+  }
+  const bad = images.split(",").map((u) => u.trim()).filter((u) => !HTTP_URL.test(u));
+  return bad.length > 0
+    ? `return_request.images has ${bad.length} entry/entries that are not http(s) URLs ('${bad.join("', '")}')`
+    : null;
 }
 
 interface TrailEntry {
@@ -191,6 +212,8 @@ export function validateReturnRequest(
       );
     }
     if (!request.itemId) result.failed.push(`${label}: ${ref} return_request.item_id is missing`);
+    const imagesProblem = returnImagesProblem(request.images);
+    if (imagesProblem) result.failed.push(`${label}: ${ref} ${imagesProblem}`);
 
     const qty = Number(request.quantity);
     if (!Number.isInteger(qty) || qty <= 0) {
@@ -216,7 +239,8 @@ export function validateReturnRequest(
     const summary = returns
       .map((f: any) => {
         const r = returnRequestOf(f);
-        return `'${r?.id}' (${r?.quantity} x ${r?.itemId})`;
+        const imageCount = String(r?.images ?? "").split(",").filter((u) => u.trim()).length;
+        return `'${r?.id}' (${r?.quantity} x ${r?.itemId}, ${imageCount} image(s))`;
       })
       .join(", ");
     result.passed.push(`${label}: return request ${summary} is complete and within the ordered quantity`);

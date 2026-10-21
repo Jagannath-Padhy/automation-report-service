@@ -16,6 +16,7 @@ import {
   validateIdsAgainstOnSelect,
   validateItemsAgainstOnSelect,
   validateFulfillmentContactAndTracking,
+  validateDeliveryLocality,
   validateProviderContinuity,
   validateQuotePriceNoDrift,
   validateOffersAgainstCatalog,
@@ -40,6 +41,7 @@ export default async function init(
     // L1 asserts these fulfillment fields EXIST; this adds the shape it cannot see
     // (dialable phone, boolean tracking). See docs/RETeB2B-init-contract-audit.md §3.1.
     validateFulfillmentContactAndTracking(order, "init", result);
+    validateDeliveryLocality(order, "init", result);
 
     validatePaymentsPresence(order, "init", result);
     validatePaymentEnums(order, "init", result);
