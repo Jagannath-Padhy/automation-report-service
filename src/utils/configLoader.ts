@@ -2,6 +2,7 @@ import * as yaml from "js-yaml";
 import * as fs from "fs";
 import * as path from "path";
 import logger from "@ondc/automation-logger";
+import { resolveUsecaseKey } from "./payloadUtils";
 
 // Load ReportingConfig.yaml
 export const loadConfig = (domain: string, version: string, usecaseId?: string) => {
@@ -14,12 +15,23 @@ export const loadConfig = (domain: string, version: string, usecaseId?: string) 
     const yamlFile: any = yaml.load(file);
 
     const versionConfig = yamlFile?.domains?.[domain]?.versions?.[version];
-    
-    // First try with usecaseId if provided (for domains that have usecase-specific configs)
-    let domainConfig = usecaseId ? versionConfig?.usecases?.[usecaseId] : null;
-    
+
+    // First try with usecaseId if provided (for domains that have usecase-specific configs).
+    // Session usecaseIds can arrive as slugs ("transit-insurance") or in a different case
+    // than the YAML keys ("TRANSIT INSURANCE"), so resolve case/format-insensitively.
+    const resolvedUsecaseId = usecaseId
+      ? resolveUsecaseKey(versionConfig?.usecases, usecaseId)
+      : undefined;
+    let domainConfig = resolvedUsecaseId ? versionConfig?.usecases?.[resolvedUsecaseId] : null;
+
     // If no usecase config found, use the version config directly (for TRV10, TRV11, etc.)
     if (!domainConfig && versionConfig) {
+      if (usecaseId && versionConfig?.usecases) {
+        logger.error(
+          `No usecase config matched '${usecaseId}' for domain '${domain}' version '${version}'; falling back to version config, which lacks per-usecase flows/validationModules.`,
+          { domain, version, usecaseId, availableUsecases: Object.keys(versionConfig.usecases) }
+        );
+      }
       domainConfig = versionConfig;
     }
     
