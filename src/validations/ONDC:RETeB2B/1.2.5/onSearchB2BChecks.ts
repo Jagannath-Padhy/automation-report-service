@@ -33,11 +33,18 @@ export function failureGate(result: TestResult): () => boolean {
   return () => result.failed.length === before;
 }
 
+/**
+ * `order_value.min_value` is "required" (fn 94), and every full spec catalog sends it
+ * (`500.00`). Its absence used to pass as "nothing to validate", so a seller omitting the
+ * group passed every layer (the Vistar tester's V3,
+ * docs/RETeB2B-vistar-seller-tester-coverage.md). Only the full catalog reaches this check;
+ * the incremental and P2P on_search forms carry no provider tags and are never validated here.
+ */
 export function validateOrderValueTag(provider: any, result: TestResult): void {
   const group = tagGroupsByCode(provider?.tags, "order_value")[0];
   if (!group) {
-    result.passed.push(
-      `on_search: ${providerLabel(provider)} no order_value tag declared — nothing to validate`
+    result.failed.push(
+      `on_search: ${providerLabel(provider)} is missing the required 'order_value' tag group — it must declare the minimum order value (min_value)`
     );
     return;
   }
@@ -58,12 +65,8 @@ export function validateOrderValueTag(provider: any, result: TestResult): void {
 
 export function validateTimingTags(provider: any, result: TestResult): void {
   const groups = tagGroupsByCode(provider?.tags, "timing");
-  if (groups.length === 0) {
-    result.passed.push(
-      `on_search: ${providerLabel(provider)} no timing tags declared — nothing to validate`
-    );
-    return;
-  }
+  // Absence is reported once, as a failure, by validateOrderTimingPresence.
+  if (groups.length === 0) return;
 
   const cleanRun = failureGate(result);
 
@@ -156,7 +159,7 @@ export function validateBrandImagesConsistency(provider: any, result: TestResult
   const group = tagGroupsByCode(provider?.tags, "brand_images")[0];
   if (!group) {
     result.failed.push(
-      `on_search: ${providerLabel(provider)} brand_images configuration is required`
+      `on_search: ${providerLabel(provider)} provider.tags must include a 'brand_images' group with an image for each brand used in the items' attribute tags`
     );
     return;
   }
@@ -198,7 +201,7 @@ export function validateRetailerInfoRequiredTags(provider: any, result: TestResu
 
   if (groups.length === 0) {
     result.failed.push(
-      `on_search: ${providerLabel(provider)} retailer_info_required configuration is required`
+      `on_search: ${providerLabel(provider)} provider.tags must include at least one 'retailer_info_required' group — a non-empty list of code/value entries naming the retailer details the seller needs from the buyer`
     );
     return;
   }
@@ -454,8 +457,29 @@ export function validateConsumerCareContact(items: any[] | undefined, result: Te
   }
 }
 
+/**
+ * The provider's GSTIN credential, and its descriptor `name` / `short_desc` (fn 30).
+ *
+ * The descriptor fields are checked for emptiness only WHEN SENT: the incremental-catalog
+ * and P2P on_search forms legitimately carry no provider descriptor. L1's
+ * `PROVIDERS_DESCRIPTOR_SHORT_DESC must be present` treats `""` as present, so an empty
+ * short_desc (the Vistar tester's V1, docs/RETeB2B-vistar-seller-tester-coverage.md)
+ * passed every layer. Every spec catalog that sends a descriptor sends both values.
+ */
 export function validateProviderIdentity(provider: any, result: TestResult): void {
   const cleanRun = failureGate(result);
+
+  const descriptor = provider?.descriptor;
+  if (descriptor && typeof descriptor === "object") {
+    for (const field of ["name", "short_desc"]) {
+      const value = descriptor[field];
+      if (value !== undefined && value !== null && !String(value).trim()) {
+        result.failed.push(
+          `on_search: ${providerLabel(provider)} descriptor.${field} must not be empty when sent`
+        );
+      }
+    }
+  }
 
   const creds = provider?.creds || [];
   const gstin = creds.find((cred: any) => cred?.descriptor?.code === "GSTIN");
@@ -474,6 +498,11 @@ export function validateProviderIdentity(provider: any, result: TestResult): voi
         ? `on_search: ${providerLabel(provider)} GSTIN credential present ('${gstin.id}')`
         : `on_search: ${providerLabel(provider)} no GSTIN credential declared — nothing to validate`
     );
+    if (descriptor && typeof descriptor === "object") {
+      result.passed.push(
+        `on_search: ${providerLabel(provider)} descriptor name/short_desc are non-empty where sent`
+      );
+    }
   }
 }
 

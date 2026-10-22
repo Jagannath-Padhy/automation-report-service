@@ -462,9 +462,20 @@ export function validateServiceabilityCoverage(provider: any, result: TestResult
   }
 }
 
+/**
+ * At least one `timing` group of type `Order` is mandatory. A provider with NO timing groups
+ * used to return silently, so the most common form of the defect was the one never flagged
+ * (the Vistar tester's V3, docs/RETeB2B-vistar-seller-tester-coverage.md Finding 3). Every
+ * full spec catalog declares Order and Delivery timing.
+ */
 export function validateOrderTimingPresence(provider: any, result: TestResult): void {
   const groups = tagGroupsByCode(provider?.tags, "timing");
-  if (groups.length === 0) return;
+  if (groups.length === 0) {
+    result.failed.push(
+      `on_search: ${providerLabel(provider)} declares no 'timing' tag groups — at least one timing construct of type 'Order' is mandatory`
+    );
+    return;
+  }
 
   const types = groups.map((g) => tagValue(g.list, "type")).filter(Boolean);
   if (!types.includes("Order")) {

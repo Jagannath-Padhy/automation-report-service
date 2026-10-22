@@ -38,7 +38,8 @@ import {
   validateItemStatutoryFields,
   validateOffers,
 } from "./onSearchRetailChecks";
-import { isOffersFlow } from "./offerChecks";
+import { isOffersFlow, validateCatalogOffersPresent } from "./offerChecks";
+import { hasErrorResponse } from "./selectChecks";
 
 // Only Discovery_flow_broadcast_search disambiguates its two on_search legs by
 // action_id (search-0 / on_search / search-1 / on_search-1). Of the other eight
@@ -74,12 +75,17 @@ export default async function on_search(
         validateP2PDescriptor(message?.catalog?.["bpp/descriptor"], result);
       } else {
         result.failed.push(
-          `on_search: unexpected action_id '${actionId}' for flow '${flowId}' — expected '${ACTION_ID_BROADCAST}' or '${ACTION_ID_P2P}'`
+          `on_search: this call does not match a step of ${flowId} — the flow expects the catalog response to the broadcast search, then the response to the search sent directly to one seller; check the order of calls`
         );
       }
     } else if (isOffersFlow(flowId)) {
       // Deep path, no action_id dispatch: these flows have one on_search step.
       validateBroadcastCatalog(element, message, result);
+      // Skipped on a NACK and on a missing provider array — both are already reported.
+      const providers = message?.catalog?.["bpp/providers"];
+      if (!hasErrorResponse(element?.jsonRequest?.error) && Array.isArray(providers) && providers.length > 0) {
+        validateCatalogOffersPresent(providers, result);
+      }
     } else {
       validateCatalogStructure(message, result);
     }

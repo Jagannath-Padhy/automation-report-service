@@ -268,14 +268,14 @@ export function validateReturnStateProgression(
 
   if (expected) {
     if (returns.length === 0) {
-      result.failed.push(`${label}: no fulfillment of type 'Return' — this leg must report one in state '${expected}'`);
+      result.failed.push(`${label}: no fulfillment of type 'Return' — this return update must include one in state '${expected}'`);
       return;
     }
     const wrong = returns.filter((f: any) => stateCode(f) !== expected);
     if (wrong.length > 0) {
       wrong.forEach((f: any) =>
         result.failed.push(
-          `${label}: Return fulfillment '${f?.id}' is in state '${stateCode(f)}', expected '${expected}' at this leg`
+          `${label}: Return fulfillment '${f?.id}' is in state '${stateCode(f)}', expected '${expected}' at this step of the return`
         )
       );
     } else {
@@ -317,6 +317,40 @@ export function validateReturnStateProgression(
 }
 
 /**
+ * A return is raised against a delivered order, so while a Return fulfillment is in play the
+ * forward `Delivery` fulfillment must still read `Order-delivered`: the Return fulfillment
+ * carries the return's lifecycle, and the Delivery leg does not change because of it. All 10
+ * contract `/on_update` return examples (Return_Initiated through Liquidated, Return_Rejected
+ * and Return_Delivered) keep Delivery at `Order-delivered`, as do all four BIR spec legs.
+ *
+ * SELF-GATING on the presence of a Return fulfillment. A part-cancel on_update (a `Cancel`
+ * fulfillment, Delivery still `Pending`) and an order with no return are skipped, not passed.
+ */
+export function validateDeliveryStaysDeliveredDuringReturn(order: any, label: string, result: TestResult): void {
+  const fulfillments = asArray(order?.fulfillments);
+  if (returnFulfillments(fulfillments).length === 0) return;
+
+  const deliveries = fulfillments.filter((f: any) => f?.type === "Delivery");
+  if (deliveries.length === 0) {
+    result.failed.push(`${label}: a return is in progress but the order carries no Delivery fulfillment — the delivered forward shipment must stay on the order`);
+    return;
+  }
+
+  const cleanRun = failureGate(result);
+  for (const f of deliveries) {
+    const code = stateCode(f);
+    if (code !== "Order-delivered") {
+      result.failed.push(
+        `${label}: Delivery fulfillment ${f?.id ?? "?"} is '${code ?? "missing"}' during a return — it must stay 'Order-delivered' (the return's state belongs on the Return fulfillment)`
+      );
+    }
+  }
+  if (cleanRun()) {
+    result.passed.push(`${label}: ${deliveries.length} Delivery fulfillment(s) remain 'Order-delivered' while the return is in progress`);
+  }
+}
+
+/**
  * The seller must keep answering under the id the buyer raised: a Return fulfillment with
  * that id must be present, its own return_request.id must agree with it, and the item and
  * quantity must still be what the buyer asked to return.
@@ -335,7 +369,7 @@ export function validateReturnIdContinuity(
   if (returns.length === 0) return;
 
   if (!raisedId) {
-    result.passed.push(`${label}: no saved update_return to trace the Return fulfillment id against — skipped`);
+    result.passed.push(`${label}: Return fulfillment id not compared — no update_return request was found earlier in this flow`);
     return;
   }
 

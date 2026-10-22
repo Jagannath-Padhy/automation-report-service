@@ -2,9 +2,10 @@ import { TestResult, Payload } from "../../../types/payload";
 import { DomainValidators } from "../../shared/domainValidator";
 import { saveFromElement } from "../../../utils/specLoader";
 import { getActionData } from "../../../services/actionDataService";
-import { validateQuoteBreakup } from "./commonChecks";
+import { validateQuoteBreakup, validateQuoteAmountSigns } from "./commonChecks";
 import {
   validateMandatoryOutOfStockError,
+  validateOutOfStockQuantityReduced,
   validateErrorResponse,
   hasErrorResponse,
   validateSelectProvider,
@@ -48,11 +49,18 @@ export default async function on_select(
     if (flowId === FLOW_OUT_OF_STOCK) {
       if (actionId === ACTION_ID_OOS_REJECTION) {
         validateMandatoryOutOfStockError(requestError, result);
+        // At this point the stored `select` is select0's: the retry select is saved only later.
+        const txnId = element?.jsonRequest?.context?.transaction_id as string | undefined;
+        const select0Data = txnId ? await getActionData(sessionID, flowId, txnId, "select") : null;
+        validateOutOfStockQuantityReduced(element?.jsonRequest?.message?.order, requestError, select0Data, result);
+        // The rejection still quotes (the OOS item at 0.00), so the S8 sign rule applies to it too.
+        const rejectionQuote = element?.jsonRequest?.message?.order?.quote;
+        if (rejectionQuote) validateQuoteAmountSigns(rejectionQuote, result, "on_select");
         return await finish(element, sessionID, flowId, result);
       }
       if (actionId !== ACTION_ID_OOS_RETRY) {
         result.failed.push(
-          `on_select: unexpected action_id '${actionId}' for flow '${flowId}' — expected '${ACTION_ID_OOS_REJECTION}' (rejection) or '${ACTION_ID_OOS_RETRY}' (retry)`
+          `on_select: this call does not match a step of ${flowId} — the flow expects an out-of-stock on_select (with error code 40002) and then an on_select for the retried select; check the order of calls`
         );
         return await finish(element, sessionID, flowId, result);
       }

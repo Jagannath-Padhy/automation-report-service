@@ -851,9 +851,60 @@ export function validateBapTerms(
   if (cleanRun()) {
     result.passed.push(
       isAbsent(accept)
-        ? `${label}: bap_terms declared (no accept_bpp_terms on this leg — the buyer's acceptance is given at confirm)`
+        ? `${label}: bap_terms declared (accept_bpp_terms is not needed here — the buyer accepts the seller's terms at confirm)`
         : `${label}: bap_terms accepts the seller's terms (accept_bpp_terms 'Y')`
     );
+  }
+}
+
+/**
+ * on_confirm `bpp_terms.accept_bap_terms` — the seller's acceptance of the buyer app's terms.
+ * Contract `/on_confirm` bpp_terms carries `accept_bap_terms: "Y"`, fn 270: "SNP must accept
+ * proposed bap terms & conditions (if proposed). If not accepted, BNP can NACK /on_confirm
+ * with error code 27502". It is the mirror of `confirm`'s `bap_terms.accept_bpp_terms`
+ * (fn 259), which validateBapTerms already requires there.
+ *
+ * "If proposed": the buyer proposes its terms as the `bap_terms` group of `confirm`
+ * (`proposedBapTerms`, saved from that leg). When that state was not stored, the bap_terms
+ * on_confirm itself echoes (contract `/on_confirm` carries it; validateBapTerms requires it)
+ * is taken as the evidence. With neither, nothing was proposed and the flag is not required.
+ *
+ * Only `Y` passes. `N` is a well-formed refusal, but an order cannot be accepted on terms the
+ * seller rejects — the contract's answer to it is a 27502 NACK, so it fails here.
+ *
+ * Calibration (2026-10-22): the contract and 4 of 9 spec flows (BIR, Cancellation, RTO,
+ * Out_of_Stock) send it, as does every mock's defaultPayload. The other five flows' spec
+ * examples and mock generators (COD, Prepaid, Prepaid-IGM, both with_offers) rebuild
+ * on_confirm's tags by copying the buyer's confirm tags, which drops it; that is an upstream
+ * defect and FAILS here (the contract wins where unambiguous).
+ */
+export function validateAcceptBapTerms(
+  order: any,
+  proposedBapTerms: any,
+  label: string,
+  result: TestResult
+): void {
+  const proposedAtConfirm = normalizeSaved(proposedBapTerms)[0];
+  const echoedHere = tagGroupsByCode(order?.tags, "bap_terms")[0];
+  if (!proposedAtConfirm && !echoedHere) {
+    result.passed.push(`${label}: no bap_terms were proposed, so bpp_terms.accept_bap_terms is not required`);
+    return;
+  }
+
+  const group = tagGroupsByCode(order?.tags, "bpp_terms")[0];
+  if (!group) return; // a missing bpp_terms group is validateBppTerms' failure, not this one's
+
+  const accept = tagValue(group.list, "accept_bap_terms");
+  if (isAbsent(accept)) {
+    result.failed.push(
+      `${label}: bpp_terms is missing accept_bap_terms — the seller must accept the bap_terms the buyer proposed ('Y'); otherwise the BNP can NACK with 27502`
+    );
+  } else if (accept !== "Y") {
+    result.failed.push(
+      `${label}: bpp_terms.accept_bap_terms is '${accept}' — the seller must accept the proposed bap_terms ('Y') to confirm the order; a refusal is answered with a 27502 NACK`
+    );
+  } else {
+    result.passed.push(`${label}: bpp_terms accepts the buyer's proposed terms (accept_bap_terms 'Y')`);
   }
 }
 
@@ -1536,8 +1587,18 @@ export function validateFulfillmentContactAndTracking(
  * treats `""` as present; L0's empty-field sweep is disabled for v1.x — so an empty locality
  * (raised by the manual tester, docs/RETeB2B-tester-bugs-coverage.md B4) passed every layer.
  * A fulfillment without an `end` is left to L1.
+ *
+ * `side: "start"` applies the same rule to the seller's ship-from locality, which the
+ * contract's /on_confirm carries ("Jayanagar", as do all nine on_confirm reference payloads).
+ * L1's `FULFILLMENTS_START_LOCATION_ADDRESS_LOCALITY must be present` waves `""` through
+ * the same way (the Vistar tester's V7, docs/RETeB2B-vistar-seller-tester-coverage.md).
  */
-export function validateDeliveryLocality(order: any, label: string, result: TestResult): void {
+export function validateDeliveryLocality(
+  order: any,
+  label: string,
+  result: TestResult,
+  side: "end" | "start" = "end"
+): void {
   const fulfillments = order?.fulfillments;
   if (!Array.isArray(fulfillments) || fulfillments.length === 0) return;
 
@@ -1545,25 +1606,25 @@ export function validateDeliveryLocality(order: any, label: string, result: Test
   let checked = 0;
 
   for (const fulfillment of fulfillments) {
-    if (!fulfillment?.end) continue;
+    if (!fulfillment?.[side]) continue;
     checked++;
     const ref = `fulfillment ${fulfillment?.id ?? "?"}`;
-    const locality = fulfillment.end.location?.address?.locality;
+    const locality = fulfillment[side].location?.address?.locality;
 
     if (isAbsent(locality)) {
-      result.failed.push(`${label}: ${ref} end.location.address.locality is missing`);
+      result.failed.push(`${label}: ${ref} ${side}.location.address.locality is missing`);
     } else if (typeof locality !== "string") {
       result.failed.push(
-        `${label}: ${ref} end.location.address.locality must be a string, got ${Array.isArray(locality) ? "array" : typeof locality}`
+        `${label}: ${ref} ${side}.location.address.locality must be a string, got ${Array.isArray(locality) ? "array" : typeof locality}`
       );
     } else if (!locality.trim()) {
-      result.failed.push(`${label}: ${ref} end.location.address.locality must not be empty`);
+      result.failed.push(`${label}: ${ref} ${side}.location.address.locality must not be empty`);
     }
   }
 
   if (checked > 0 && cleanRun()) {
     result.passed.push(
-      `${label}: delivery locality is a non-empty string on all ${checked} fulfillment(s)`
+      `${label}: ${side === "end" ? "delivery" : "ship-from"} locality is a non-empty string on all ${checked} fulfillment(s)`
     );
   }
 }

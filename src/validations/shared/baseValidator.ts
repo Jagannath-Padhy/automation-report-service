@@ -50,7 +50,7 @@ export function createDomainValidator(
 
         if (!fileName || !version) {
           testResults.failed.push(
-            `Incorrect version or unsupported action: ${action_id}`
+            `'${action_id}' was not checked: its context carries no version/core_version, so the matching validations could not be chosen`
           );
           return testResults;
         }
@@ -85,7 +85,17 @@ export function createDomainValidator(
           testResults.response = testResult.response;
         }
       } catch (err: any) {
-        testResults.failed.push(`Incorrect version for ${action_id}`);
+        const domain = element?.jsonRequest?.context?.domain;
+        // Only a missing validator file for this action/version means "nothing to run"; any
+        // other error is the validator itself failing and is reported as such.
+        const noValidator =
+          (err?.code === "MODULE_NOT_FOUND" || err?.code === "ERR_MODULE_NOT_FOUND") &&
+          String(err?.message).includes(`${domain}/${version}/`);
+        testResults.failed.push(
+          noValidator
+            ? `'${action_id}' was not checked: no validations are available for ${action} in ${domain} ${version}`
+            : `Validation of '${action_id}' could not complete: ${err?.message || err}`
+        );
         logger.error(
           `Error importing version-specific tests: ${err?.stack || err}`
         );

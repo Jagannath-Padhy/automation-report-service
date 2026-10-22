@@ -23,6 +23,7 @@ import {
   validateBppTerms,
   validateCreditTerms,
   validateBapTerms,
+  validateAcceptBapTerms,
   validateOrderTimestamps,
   validateBppTermsEcho,
   validateSettlementDetailsEcho,
@@ -35,6 +36,7 @@ import {
   validateCallbackTtlWindow,
   validateItemsAgainstOnSelect,
   validateShipFromLocation,
+  validateDeliveryLocality,
   validateFulfillmentContactAndTracking,
   validateOrderDurations,
   validateTaxNumberPanConsistency,
@@ -102,6 +104,8 @@ export default async function on_confirm(
     // Seller leg: the offers it lists must be exactly the offers its quote applies.
     if (isOffersFlow(flowId)) validateOrderOffersMatchApplied(order, "on_confirm", result);
     validateShipFromLocation(order, "on_confirm", result);
+    // Vistar V7: an empty ship-from locality passed L1's presence rule.
+    validateDeliveryLocality(order, "on_confirm", result, "start");
     // Added 2026-10-12 from the confirm-leg contract audit §3.1. This is the one leg that
     // carries BOTH contacts: the seller's warehouse (start) and the buyer's door (end). L1
     // asserts both phones exist and that tracking exists; this adds their shape.
@@ -113,6 +117,8 @@ export default async function on_confirm(
       const confirmData = await getActionData(sessionID, flowId, txnId, "confirm");
       compareOrderIdContinuity(order?.id, confirmData?.order_id, "on_confirm", result);
       validateBppTermsEcho(order, confirmData?.bpp_terms, "on_confirm", result);
+      // fn 270: the seller must accept the bap_terms the buyer proposed at confirm.
+      validateAcceptBapTerms(order, confirmData?.bap_terms, "on_confirm", result);
       // The generated COD scripts omit the settlement_details echo at BOTH confirm and
       // on_confirm; it is applied at both here.
       validateSettlementDetailsEcho(order, confirmData?.settlement_details, "on_confirm", result);
