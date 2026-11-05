@@ -33,6 +33,9 @@ save-data:
   # be read from the leg being checked.
   quote_breakup: "$.message.order.quote.breakup[*]"
   bpp_terms: "$.message.order.tags[?(@.code == 'bpp_terms')]"
+  # orderFormationChecks.validateAcceptBapTerms: the terms the buyer PROPOSED here are what
+  # on_confirm's bpp_terms.accept_bap_terms must accept (contract fn 270, "if proposed").
+  bap_terms: "$.message.order.tags[?(@.code == 'bap_terms')]"
   settlement_details: "$.message.order.payments[*]['@ondc/org/settlement_details'][*]"
   billing: "$.message.order.billing"
   created_at: "$.message.order.created_at"

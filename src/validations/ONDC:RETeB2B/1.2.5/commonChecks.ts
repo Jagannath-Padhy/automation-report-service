@@ -1,4 +1,5 @@
 import { TestResult } from "../../../types/payload";
+import { failureGate } from "./onSearchB2BChecks";
 
 /**
  * Common validation utilities for RETeB2B 1.2.5 flows.
@@ -60,6 +61,82 @@ export function validateGpsFormat(gps: string | undefined, fieldPath: string, re
   }
 }
 
+/** Breakup line types whose amounts take money OFF the order, so may be negative. */
+const PRICE_REDUCING_TITLE_TYPES = new Set(["offer", "discount"]);
+
+/**
+ * Only discount and offer lines may carry negative amounts. Every other `quote.breakup`
+ * line (`item`, `delivery`, `packing`, `misc`, `tax`) must have a non-negative line
+ * `price.value` and a non-negative unit `item.price.value`, and `quote.price.value` must be
+ * non-negative too.
+ *
+ * Contract basis:
+ * - fn 213: `item` is product cost, `delivery` / `packing` / `misc` are charges, `tax` is tax;
+ *   `discount` and the order-level offer construct are the reductions.
+ * - fn 214: the item price is "exactly as defined in the catalog", and a catalog price is
+ *   never negative (validateItemPricing).
+ * - Across every contract quote (on_select through on_cancel, part cancel and all return
+ *   states), the only negatives are offer line prices and one discount line's unit price
+ *   (on_cancel, `item.price.value: "-1201.30"` with a "0.00" line price).
+ * - `quote.price.value` is "0.00" on the OOS on_select and on full cancels, and never below
+ *   zero.
+ *
+ * Zero is allowed everywhere: an OOS item quoted at count 0, a cancelled line, free delivery.
+ * Calibration (2026-10-22): all spec examples, every mock defaultPayload and the two real log
+ * bundles have 0 negatives outside offer lines.
+ *
+ * Absent values are skipped here (L1 asserts presence); a present non-numeric value fails.
+ * Offer lines' own sign ("never positive") is offerChecks' job, so discount and offer lines
+ * are exempt here rather than checked twice.
+ */
+export function validateQuoteAmountSigns(quote: any, result: TestResult, context: string = "quote"): void {
+  const breakup: any[] = Array.isArray(quote?.breakup) ? quote.breakup : [];
+  if (breakup.length === 0 && quote?.price?.value === undefined) return;
+
+  const cleanRun = failureGate(result);
+  // null when the amount is acceptable, otherwise the reason it is not.
+  const amountProblem = (raw: any): string | null => {
+    const value = Number(raw);
+    if (raw === null || String(raw).trim() === "" || Number.isNaN(value)) return "is not a number";
+    return value < 0 ? "must be a non-negative amount" : null;
+  };
+
+  const total = quote?.price?.value;
+  const totalProblem = total === undefined ? null : amountProblem(total);
+  if (totalProblem) {
+    result.failed.push(`${context}: quote.price.value '${total}' ${totalProblem} — an order total is never below zero`);
+  }
+
+  let checked = 0;
+  let exempt = 0;
+  breakup.forEach((line: any, index: number) => {
+    const titleType = line?.["@ondc/org/title_type"];
+    if (PRICE_REDUCING_TITLE_TYPES.has(titleType)) {
+      exempt++;
+      return;
+    }
+    checked++;
+    const ref = `quote.breakup[${index}] (title_type '${titleType ?? "?"}', item '${line?.["@ondc/org/item_id"] ?? "?"}')`;
+    const linePrice = line?.price?.value;
+    const lineProblem = linePrice === undefined ? null : amountProblem(linePrice);
+    if (lineProblem) {
+      result.failed.push(`${context}: ${ref} price.value '${linePrice}' ${lineProblem} — only discount/offer lines may be negative`);
+    }
+    const unitPrice = line?.item?.price?.value;
+    const unitProblem = unitPrice === undefined ? null : amountProblem(unitPrice);
+    if (unitProblem) {
+      result.failed.push(`${context}: ${ref} item.price.value '${unitPrice}' ${unitProblem} — the unit price is the catalog price`);
+    }
+  });
+
+  if (cleanRun()) {
+    result.passed.push(
+      `${context}: quote.price and all ${checked} non-discount quote.breakup line(s) carry non-negative amounts` +
+        (exempt ? ` (${exempt} discount/offer line(s) exempt)` : "")
+    );
+  }
+}
+
 /**
  * Validate quote breakup: price.value must match sum(breakup[].price.value)
  */
@@ -71,6 +148,8 @@ export function validateQuoteBreakup(
   if (!quote?.breakup || !Array.isArray(quote.breakup)) {
     return;
   }
+
+  validateQuoteAmountSigns(quote, result, context);
 
   const breakup = quote.breakup;
 
