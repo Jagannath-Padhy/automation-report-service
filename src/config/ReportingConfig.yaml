@@ -1816,6 +1816,165 @@ domains:
             - on_update
             - on_update
 
+          business_term_loan_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_pre_part_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_foreclosure:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_missed_emi_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
           business_term_loan_without_aa_with_igm_1.0.0:
             - search
             - on_search
@@ -1888,6 +2047,15 @@ domains:
           - business_term_loan_with_offline_online_foreclosure
           - business_term_loan_with_offline_online_missed_emi
           - business_term_loan_with_offline_online_pre_part
+          - business_term_loan_pre_part_payment
+          - business_term_loan_foreclosure
+          - business_term_loan_missed_emi_payment
+          - business_term_loan_with_file_upload_pre_part_payment
+          - business_term_loan_with_file_upload_foreclosure
+          - business_term_loan_with_file_upload_missed_emi_payment
+          - business_term_loan_with_aa_pre_part_payment
+          - business_term_loan_with_aa_foreclosure
+          - business_term_loan_with_aa_missed_emi_payment
           - business_term_loan_without_aa_with_igm_1.0.0
           - business_term_loan_with_file_upload_with_igm_1.0.0
           - business_term_loan_with_aa_with_igm_1.0.0
@@ -4516,6 +4684,165 @@ domains:
                 - on_update
                 - on_update
 
+              business_term_loan_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_pre_part_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_foreclosure:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_missed_emi_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
               dedupe_check:
                 - select
                 - on_select
@@ -4567,6 +4894,15 @@ domains:
               - business_term_loan_with_offline_online_foreclosure
               - business_term_loan_with_offline_online_missed_emi
               - business_term_loan_with_offline_online_pre_part
+              - business_term_loan_pre_part_payment
+              - business_term_loan_foreclosure
+              - business_term_loan_missed_emi_payment
+              - business_term_loan_with_file_upload_pre_part_payment
+              - business_term_loan_with_file_upload_foreclosure
+              - business_term_loan_with_file_upload_missed_emi_payment
+              - business_term_loan_with_aa_pre_part_payment
+              - business_term_loan_with_aa_foreclosure
+              - business_term_loan_with_aa_missed_emi_payment
               - dedupe_check
               - lamf_credit_line_with_mfc_single_redirection
               - lamf_credit_line_with_mfc_single_redirection_with_igm_1.0.0
