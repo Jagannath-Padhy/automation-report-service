@@ -301,6 +301,7 @@ const FORMULA_TOLERANCE = 1.0;
 /**
  * FIS12 Business Loan quote formulas — same method as the BL flow specs:
  *   quote.price.value      = PRINCIPAL + INTEREST + PROCESSING_FEE + OTHER_UPFRONT + INSURANCE + OTHER_CHARGES
+ *                            (+ LATE_FEE_AMOUNT on missed-EMI quotes, + FORECLOSURE_CHARGES on foreclosure quotes)
  *   NET_DISBURSED_AMOUNT   = PRINCIPAL - PROCESSING_FEE - OTHER_UPFRONT - INSURANCE
  * Quotes without PRINCIPAL_AMOUNT (e.g. non-loan breakups) are skipped.
  */
@@ -314,14 +315,18 @@ export function validateBLQuoteFormulas(quote: any, testResults: TestResult): vo
   const otherUpfront = getLoanBreakupValue(breakup, "OTHER_UPFRONT_CHARGES");
   const insurance = getLoanBreakupValue(breakup, "INSURANCE_CHARGES");
   const otherCharges = getLoanBreakupValue(breakup, "OTHER_CHARGES");
+  const lateFee = getLoanBreakupValue(breakup, "LATE_FEE_AMOUNT");
+  const foreclosureCharges = getLoanBreakupValue(breakup, "FORECLOSURE_CHARGES");
 
   const quoteTotal = parseFloat(quote?.price?.value ?? "0");
   const expectedTotal = parseFloat(
-    (principal + interest + processingFee + otherUpfront + insurance + otherCharges).toFixed(2)
+    (principal + interest + processingFee + otherUpfront + insurance + otherCharges + lateFee + foreclosureCharges).toFixed(2)
   );
   const totalFormula =
     `PRINCIPAL(${principal}) + INTEREST(${interest}) + PROCESSING_FEE(${processingFee}) + ` +
-    `OTHER_UPFRONT(${otherUpfront}) + INSURANCE(${insurance}) + OTHER(${otherCharges})`;
+    `OTHER_UPFRONT(${otherUpfront}) + INSURANCE(${insurance}) + OTHER(${otherCharges})` +
+    (lateFee ? ` + LATE_FEE(${lateFee})` : "") +
+    (foreclosureCharges ? ` + FORECLOSURE_CHARGES(${foreclosureCharges})` : "");
   if (Math.abs(quoteTotal - expectedTotal) < FORMULA_TOLERANCE) {
     testResults.passed.push(`Quote total ${quoteTotal} = ${totalFormula}`);
   } else {
