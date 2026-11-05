@@ -16,5 +16,5 @@ router.use("/generate-report", ReportRoutes);
 router.use("/logs", LogRoutes);
 router.use("/callback", CallbackRoutes);
 router.use("/flow-data", FlowDataRoutes);
-router.use("/logs-report", LogsReportRoutes);
+// router.use("/logs-report", LogsReportRoutes);
 export default router;
