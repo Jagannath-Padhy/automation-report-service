@@ -236,18 +236,114 @@ export function validateRetailerInfoRequiredTags(provider: any, result: TestResu
   }
 }
 
+/**
+ * Resolves a variant attribute path — the `name` of a variant_group category's `attr` tag
+ * — against an item. Two forms occur in the wild: an object path
+ * (`item.quantity.unitized.measure`) and a tag path (`item.tags.<group>.<code>`, e.g.
+ * `item.tags.attribute.colour`). Returns `undefined` when the path does not resolve.
+ */
+function resolveVariantAttr(item: any, name: string): any {
+  const parts = String(name).split(".");
+  if (parts[0] !== "item" || parts.length < 2) return undefined;
+
+  if (parts[1] === "tags") {
+    if (parts.length !== 4) return undefined;
+    for (const group of tagGroupsByCode(item?.tags, parts[2])) {
+      const value = tagValue(group.list, parts[3]);
+      if (value !== undefined) return value;
+    }
+    return undefined;
+  }
+
+  let node: any = item;
+  for (const part of parts.slice(1)) {
+    if (node === null || typeof node !== "object") return undefined;
+    node = node[part];
+  }
+  return node;
+}
+
+/**
+ * Serialises a resolved variant value so that two logically equal values compare equal.
+ * `JSON.stringify` alone is key-order sensitive, and an object leaf such as
+ * `item.quantity.unitized.measure` (`{unit, value}`) is authored in either order — which
+ * would let two identical variants pass as distinct.
+ */
+function canonicalize(value: any): string {
+  if (value === null || value === undefined) return "null";
+  if (typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(canonicalize).join(",")}]`;
+  return `{${Object.keys(value)
+    .sort()
+    .map((key) => `${JSON.stringify(key)}:${canonicalize(value[key])}`)
+    .join(",")}}`;
+}
+
+/**
+ * A variant group is only meaningful if the attributes it declares exist on its members
+ * and actually tell them apart. `attr.name` was previously checked for non-emptiness only,
+ * so a path naming a field no item carries — e.g. `item.tags.unitized.count`, where the
+ * real field is `item.quantity.unitized.count` — passed silently.
+ */
+function validateVariantGroupAttributes(
+  provider: any,
+  category: any,
+  members: any[],
+  result: TestResult
+): void {
+  if (members.length === 0) return;
+
+  const names = tagGroupsByCode(category?.tags, "attr")
+    .map((group: any) => tagValue(group.list, "name"))
+    .filter((name: any): name is string => typeof name === "string" && name.trim().length > 0);
+  // A missing `attr.name` is reported by validateCategoryTags.
+  if (names.length === 0) return;
+
+  const label = `${providerLabel(provider)} variant group ${category?.id ?? "?"}`;
+  let allResolved = true;
+
+  for (const name of names) {
+    const absent = members.filter((item: any) => resolveVariantAttr(item, name) === undefined);
+    if (absent.length === 0) continue;
+
+    allResolved = false;
+    result.failed.push(
+      absent.length === members.length
+        ? `on_search: ${label} varies on '${name}', which resolves on none of its ${members.length} item(s) — check the path`
+        : `on_search: ${label} varies on '${name}', which is absent on item(s) ${absent.map((i: any) => i.id).join(", ")}`
+    );
+  }
+
+  // Only worth comparing once every declared attribute resolves — otherwise the collisions
+  // reported would just be an echo of the broken path above.
+  if (!allResolved) return;
+
+  const seen = new Map<string, string>();
+  for (const item of members) {
+    const fingerprint = names
+      .map((name) => canonicalize(resolveVariantAttr(item, name)))
+      .join("|");
+    const twin = seen.get(fingerprint);
+    if (twin === undefined) {
+      seen.set(fingerprint, item.id);
+    } else {
+      result.failed.push(
+        `on_search: ${label} items ${twin} and ${item.id} are identical on ${names.join(", ")} — items in a variant group must differ on the attributes it varies on`
+      );
+    }
+  }
+}
+
 export function validateVariantGroupConsistency(provider: any, result: TestResult): void {
   const cleanRun = failureGate(result);
 
+  const variantGroups = (provider?.categories || []).filter((category: any) =>
+    tagGroupsByCode(category?.tags, "type").some(
+      (group: any) => tagValue(group.list, "type") === "variant_group"
+    )
+  );
   const variantGroupIds = new Set(
-    (provider?.categories || [])
-      .filter((category: any) =>
-        tagGroupsByCode(category?.tags, "type").some(
-          (group: any) => tagValue(group.list, "type") === "variant_group"
-        )
-      )
-      .map((category: any) => category?.id)
-      .filter(Boolean)
+    variantGroups.map((category: any) => category?.id).filter(Boolean)
   );
 
   const itemsWithParent = (provider?.items || []).filter((item: any) => item?.parent_item_id);
@@ -271,6 +367,15 @@ export function validateVariantGroupConsistency(provider: any, result: TestResul
         `on_search: ${providerLabel(provider)} ${itemLabel(item)} parent_item_id '${item.parent_item_id}' does not match any declared variant_group category`
       );
     }
+  }
+
+  for (const category of variantGroups) {
+    validateVariantGroupAttributes(
+      provider,
+      category,
+      itemsWithParent.filter((item: any) => item.parent_item_id === category?.id),
+      result
+    );
   }
 
   if (cleanRun()) {

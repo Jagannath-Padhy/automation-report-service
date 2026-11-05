@@ -33,6 +33,8 @@ import {
   validateItemLocationRefs,
   validateItemPriceBounds,
   validateItemMaximumCount,
+  validateItemCategory,
+  validateItemAttributeTags,
   validateMandatoryItemTags,
   validateReplacementTerms,
   validateItemStatutoryFields,
@@ -148,6 +150,10 @@ function validateBroadcastCatalog(element: Payload, message: any, result: TestRe
     validateItemMaximumCount(provider?.items, result);
     validateItemPriceBounds(provider?.items, result);
     validatePackConfig(provider?.items, result);
+    // Category first: an unknown category_id is reported once here, and the attribute and
+    // statutory checks that key off it then skip the item rather than pile on.
+    validateItemCategory(provider?.items, result);
+    validateItemAttributeTags(provider?.items, result);
     validateMandatoryItemTags(provider?.items, result);
     validateReplacementTerms(provider?.items, result);
     validateItemStatutoryFields(provider?.items, result);
