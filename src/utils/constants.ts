@@ -199,6 +199,7 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:TRV11:2.0.1",
   "ONDC:TRV11:2.1.0",
   "ONDC:TRV13:2.0.1",
+  "ONDC:TRV14:2.0.0",
   "ONDC:FIS14:2.1.0",
   "ONDC:RETeB2B:1.2.5",
   "ONDC:RET10:1.2.0",
@@ -237,6 +238,7 @@ export const DOMAINS = {
   TRV10: "ONDC:TRV10",
   TRV11: "ONDC:TRV11",
   TRV13: "ONDC:TRV13",
+  TRV14: "ONDC:TRV14",
   RET10: "ONDC:RET10"
 };
 

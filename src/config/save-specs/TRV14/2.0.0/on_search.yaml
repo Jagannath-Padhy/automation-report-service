@@ -1,0 +1,7 @@
+save-data:
+  context: "$.context"
+  catalog_tags: "$.message.catalog.tags"
+  providers: "$.message.catalog.providers"
+  provider_ids: "$.message.catalog.providers[*].id"
+  items: "$.message.catalog.providers[*].items[*]"
+  fulfillments: "$.message.catalog.providers[*].fulfillments[*]"

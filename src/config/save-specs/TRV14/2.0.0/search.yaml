@@ -1,0 +1,4 @@
+save-data:
+  context: "$.context"
+  intent: "$.message.intent"
+  intent_tags: "$.message.intent.tags"

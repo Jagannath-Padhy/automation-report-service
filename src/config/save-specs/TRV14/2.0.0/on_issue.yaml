@@ -1,0 +1,3 @@
+save-data:
+  context: "$.context"
+  issue: "$.message.issue"

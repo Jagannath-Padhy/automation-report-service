@@ -5656,6 +5656,445 @@ domains:
               - Payment_Failure_Motor_Insurance(PRE-ORDER)
             validationModules: "../validations/ONDC:FIS13/validator#validate"
       
+  ONDC:TRV14:
+    versions:
+      "2.0.0":
+        # Sourced 2026-11-05 from ONDC-Official/automation-specifications draft-TRV14-2.0.0
+        # (commit cc6c1355) — the branch the deployed workbench runs: config/flows/index.yaml
+        # (flow ids, tags) + config/flows/unreserved-entry-pass/*.yaml (steps[].api / action_id).
+        flows:
+          "Cancellation Rejected":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          "User Cancellation (Full)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "User_Cancellation_FULL_With_Form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "incremental_pull_journey":
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - on_search
+          "purchase_journey_order_level_forms_culture_heritage":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_with_form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_with_form_Multiple_Tickets":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form_Multiple_Tickets":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form_with_IGM(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "seller_app_pagination_journey":
+            - search
+            - on_search
+            - on_search
+            - on_search
+          "technical_cancellation":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "technical_cancellation_with_form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "user_cancellation_partial":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - update
+            - on_update
+          "Cancellation Flow(unsolicited on_cancel)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_cancel
+          "purchase_journey_with_form (BAP Convenience fee)":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+        # Tagged OPTIONAL in the workbench index, plus the IGM flows (TRV14 reporting covers
+        # their purchase steps only — plan decision Q2).
+        optional_flows:
+          - "Cancellation Rejected"
+          - "purchase_journey_order_level_forms_culture_heritage"
+          - "purchase_journey_without_form_with_IGM(v-2.0.0)"
+          - "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)"
+          - "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)"
+          - "user_cancellation_partial"
+        # Every workbench action_id (except the HTML_FORM step, which has no Beckn payload) must arrive.
+        mandatory_legs:
+          "Cancellation Rejected":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_rejected"
+          "User Cancellation (Full)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_user_cancellation"
+            - "on_cancel_soft_user_cancellation"
+            - "cancel_confirm_user_cancellation"
+            - "on_cancel_confirm_user_cancellation"
+          "User_Cancellation_FULL_With_Form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_user_cancellation"
+            - "on_cancel_soft_user_cancellation"
+            - "cancel_confirm_user_cancellation"
+            - "on_cancel_confirm_user_cancellation"
+          "incremental_pull_journey":
+            - "search_incremental_pull"
+            - "on_search_incremental_pull_1"
+            - "on_search_incremental_pull_2"
+            - "on_search_incremental_pull_3"
+          "purchase_journey_order_level_forms_culture_heritage":
+            - "select"
+            - "on_select_submission_cultural"
+            - "select_form_submission_cultural"
+            - "on_select_form_submission_culture"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_with_form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_with_form_Multiple_Tickets":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form_Multiple_Tickets":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form_with_IGM(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open"
+            - "on_issue_processing"
+            - "on_issue_need_more_info"
+            - "issue_info_provided"
+            - "on_issue_provided"
+            - "on_issue_resolution"
+            - "issue_resolution_accept"
+            - "on_issue_resolved"
+            - "issue_close"
+          "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open_2"
+            - "on_issue_processing"
+            - "on_issue_resolution_igm_3"
+            - "issue_resolution_accept_igm_3"
+            - "on_issue_resolved_igm_3"
+            - "issue_close_igm_3"
+          "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open"
+            - "on_issue_processing"
+            - "on_issue_resolution"
+            - "issue_resolution_reject"
+            - "on_issue_processing_1"
+            - "on_issue_resolution_1"
+            - "issue_escalate"
+            - "on_issue_processing_2"
+            - "on_issue_resolution_2"
+            - "issue_resolution_accept"
+            - "on_issue_resolved"
+            - "issue_close"
+          "seller_app_pagination_journey":
+            - "search_seller_pagination"
+            - "on_search_seller_pagination_1"
+            - "on_search_seller_pagination_2"
+            - "on_search_seller_pagination_3"
+          "technical_cancellation":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm_technical_cancellation"
+            - "status"
+            - "on_status_technical_cancellation"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_soft_technical_cancellation"
+            - "cancel_confirm_technical_cancellation"
+            - "on_cancel_confirm_technical_cancellation"
+          "technical_cancellation_with_form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm_technical_cancellation"
+            - "status"
+            - "on_status_technical_cancellation"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_soft_technical_cancellation"
+            - "cancel_confirm_technical_cancellation"
+            - "on_cancel_confirm_technical_cancellation"
+          "user_cancellation_partial":
+            - "select_for_partial_cancellation"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "update_soft_partial_cancellation"
+            - "on_update_soft_partial_cancellation"
+            - "update_confirm_partial_cancellation"
+            - "on_update_confirm_partial_cancellation"
+          "Cancellation Flow(unsolicited on_cancel)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "on_cancel_unsolicited"
+          "purchase_journey_with_form (BAP Convenience fee)":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init_bap_ convenience"
+            - "on_init_bap_ convenience"
+            - "confirm_bap_ convenience"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+        validationModules: "../validations/ONDC:TRV14/validator#validate"
+
   ONDC:TRV13:
     versions:
       "2.0.1":
