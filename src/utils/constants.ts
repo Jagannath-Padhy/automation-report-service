@@ -19,6 +19,10 @@ export const actions: String[] = [
   "on_issue",
   "issue_status",
   "on_issue_status",
+  // Non-standard pseudo-action recorded by the mock for ONDC:RET10's
+  // Catalog_Rejection_Flow — a real recorded payload (context.action:
+  // "catalog_rejection"), not one of Beckn's 20 canonical actions.
+  "catalog_rejection",
 ];
 
 export const MANDATORY_FLOWS: String[] = [
@@ -184,6 +188,7 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:FIS12:2.0.1",
   "ONDC:FIS12:2.3.0",
   "ONDC:FIS12:SL:2.3.0",
+  "ONDC:FIS12:BL:2.3.0",
   "ONDC:FIS13:2.0.1",
   "ONDC:FIS13:2.0.0:HEALTH INSURANCE",
   "ONDC:FIS13:2.0.0:MOTOR INSURANCE",
@@ -195,7 +200,23 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:TRV11:2.1.0",
   "ONDC:TRV13:2.0.1",
   "ONDC:FIS14:2.1.0",
-  "ONDC:RETeB2B:1.2.5"
+  "ONDC:RETeB2B:1.2.5",
+  "ONDC:RET10:1.2.0",
+  "ONDC:RET10:1.2.5",
+  "ONDC:RET11:1.2.0",
+  "ONDC:RET11:1.2.5",
+  "ONDC:RET12:1.2.0",
+  "ONDC:RET12:1.2.5",
+  "ONDC:RET13:1.2.0",
+  "ONDC:RET13:1.2.5",
+  "ONDC:RET14:1.2.0",
+  "ONDC:RET14:1.2.5",
+  "ONDC:RET15:1.2.0",
+  "ONDC:RET15:1.2.5",
+  "ONDC:RET16:1.2.0",
+  "ONDC:RET16:1.2.5",
+  "ONDC:RET18:1.2.0",
+  "ONDC:RET18:1.2.5"
 ];
 
 // Usecase-level enabling: Map of domain:version -> allowed usecases
@@ -215,8 +236,17 @@ export const DOMAINS = {
   FIS12: "ONDC:FIS12",
   TRV10: "ONDC:TRV10",
   TRV11: "ONDC:TRV11",
-  TRV13: "ONDC:TRV13"
+  TRV13: "ONDC:TRV13",
+  RET10: "ONDC:RET10"
 };
+
+// Prefix shared by every RET1X Retail domain — mirrors log-validation-utility's
+// own structure, which has no per-domain folders at all for Retail (just
+// version-level utils/Retail vs utils/Retail_.1.2.5), with RET11 as the one
+// named exception (RET11_onSearch). RET10's own folder plays that same role
+// here as that single shared structure: every other RET1X domain falls back
+// to RET10's files when it has none of its own.
+export const RET_DOMAIN_PREFIX = "ONDC:RET";
 
 export const FLOW_MAPPINGS: Record<string, string> = {
   //METRO
@@ -720,6 +750,17 @@ export const FLOW_ID_MAP: Record<
       },
     },
   },
+  "ONDC:RETINVL": {
+    "1.2.5": {
+      "INVL": {
+        "RETINVL_DISCOVERY_FLOW": "RETINVL_DISCOVERY_FLOW",
+        "ORDER_FLOW_BASELINE": "ORDER_FLOW_BASELINE",
+        "ORDER_FLOW_BASELINE_ILBP": "ORDER_FLOW_BASELINE_ILBP",
+        "OFFERS_FLOW": "OFFERS_FLOW",
+        "BUYER_SIDE_ORDER_CANCELLATION": "BUYER_SIDE_ORDER_CANCELLATION",
+      },
+    },
+  },
   "ONDC:LOG10": {
     "1.2.5": {
       "ride-Logistics (P2P)": {
@@ -804,7 +845,8 @@ export const typeMapping: Record<string, string> = {
   "ACCIDENTAL INSURANCE": "SACHET_INSURANCE",
   "HOSPICASH INSURANCE": "SACHET_INSURANCE",
   "Logistics (NIC2004:60232)": "LOGISTICS",
-  "RECONCILIATION": "RECONCILIATION",
+  "RETINVL":"RETINVL",
+  "RECONCILIATION": "RECONCILIATION"
 };
 
 export const NIC_LOGISTICS_CATEGORY_FLOW_MAP: Record<string, string> = {

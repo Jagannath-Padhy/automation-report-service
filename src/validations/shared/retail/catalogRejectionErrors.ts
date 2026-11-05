@@ -1,0 +1,87 @@
+/**
+ * Ported verbatim from log-validation-utility/constants/catalogRejection.ts —
+ * the error-code -> {message, type} table used by the Catalog_Rejection flow
+ * (a non-standard pseudo-action some flows use to let the BAP report why it
+ * rejected a BPP's catalog).
+ */
+export enum CatalogRejectionErrorType {
+  PROVIDER_ERROR = "PROVIDER-ERROR",
+  INTEGRATION_ERROR = "INTEGRATION-ERROR",
+  ITEM_ERROR = "ITEM-ERROR",
+  BPP_ERROR = "BPP-ERROR",
+}
+
+export interface CatalogRejectionErrorDetail {
+  message: string;
+  type: CatalogRejectionErrorType;
+}
+
+export const CATALOG_REJECTION_ERRORS: Record<string, CatalogRejectionErrorDetail> = {
+  "90001": { message: "Fulfilment rate below declared standards", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90002": { message: "On-time delivery rate below declared standards", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90003": { message: "Select call failure more than published threshold", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90004": { message: "Init call failure more than published threshold", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90005": { message: "Confirm call failure more than published threshold", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90006": { message: "Percentage of customer issues resolved within resolution TATs is below published standards", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90007": { message: "Duplicate Store", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90008": { message: "Customer complaints more than published standards", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90009": { message: "Rejected store due to Item level rejection above threshold", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90010": { message: "Missing authorisation from NP", type: CatalogRejectionErrorType.INTEGRATION_ERROR },
+  "90011": { message: "Merchant status sent by Seller NP is unavailable", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90012": { message: "Country of Origin not present (For Packaged Products)", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90013": { message: "Only Hyperlocal Delivery allowed", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90014": { message: "Invalid Latitude", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90015": { message: "Invalid Longitude", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90016": { message: "Invalid customisation group data", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90017": { message: "Stores less than declared threshold", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90018": { message: "Empty Address field", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90019": { message: "Other Provider Error", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90020": { message: "Tags type not present against items", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90021": { message: "Invalid Address received", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90022": { message: "Invalid city received", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90023": { message: "Invalid contact number- not 10 digit", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90024": { message: "Invalid FSSAI", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90025": { message: "Delivery radius not given", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90026": { message: "Store timing not in correct format", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90027": { message: "Locality & city mismatch", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90028": { message: "Store not received on search for 2 consecutive days", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90029": { message: "Store disabled by Seller App", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90030": { message: "Store Category mapping sent empty or unavailable at Buyer App side", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90031": { message: "NP integration version mis-match", type: CatalogRejectionErrorType.INTEGRATION_ERROR },
+  "90032": { message: "Store location error", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "90033": { message: "Provider in Blacklisted", type: CatalogRejectionErrorType.PROVIDER_ERROR },
+  "91001": { message: "Item price > MRP", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91002": { message: "Use of restrictive keywords", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91003": { message: "No Images found", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91004": { message: "Duplicate Images Found", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91005": { message: "Low quality Image Found", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91006": { message: "Image Title Mismatch", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91007": { message: "Other Mandatory/Statutory Field not there", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91008": { message: "Duplicate Product", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91010": { message: "Price is Zero", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91011": { message: "Incorrect Image File Format", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91012": { message: "Country of Origin not present (For Packaged Products)", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91013": { message: "Net Quantity not present", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91014": { message: "FSSAI/Statutory requirement not present (For packaged products)", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91015": { message: "BIS Mark not present", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91016": { message: "Product miscategorized", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91017": { message: "Others - Add specific Error Description", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91018": { message: "Available quantity for the SKU is either absent or invalid", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91019": { message: "Category for the SKU does not exist", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91020": { message: "The parameters for customisation of SKU are not shared", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91021": { message: "Category field is missing", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91022": { message: "Customer care contact details missing", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91023": { message: "MRP less than zero", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91024": { message: "Price less than zero", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91025": { message: "Item status sent by Seller NP is unavailable", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91026": { message: "Invalid Item ID", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91027": { message: "Invalid Service Provider ID", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91028": { message: "Customisation not present", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "91029": { message: "Invalid customisation group", type: CatalogRejectionErrorType.ITEM_ERROR },
+  "92001": { message: "NP integration version mis-match", type: CatalogRejectionErrorType.BPP_ERROR },
+  "92002": { message: "Missing authorisation from NP", type: CatalogRejectionErrorType.BPP_ERROR },
+  "92003": { message: "Mandatory field missing or the data format is incorrect for all Providers", type: CatalogRejectionErrorType.BPP_ERROR },
+  "92004": { message: "Invalid domain sent", type: CatalogRejectionErrorType.BPP_ERROR },
+  "92005": { message: "NP is blacklisted or inactive or not onboarded yet", type: CatalogRejectionErrorType.BPP_ERROR },
+  "92006": { message: "Provider Rejections crossed threshold in single transaction ID", type: CatalogRejectionErrorType.BPP_ERROR },
+};

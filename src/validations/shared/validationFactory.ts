@@ -4659,6 +4659,12 @@ function validateOnSearchItemsFIS12(
 
     item.category_ids.forEach((rawCatId: string) => {
       const catId = typeof rawCatId === "string" ? rawCatId.trim() : rawCatId;
+      // Some flows (e.g. FIS12 Business Loan) declare the category tree once in master_search's
+      // on_search; later on_search calls only carry category_ids with no categories list to
+      // resolve against, so existence can only be checked when this message declares categories.
+      if (categories.length === 0) {
+        return;
+      }
       if (!validCategoryIds.has(catId)) {
         testResults.failed.push(
           `Item ${item.id} refers to invalid category id: ${catId}`
@@ -5209,7 +5215,9 @@ async function validateXinputFIS12(
       } else if (
         !item.xinput.form.id ||
         !item.xinput.form.mime_type ||
-        !item.xinput.form.url
+        // inline forms (e.g. FIS12 Business Loan, mime_type "none") carry their fields in
+        // form.data instead of hosting them at a url
+        (!item.xinput.form.url && !item.xinput.form.data)
       ) {
         testResults.failed.push(
           `Item ${item.id}: xinput.form fields are incomplete`

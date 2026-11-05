@@ -1,14 +1,33 @@
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import path from "path";
 import yaml from "js-yaml";
 import { saveActionData } from "../services/actionDataService";
 import { ValidationAction } from "../types/actions";
 
+/**
+ * Save-specs for search/on_search/select/on_select/init/on_init/confirm are
+ * identical across every RET1X domain (confirmed byte-for-byte, 2026-10-23) —
+ * the cross-action fields these capture (context, items, provider, etc.)
+ * don't vary by category. Mirrors log-validation-utility's own structure
+ * (one utils/Retail folder, not one per domain, with only RET11 ever
+ * carrying its own named exception) — RET10's own save-specs folder plays
+ * that same "shared structure" role: a domain+version is checked first (so
+ * a genuine future override still works), falling back to
+ * config/save-specs/RET10/<version> when no domain-specific file exists.
+ * Only applies to RET1X domains (`domain` here is already the ":"-stripped
+ * key, e.g. "RET11") — non-Retail domains have genuinely distinct per-domain
+ * specs, not duplicates, and are untouched.
+ */
 export function loadSaveSpec(domain: string, version: string, action: string): { [k: string]: any } {
-  const specPath = path.resolve(
+  const isRetDomain = domain.startsWith("RET");
+  const domainSpecific = path.resolve(
     __dirname,
     `../config/save-specs/${domain}/${version}/${action}.yaml`
   );
+  const specPath =
+    !isRetDomain || existsSync(domainSpecific)
+      ? domainSpecific
+      : path.resolve(__dirname, `../config/save-specs/RET10/${version}/${action}.yaml`);
   const content = readFileSync(specPath, "utf8");
   return yaml.load(content) as any;
 }

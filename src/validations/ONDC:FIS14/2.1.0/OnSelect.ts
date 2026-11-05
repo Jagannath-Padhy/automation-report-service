@@ -2,6 +2,7 @@ import { TestResult, Payload } from "../../../types/payload";
 import { DomainValidators } from "../../shared/domainValidator";
 import { saveFromElement } from "../../../utils/specLoader";
 import { getActionData } from "../../../services/actionDataService";
+import { fetchData, saveData } from "../../../utils/redisUtils";
 import {
     validateMfContextConsistency,
     validateMfMessageIdMatch,
@@ -36,6 +37,22 @@ export default async function on_select(
                 const selectOnSearchData = await getActionData(sessionID, flowId, txnId, "on_select");
                 validateMfQuoteConsistency(message, selectOnSearchData, result, flowId, "on_select", "prior_on_select");
             }
+        }
+    } catch (_) { }
+
+    // Save form URLs (order.xinput / items[].xinput) so the HTML_FORM step that
+    // follows can find them -- same Redis key the FIS12 validator uses.
+    try {
+        const txnId = element?.jsonRequest?.context?.transaction_id as string | undefined;
+        const order = element?.jsonRequest?.message?.order;
+        const urls: string[] = [
+            order?.xinput?.form?.url,
+            ...(Array.isArray(order?.items) ? order.items.map((i: any) => i?.xinput?.form?.url) : []),
+        ].filter((u): u is string => typeof u === "string" && u.length > 0);
+        if (txnId && urls.length > 0) {
+            const existing = await fetchData(sessionID, txnId, "formUrls");
+            const merged = Array.from(new Set([...(existing?.urls ?? []), ...urls]));
+            await saveData(sessionID, txnId, "formUrls", { urls: merged });
         }
     } catch (_) { }
 

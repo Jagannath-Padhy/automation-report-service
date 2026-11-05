@@ -1,0 +1,3 @@
+save-data:
+  context: "$.context"
+  providers: "$.message.catalog['bpp/providers'][*]"

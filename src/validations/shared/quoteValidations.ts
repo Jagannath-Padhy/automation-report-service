@@ -131,7 +131,11 @@ export function validateQuote(
           quote.price.value
         )} does not match the breakup total ${totalBreakup}`
       );
-      testResults.passed.push("Quote price matches breakup total");
+      testResults.passed.push(
+        `Quote price ${parseFloat(
+          quote.price.value
+        )} matches the breakup total ${totalBreakup}`
+      );
     } catch (error: any) {
       testResults.failed.push(error.message);
     }
@@ -295,6 +299,49 @@ function parseRatePct(value: string | undefined): number | null {
 const FORMULA_TOLERANCE = 1.0;
 
 /**
+ * FIS12 Business Loan quote formulas — same method as the BL flow specs:
+ *   quote.price.value      = PRINCIPAL + INTEREST + PROCESSING_FEE + OTHER_UPFRONT + INSURANCE + OTHER_CHARGES
+ *   NET_DISBURSED_AMOUNT   = PRINCIPAL - PROCESSING_FEE - OTHER_UPFRONT - INSURANCE
+ * Quotes without PRINCIPAL_AMOUNT (e.g. non-loan breakups) are skipped.
+ */
+export function validateBLQuoteFormulas(quote: any, testResults: TestResult): void {
+  const breakup: any[] = quote?.breakup || [];
+  if (!breakup.some((b: any) => b?.title === "PRINCIPAL_AMOUNT")) return;
+
+  const principal = getLoanBreakupValue(breakup, "PRINCIPAL_AMOUNT");
+  const interest = getLoanBreakupValue(breakup, "INTEREST_AMOUNT");
+  const processingFee = getLoanBreakupValue(breakup, "PROCESSING_FEE");
+  const otherUpfront = getLoanBreakupValue(breakup, "OTHER_UPFRONT_CHARGES");
+  const insurance = getLoanBreakupValue(breakup, "INSURANCE_CHARGES");
+  const otherCharges = getLoanBreakupValue(breakup, "OTHER_CHARGES");
+
+  const quoteTotal = parseFloat(quote?.price?.value ?? "0");
+  const expectedTotal = parseFloat(
+    (principal + interest + processingFee + otherUpfront + insurance + otherCharges).toFixed(2)
+  );
+  const totalFormula =
+    `PRINCIPAL(${principal}) + INTEREST(${interest}) + PROCESSING_FEE(${processingFee}) + ` +
+    `OTHER_UPFRONT(${otherUpfront}) + INSURANCE(${insurance}) + OTHER(${otherCharges})`;
+  if (Math.abs(quoteTotal - expectedTotal) < FORMULA_TOLERANCE) {
+    testResults.passed.push(`Quote total ${quoteTotal} = ${totalFormula}`);
+  } else {
+    testResults.failed.push(`Quote total ${quoteTotal} ≠ expected ${expectedTotal} [${totalFormula}]`);
+  }
+
+  if (breakup.some((b: any) => b?.title === "NET_DISBURSED_AMOUNT")) {
+    const netDisbursed = getLoanBreakupValue(breakup, "NET_DISBURSED_AMOUNT");
+    const expectedNet = parseFloat((principal - processingFee - otherUpfront - insurance).toFixed(2));
+    const netFormula =
+      `PRINCIPAL(${principal}) - PROCESSING_FEE(${processingFee}) - OTHER_UPFRONT(${otherUpfront}) - INSURANCE(${insurance})`;
+    if (Math.abs(netDisbursed - expectedNet) < FORMULA_TOLERANCE) {
+      testResults.passed.push(`NET_DISBURSED_AMOUNT ${netDisbursed} = ${netFormula}`);
+    } else {
+      testResults.failed.push(`NET_DISBURSED_AMOUNT ${netDisbursed} ≠ expected ${expectedNet} [${netFormula}]`);
+    }
+  }
+}
+
+/**
  * FIS12 Loan Quote Validation
  *
  * Variables (mapping to spreadsheet columns):
@@ -336,8 +383,8 @@ export function validateFIS12LoanQuote(
   }
 
   // ── Extract breakup values ─────────────────────────────────────────────
-  const principal = getLoanBreakupValue(breakup, "PRINCIPAL");            // A
-  const interest = getLoanBreakupValue(breakup, "INTEREST");             // G
+  const principal = getLoanBreakupValue(breakup, "PRINCIPAL_AMOUNT");            // A
+  const interest = getLoanBreakupValue(breakup, "INTEREST_AMOUNT");             // G
   const processingFee = getLoanBreakupValue(breakup, "PROCESSING_FEE");
   const otherUpfront = getLoanBreakupValue(breakup, "OTHER_UPFRONT_CHARGES");
   const insuranceCharges = getLoanBreakupValue(breakup, "INSURANCE_CHARGES");

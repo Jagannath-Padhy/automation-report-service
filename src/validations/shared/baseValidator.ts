@@ -1,8 +1,11 @@
+import { getIgmHandler, isFinanceDomain, runIgmAction } from "./igm/igmActionHandler";
 import { ValidationAction } from "../../types/actions";
 import { TestResult, Payload } from "../../types/payload";
-import { DOMAINS } from "../../utils/constants";
+import { DOMAINS, RET_DOMAIN_PREFIX } from "../../utils/constants";
 import { getRuntimeExtension } from "../../utils/getRuntimeExtension";
 import { getFileName } from "./validationFactory";
+import { existsSync } from "fs";
+import path from "path";
 
 import logger from "@ondc/automation-logger";
 type CheckJsonResponseFn = (jsonResponse: any, testResults: TestResult, action_id?: string, flowId?: string) => void;
@@ -40,6 +43,14 @@ export function createDomainValidator(
       try {
         const domain = element?.jsonRequest?.context?.domain;
         const ext = getRuntimeExtension();
+        const igmHandler = isFinanceDomain(domain) ? getIgmHandler(action) : undefined;
+        if (igmHandler) {
+          const igmResult = await runIgmAction(igmHandler, element, sessionID, flowId, action_id as string);
+          testResults.passed.push(...(igmResult.passed || []));
+          testResults.failed.push(...(igmResult.failed || []));
+          return testResults;
+        }
+
 
         let baseName =
           domain && domain.startsWith(DOMAINS.FIS11)
@@ -55,9 +66,30 @@ export function createDomainValidator(
           return testResults;
         }
 
-        const mod: any = await import(
+        // Most RET1X action files are identical thin wrappers around a
+        // shared, domain-agnostic business-logic function (confirmed
+        // 2026-10-23: 162 of 163 RET1X dispatch files are byte-for-byte the
+        // same, the one real exception being RET11's on_search) — mirroring
+        // log-validation-utility's own structure (utils/Retail, not one
+        // folder per domain), which has no per-domain split at all except a
+        // single RET11_onSearch exception. RET10's folder plays that same
+        // "one shared structure" role here: for every other RET1X domain,
+        // the domain-specific path is tried first (so a genuine override
+        // like RET11's on_search still works), falling back to
+        // ONDC:RET10/<version>/<fileName> when no domain-specific file
+        // exists. Non-Retail domains (TRV/FIS/LOG) are untouched by this —
+        // they have genuinely distinct per-domain logic, not duplicates.
+        const isRetDomain = domain?.startsWith(RET_DOMAIN_PREFIX);
+        const domainSpecificPath = path.resolve(
+          __dirname,
           `../${element.jsonRequest.context.domain}/${version}/${fileName}`
         );
+        const importSpecifier =
+          !isRetDomain || existsSync(domainSpecificPath)
+            ? `../${element.jsonRequest.context.domain}/${version}/${fileName}`
+            : `../${DOMAINS.RET10}/${version}/${fileName}`;
+
+        const mod: any = await import(importSpecifier);
 
         const exportedFnName = Object.keys(mod).find(
           (k) => typeof (mod as any)[k] === "function"

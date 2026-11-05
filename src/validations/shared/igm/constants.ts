@@ -2,7 +2,16 @@ import { TestResult } from "../../../types/payload";
 
 // IGM 2.0.0 Constants
 export const VALID_ISSUE_STATUSES = ["OPEN", "PROCESSING", "RESOLVED", "CLOSED"];
-export const VALID_ISSUE_LEVELS = ["ISSUE", "GRIEVANCE"];
+// "GREVIENCE" (not the dictionary-correct "GRIEVANCE") is the actual value
+// used throughout this project's live stack: the compiled JVAL spec
+// (validations/RET1X/*/index.yaml, every domain/version) enumerates
+// message.issue.level as exactly ["ISSUE", "GREVIENCE"], and real recorded
+// on_issue/issue traffic in this workspace uses "GREVIENCE" and gets ACKed
+// by the live API_SERVICE — confirmed a historical typo baked into the
+// deployed spec/mock stack, not a typo in the test data. (Note:
+// log-validation-utility's own AJV schema for this field says "GRIEVANCE" —
+// that source disagrees with what's actually live here.)
+export const VALID_ISSUE_LEVELS = ["ISSUE", "GREVIENCE"];
 export const VALID_ACTION_CODES = [
   "OPEN", "PROCESSING", "INFO_REQUESTED", "INFO_PROVIDED",
   "RESOLUTION_PROPOSED", "RESOLUTION_ACCEPTED", "RESOLUTION_REJECTED",

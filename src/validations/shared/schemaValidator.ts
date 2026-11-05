@@ -2,6 +2,19 @@ import { TestResult,Validation } from "../../types/payload";
 import Joi from "joi";
 
 // Default ACK/NACK schema (used when a schema isn't provided)
+//
+// `context` itself is intentionally optional at the top level (2026-10-22,
+// evidenced against a real RET10 1.2.5 session with 23 flows / ~280 sync
+// responses): the sync ACK/NACK envelope for a *request*-direction action
+// (search/select/init/confirm/cancel/update/track/status/issue/...) omits
+// context entirely in roughly half of real responses — e.g. just
+// `{"message":{"ack":{"status":"ACK"}}}` — while every single on_* (BPP
+// response) sync-ack in that sample DID include a full context. This schema
+// only validates the transport-level ACK/NACK envelope on jsonResponse; the
+// actual Beckn message's context is validated separately against
+// jsonRequest elsewhere (contextValidators()), so loosening this here loses
+// no real coverage. When context IS present, every field below still
+// applies in full.
 const defaultAckSchema = Joi.object({
   context: Joi.object({
     domain: Joi.string()
@@ -15,15 +28,22 @@ const defaultAckSchema = Joi.object({
       .valid('IND')
       .required(),
 
+    // "*" is the valid wildcard city for incremental catalog refresh
+    // (search_inc_catalog) requests/responses — not just a std:NNN code.
     city: Joi.string()
-      .pattern(/^std:\d+$/)
+      .pattern(/^(std:\d+|\*)$/)
       .required()
       .messages({
-        'string.pattern.base': 'city must be in format std:<city_code> (e.g., std:080)',
+        'string.pattern.base': 'city must be in format std:<city_code> (e.g., std:080) or "*"',
       }),
 
+    // IGM (issue/on_issue/issue_status/on_issue_status) and the
+    // catalog_rejection pseudo-action were missing here (2026-10-22) —
+    // every real on_issue/on_issue_status sync-ack in a RET10 1.2.5 test
+    // session DOES include a full context, so this enum rejected every one
+    // of them as "context.action must be one of [...]", a false failure.
     action: Joi.string()
-      .valid('search', 'select', 'init', 'confirm', 'status', 'track', 'cancel', 'update', 'rating', 'support', 'on_search', 'on_select', 'on_init', 'on_confirm', 'on_status', 'on_track', 'on_cancel', 'on_update', 'on_rating', 'on_support')
+      .valid('search', 'select', 'init', 'confirm', 'status', 'track', 'cancel', 'update', 'rating', 'support', 'on_search', 'on_select', 'on_init', 'on_confirm', 'on_status', 'on_track', 'on_cancel', 'on_update', 'on_rating', 'on_support', 'issue', 'on_issue', 'issue_status', 'on_issue_status', 'catalog_rejection')
       .required(),
 
     core_version: Joi.string()
@@ -44,6 +64,28 @@ const defaultAckSchema = Joi.object({
       .uri()
       .required(),
 
+    // bpp_id/bpp_uri are legitimately absent during 'search' — the BAP
+    // broadcasts before any BPP is known; they only appear from 'on_search'
+    // onward, once a specific BPP has responded.
+    bpp_id: Joi.string()
+      .domain()
+      .messages({
+        'string.domain': 'bpp_id must be a valid domain',
+      })
+      .when('action', {
+        is: 'search',
+        then: Joi.optional(),
+        otherwise: Joi.required(),
+      }),
+
+    bpp_uri: Joi.string()
+      .uri()
+      .when('action', {
+        is: 'search',
+        then: Joi.optional(),
+        otherwise: Joi.required(),
+      }),
+
     message_id: Joi.string()
       .uuid()
       .required(),
@@ -62,7 +104,7 @@ const defaultAckSchema = Joi.object({
       .messages({
         'string.pattern.base': 'ttl must be in ISO 8601 duration format like PT30S',
       }),
-  }).required(),
+  }).optional(),
   message: Joi.object({
     ack: Joi.object({
       status: Joi.string().valid("ACK", "NACK").required(),

@@ -1,0 +1,8 @@
+save-data:
+  context: "$.context"
+  message_id: "$.context.message_id"
+  transaction_id: "$.context.transaction_id"
+  domain: "$.context.domain"
+  city: "$.context.city"
+  incremental: "$.message.intent.tags[?(@.code==\"catalog_inc\")]"
+  buyer_app_finder_fee: "$.message.intent.payment['@ondc/org/buyer_app_finder_fee_amount']"

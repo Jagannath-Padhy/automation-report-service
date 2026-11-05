@@ -281,6 +281,29 @@ export function addDefaultValidationMessage(
 }
 
 /**
+ * Tags every passed/failed message pushed inside `fn` with a validation-layer
+ * prefix, without requiring each individual check to know about layering.
+ * L2 = domain-common (applies regardless of which flow is running).
+ * L3 = flow-specific (only meaningful for one particular flow/scenario, e.g.
+ * RTO, cancellation reason codes, OOS, COD-gated settlement).
+ */
+export function tagLayer(
+  testResults: TestResult,
+  layer: "L2" | "L3",
+  fn: () => void
+): void {
+  const passedStart = testResults.passed.length;
+  const failedStart = testResults.failed.length;
+  fn();
+  for (let i = passedStart; i < testResults.passed.length; i++) {
+    testResults.passed[i] = `${layer}: ${testResults.passed[i]}`;
+  }
+  for (let i = failedStart; i < testResults.failed.length; i++) {
+    testResults.failed[i] = `${layer}: ${testResults.failed[i]}`;
+  }
+}
+
+/**
  * Common search validation that combines multiple validations
  */
 export function validateCommonSearch(

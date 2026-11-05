@@ -1,5 +1,5 @@
 import { Payload, TestResult } from "../../types/payload";
-import { validateQuote } from "./quoteValidations";
+import { validateQuote, validateBLQuoteFormulas } from "./quoteValidations";
 
 // pramaan-validation-parity skill: cross-call continuity checks, ported from Pramaan's
 // bussinessTests/commonBussiness.js (contextBussinessTests). This is the layer report-service
@@ -246,6 +246,8 @@ function checkQuoteArithmetic(element: Payload): { passed: string[]; failed: str
   if (!quote) return { passed: [], failed: [] };
   const local: TestResult = { response: {}, passed: [], failed: [] };
   validateQuote(quote, local, { validateDecimalPlaces: false, validateTotalMatch: true });
+  // FIS12 Business Loan additionally follows the loan-quote formulas (total and net disbursed).
+  if (ctx(element)?.domain === "ONDC:FIS12:BL") validateBLQuoteFormulas(quote, local);
   return { passed: local.passed, failed: local.failed };
 }
 

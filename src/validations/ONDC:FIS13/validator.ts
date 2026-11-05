@@ -1,3 +1,4 @@
+import { getIgmHandler, isFinanceDomain, runIgmAction } from "../shared/igm/igmActionHandler";
 import { Payload, TestResult } from "../../types/payload";
 import { ackResponseSchema } from "../shared/responseSchemas";
 import { checkJsonResponse } from "../shared/schemaValidator";
@@ -45,6 +46,14 @@ export async function validate(
     try {
       const domain = element?.jsonRequest?.context?.domain;
       const ext = getRuntimeExtension();
+      const igmHandler = isFinanceDomain(domain) ? getIgmHandler(action) : undefined;
+      if (igmHandler) {
+        const igmResult = await runIgmAction(igmHandler, element, sessionID, flowId, action_id as string);
+        testResults.passed.push(...(igmResult.passed || []));
+        testResults.failed.push(...(igmResult.failed || []));
+        return testResults;
+      }
+
 
       let baseName =
         domain && domain.startsWith(DOMAINS.FIS11)

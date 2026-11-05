@@ -1,0 +1,8 @@
+save-data:
+  context: "$.context"
+  order: "$.message.order"
+  quote: "$.message.order.quote"
+  items: "$.message.order.items[*]"
+  fulfillments: "$.message.order.fulfillments[*]"
+  provider: "$.message.order.provider"
+  provider_id: "$.message.order.provider.id"

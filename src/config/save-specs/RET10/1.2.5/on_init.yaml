@@ -1,0 +1,7 @@
+save-data:
+  context: "$.context"
+  order: "$.message.order"
+  quote: "$.message.order.quote"
+  billing: "$.message.order.billing"
+  payment: "$.message.order.payment"
+  tags: "$.message.order.tags"

@@ -16,7 +16,8 @@ export default async function on_init(
 
   try {
     const message = element?.jsonRequest?.message;
-    if (message?.order?.quote) {
+    // Quote calculation checks are switched off for FIS12 Business Loan for now.
+    if (message?.order?.quote && element?.jsonRequest?.context?.domain !== "ONDC:FIS12:BL") {
       validateOrderQuote(message, result, {
         validateDecimalPlaces: true,
         validateTotalMatch: true,

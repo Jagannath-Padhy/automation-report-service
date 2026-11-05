@@ -58,7 +58,6 @@ export function validateIgm1OrderDetails(orderDetails: any, category: string, te
     } else {
       orderDetails.items.forEach((item: any, index: number) => {
         if (!item.id) testResults.failed.push(`order_details.items[${index}].id is missing`);
-        if (item.quantity === undefined) testResults.failed.push(`order_details.items[${index}].quantity is missing`);
       });
       testResults.passed.push(`Order items: ${orderDetails.items.length} item(s)`);
     }

@@ -12,6 +12,7 @@ import logger from "@ondc/automation-logger";
 import { MESSAGES } from "../utils/messages";
 import { RedisService } from "@ondc/ondc-automation-cache-lib";
 import { checkPayload } from "./checkPayload";
+import { prefetchExternalValidation, clearExternalValidationCache } from "../validations/shared/externalSchemaValidator";
 
 // Type guard to ensure the action is a valid ValidationAction from the predefined actions list
 function isValidAction(action: string): action is ValidationAction {
@@ -40,6 +41,7 @@ const INITIAL_ACTION_COUNTERS: Record<ValidationAction, number> = {
   on_issue: 1,
   issue_status: 1,
   on_issue_status: 1,
+  catalog_rejection: 1,
 };
 
 // Interface for session details
@@ -504,6 +506,14 @@ async function processPayloads(
   // Built incrementally below, both in the sequence-order branch and the fallback branch.
   const priorPayloadsInFlow: Payload[] = [];
 
+  // Kick off this flow's L0+L1 external validation calls for every action up
+  // front, concurrently — each one only needs its own payload, not any prior
+  // action's saved state, so there's no correctness reason to wait for the
+  // sequential per-action loop below to reach each one in turn. The loop's
+  // own calls (inside each action's business-logic validator) pick up these
+  // already-in-flight results instead of firing a second request.
+  prefetchExternalValidation(payloads.map((p) => p?.jsonRequest));
+
   // If we have a required sequence, process in sequence order
   if (requiredSequence && requiredSequence.length > 0) {
     const transactionId = payloads[0]?.transactionId || payloads[0]?.jsonRequest?.context?.transaction_id;
@@ -606,6 +616,39 @@ async function processPayloads(
 
       payloadIndex++;
     }
+
+    // The configured sequence can be shorter than what the flow actually produced (repeated
+    // on_status polls, extra IGM legs, ...). Don't drop the surplus payloads from the report.
+    for (; payloadIndex < payloads.length; payloadIndex++) {
+      const element = payloads[payloadIndex];
+      const action = element?.action?.toLowerCase();
+
+      if (!isValidAction(action)) {
+        logger.error(`Invalid action: ${action}`, { flowId, action, index: payloadIndex });
+        continue;
+      }
+
+      const domain = element?.jsonRequest?.context?.domain;
+
+      try {
+        const result = await checkPayload(
+          domain,
+          element,
+          sessionID,
+          flowId,
+          domainConfig,
+          usecaseId,
+          priorPayloadsInFlow,
+          expectedDomainVersion
+        );
+
+        messages[`${action}_${actionCounters[action]}`] = JSON.stringify(result);
+        actionCounters[action] += 1;
+      } catch (error) {
+        logger.error(`Error occurred for action ${action} at index ${payloadIndex}`, error, { flowId, action, index: payloadIndex });
+      }
+      priorPayloadsInFlow.push(element);
+    }
   } else {
     // Fallback: process payloads without sequence (original behavior)
     for (let i = 0; i < payloads.length; i++) {
@@ -656,95 +699,127 @@ export async function validationModule(
   const flowsReport: Record<string, FlowValidationResult> = {};
   const testedFlows = Object.keys(groupedPayloads);
 
-  // Get session details and domain configuration
-  const sessionDetails = sessionDetailsOverride ?? await getSessionDetails(sessionID);
-  // Use optional chaining for usecaseId to avoid property access error
-  const domainConfig: DomainConfig = sessionDetails
-    ? loadConfig(
-      sessionDetails.domain,
-      sessionDetails.version,
-      (sessionDetails as any).usecaseId // fallback to 'any' for backwards compatibility
-    )
-    : { flows: {} };
-
-  // Check mandatory flows
+  // resultCache (and the concurrency limiter) in externalSchemaValidator.ts
+  // are process-wide singletons, long-lived for this server's entire
+  // lifetime — this clear() call is the only thing that keeps resultCache
+  // from growing unbounded across every report this process ever
+  // generates. It used to sit after the Promise.all below, unprotected: if
+  // anything above that point threw (e.g. getSessionDetails, which isn't
+  // wrapped in its own try/catch), this function would throw straight out
+  // to reportService.ts's catch block — surfacing as the generic "Failed
+  // to generate report" 500 — and clearExternalValidationCache() would
+  // never run for that call. Wrapping the whole body in try/finally
+  // guarantees it always runs, on every exit path, not just the happy one.
   try {
-    logger.info(MESSAGES.validations.checkingMandatoryFlows, { testedFlows });
+    // Get session details and domain configuration
+    const sessionDetails = sessionDetailsOverride ?? await getSessionDetails(sessionID);
+    // Use optional chaining for usecaseId to avoid property access error
+    const domainConfig: DomainConfig = sessionDetails
+      ? loadConfig(
+          sessionDetails.domain,
+          sessionDetails.version,
+          (sessionDetails as any).usecaseId // fallback to 'any' for backwards compatibility
+        )
+      : { flows: {} };
 
-    checkMandatoryFlows(testedFlows, domainConfig, report);
+    // Check mandatory flows
+    try {
+      logger.info(MESSAGES.validations.checkingMandatoryFlows, { testedFlows });
 
-    logger.info(MESSAGES.validations.mandatoryFlowsDone, { testedFlows });
-  } catch (error: any) {
-    logger.error("Error checking mandatory flows", error, { testedFlows });
-  }
-  // Process each flow
-  for (const flowId in groupedPayloads) {
-    const requiredSequence = domainConfig?.flows?.[flowId];
-    const payloads = groupedPayloads[flowId];
+      checkMandatoryFlows(testedFlows, domainConfig, report);
 
-    logger.info(MESSAGES.validations.actionValidationStart(flowId), { flowId });
-
-    // Step 1: Validate action sequence with deduplication
-    let { validSequence, errors } = validateActionSequence(
-      payloads,
-      requiredSequence || [],
-      flowId
-    );
-
-    // Step 1b: mandatory legs. Opt-in per flow — see DomainConfig.mandatory_legs. Reported
-    // alongside the sequence errors because a missing mandatory leg IS a flow-shape problem,
-    // and because the lookahead in validateActionSequence cannot see it.
-    const missingLegs = findMissingMandatoryLegs(
-      payloads,
-      domainConfig?.mandatory_legs?.[flowId]
-    );
-    if (missingLegs.length > 0) {
-      validSequence = false;
-      errors = [
-        ...errors,
-        `Error: flow '${flowId}' is missing ${missingLegs.length} mandatory step(s): ` +
-          `${missingLegs.join(", ")}. These must all be exercised for this flow to be valid.`,
-      ];
-      logger.info("Mandatory legs missing", { flowId, missingLegs });
+      logger.info(MESSAGES.validations.mandatoryFlowsDone, { testedFlows });
+    } catch (error: any) {
+      logger.error("Error checking mandatory flows", error, { testedFlows });
     }
+    // Process each flow. Flows are independent of one another — separate
+    // transaction IDs, separate Redis keys — so there's no correctness reason
+    // to validate them one at a time; doing so was the dominant cost in report
+    // generation (N flows x ~15 sequential network calls each). Run them all
+    // concurrently instead; the shared limiter inside externalSchemaValidator.ts
+    // caps how many external validator calls are actually in flight at once,
+    // so this doesn't translate into unbounded concurrent load downstream.
+    await Promise.all(
+      Object.keys(groupedPayloads).map(async (flowId) => {
+        try {
+          const requiredSequence = domainConfig?.flows?.[flowId];
+          const payloads = groupedPayloads[flowId];
 
-    logger.info(MESSAGES.validations.actionValidationDone(flowId), { flowId });
+          logger.info(MESSAGES.validations.actionValidationStart(flowId), { flowId });
 
-    // Step 2: Process payloads (HTML_FORM validations are now handled inline)
-    // Try multiple possible keys for usecaseId
-    const usecaseId = (sessionDetails as any)?.usecaseId
-      || (sessionDetails as any)?.usecase_id
-      || (sessionDetails as any)?.useCaseId;
-    // pramaan-validation-parity skill: sessionDetails is independently fetched session state
-    // (not read from any single payload), so it's a real "expected" value to check payloads
-    // against — see contextValidator.ts's ExpectedContext doc comment for why this matters.
-    const expectedDomainVersion = sessionDetails
-      ? { domain: sessionDetails.domain, version: sessionDetails.version }
-      : undefined;
+          // Step 1: Validate action sequence with deduplication
+          let { validSequence, errors } = validateActionSequence(
+            payloads,
+            requiredSequence || [],
+            flowId
+          );
 
-    const messages = await processPayloads(
-      payloads,
-      sessionID,
-      flowId,
-      domainConfig,
-      requiredSequence,
-      usecaseId,
-      expectedDomainVersion
+          // Step 1b: mandatory legs. Opt-in per flow — see DomainConfig.mandatory_legs. Reported
+          // alongside the sequence errors because a missing mandatory leg IS a flow-shape problem,
+          // and because the lookahead in validateActionSequence cannot see it.
+          const missingLegs = findMissingMandatoryLegs(
+            payloads,
+            domainConfig?.mandatory_legs?.[flowId]
+          );
+          if (missingLegs.length > 0) {
+            validSequence = false;
+            errors = [
+              ...errors,
+              `Error: flow '${flowId}' is missing ${missingLegs.length} mandatory step(s): ` +
+                `${missingLegs.join(", ")}. These must all be exercised for this flow to be valid.`,
+            ];
+            logger.info("Mandatory legs missing", { flowId, missingLegs });
+          }
+
+          logger.info(MESSAGES.validations.actionValidationDone(flowId), { flowId });
+
+          // Step 2: Process payloads (HTML_FORM validations are now handled inline)
+          // Try multiple possible keys for usecaseId
+          const usecaseId = (sessionDetails as any)?.usecaseId
+            || (sessionDetails as any)?.usecase_id
+            || (sessionDetails as any)?.useCaseId;
+          // pramaan-validation-parity skill: sessionDetails is independently fetched session state
+          // (not read from any single payload), so it's a real "expected" value to check payloads
+          // against — see contextValidator.ts's ExpectedContext doc comment for why this matters.
+          const expectedDomainVersion = sessionDetails
+            ? { domain: sessionDetails.domain, version: sessionDetails.version }
+            : undefined;
+
+          const messages = await processPayloads(
+            payloads,
+            sessionID,
+            flowId,
+            domainConfig,
+            requiredSequence,
+            usecaseId,
+            expectedDomainVersion
+          );
+
+          logger.info(MESSAGES.validations.payloadProcessingDone(flowId), { flowId });
+
+          // Step 3: Store validation results
+          flowsReport[flowId] = {
+            valid_flow: validSequence,
+            errors,
+            messages,
+          };
+        } catch (error: any) {
+          logger.error(`Error processing flow ${flowId}`, error, { flowId });
+          flowsReport[flowId] = {
+            valid_flow: false,
+            errors: [`Error processing flow: ${error?.message || error}`],
+            messages: {},
+          };
+        }
+      })
     );
 
-    logger.info(MESSAGES.validations.payloadProcessingDone(flowId), { flowId });
+    report.flowErrors = flowsReport;
 
-    // Step 3: Store validation results
-    flowsReport[flowId] = {
-      valid_flow: validSequence,
-      errors,
-      messages,
-    };
+    logger.info(MESSAGES.services.validationExit, { sessionID, flowCount: Object.keys(flowsReport).length });
+
+    return report;
+  } finally {
+    clearExternalValidationCache();
   }
-
-  report.flowErrors = flowsReport;
-
-  logger.info(MESSAGES.services.validationExit, { sessionID, flowCount: Object.keys(flowsReport).length });
-
-  return report;
 }

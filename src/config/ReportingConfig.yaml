@@ -138,6 +138,7 @@ domains:
             - on_status
             - issue
             - on_issue
+            - issue_status
             - on_issue_status
             - issue
 
@@ -484,6 +485,7 @@ domains:
             - on_status
             - issue
             - on_issue
+            - issue_status
             - on_issue_status
             - issue
         optional_flows:
@@ -1676,6 +1678,8 @@ domains:
             - on_confirm
             - issue
             - on_issue
+            - issue_status
+            - on_issue_status
             - on_issue_status
             - issue
         optional_flows:
@@ -1683,6 +1687,379 @@ domains:
           - lamf_credit_line_with_mfc_single_redirection
           - lamf_credit_line_with_mfc_single_redirection_with_igm_1.0.0
         validationModules: "../validations/ONDC:FIS12:SL/validator#validate"
+  ONDC:FIS12:BL:
+    versions:
+      "2.3.0":
+        flows:
+          master_search:
+            - search
+            - on_search
+
+          dedupe_check:
+            - select
+            - on_select
+
+          business_term_loan_without_aa:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+
+          business_term_loan_with_file_upload:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+
+          business_term_loan_with_aa:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          business_term_loan_with_offline_online_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_with_offline_online_missed_emi:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_with_offline_online_pre_part:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_pre_part_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_foreclosure:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_missed_emi_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_without_aa_with_igm_1.0.0:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+          business_term_loan_with_file_upload_with_igm_1.0.0:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+          business_term_loan_with_aa_with_igm_1.0.0:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+        optional_flows:
+          - master_search
+          - dedupe_check
+          - business_term_loan_without_aa
+          - business_term_loan_with_file_upload
+          - business_term_loan_with_aa
+          - business_term_loan_with_offline_online_foreclosure
+          - business_term_loan_with_offline_online_missed_emi
+          - business_term_loan_with_offline_online_pre_part
+          - business_term_loan_pre_part_payment
+          - business_term_loan_foreclosure
+          - business_term_loan_missed_emi_payment
+          - business_term_loan_with_file_upload_pre_part_payment
+          - business_term_loan_with_file_upload_foreclosure
+          - business_term_loan_with_file_upload_missed_emi_payment
+          - business_term_loan_with_aa_pre_part_payment
+          - business_term_loan_with_aa_foreclosure
+          - business_term_loan_with_aa_missed_emi_payment
+          - business_term_loan_without_aa_with_igm_1.0.0
+          - business_term_loan_with_file_upload_with_igm_1.0.0
+          - business_term_loan_with_aa_with_igm_1.0.0
+        validationModules: "../validations/ONDC:FIS12:BL/validator#validate"
   ONDC:FIS10:
     versions:
       "2.1.0":
@@ -3167,12 +3544,8 @@ domains:
               # Sequence derived from this flow's own automation-specifications fixture
               # (config/flows/PURCHASE FINANCE/Purchase_Finance_With_AA_With_IGM_v-1_0_0_.yaml,
               # `steps[].api` field) rather than assumed from the sibling: it is the sibling
-              # Purchase_Finance_With_AA sequence plus an issue -> on_issue -> on_issue_status
-              # tail. NOTE: the fixture has one more trailing `issue` step after
-              # `on_issue_status` with no matching `on_issue`/`on_issue_status` after it and
-              # no other flow file explains it — deliberately left OUT of this sequence rather
-              # than guessed at; see the delivery report for what to confirm with whoever owns
-              # the spec.
+              # Purchase_Finance_With_AA sequence plus the IGM 1.0.0 tail:
+              # issue -> on_issue -> issue_status -> on_issue_status -> on_issue_status (unsolicited) -> issue.
               Purchase_Finance_With_AA_With_IGM(v-1.0.0):
                 - search
                 - on_search
@@ -3210,9 +3583,12 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
                 - on_issue_status
+                - on_issue_status
+                - issue
               # Sequence = sibling Purchase_Finance_Without_AA + issue/on_issue/on_issue_status
-              # tail, same trailing-`issue`-omitted caveat as above.
+              # IGM 1.0.0 tail as above.
               Purchase_Finance_Without_AA_With_IGM(v-1.0.0):
                 - search
                 - on_search
@@ -3248,12 +3624,15 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
                 - on_issue_status
+                - on_issue_status
+                - issue
               # Sequence = sibling Purchase_Finance_Single_Redirection_With_AA, EXCEPT this
               # IGM variant's fixture has an active status/on_status pair where the sibling
               # has it commented out (inactive) at the same position — verified independently
               # from this flow's own fixture file, not copied from the sibling. Plus the same
-              # issue/on_issue/on_issue_status tail as the other three, trailing-issue omitted.
+              # IGM 1.0.0 tail as the other three.
               Purchase_Finance_Single_Redirection_With_AA_With_IGM(v-1.0.0):
                 - search
                 - on_search
@@ -3285,7 +3664,10 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
                 - on_issue_status
+                - on_issue_status
+                - issue
               # Sequence = sibling Purchase_Finance_Single_Redirection_Without_AA, same active
               # status/on_status pair (see note above) plus the issue tail.
               Purchase_Finance_Single_Redirection_Without_AA_With_IGM(v-1.0.0):
@@ -3317,7 +3699,10 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
                 - on_issue_status
+                - on_issue_status
+                - issue
 
             optional_flows:
               - Purchase_Finance_Without_AA
@@ -3860,6 +4245,8 @@ domains:
                 - on_status
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
             optional_flows:
@@ -3905,6 +4292,8 @@ domains:
                 - on_confirm
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4000,6 +4389,8 @@ domains:
                 - on_confirm
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4111,7 +4502,7 @@ domains:
             validationModules: "../validations/ONDC:FIS12/validator#validate"
       "2.3.0":
         usecases:
-          UNIFIED CREDIT:
+          BUSINESS LOAN:
             flows:
               business_term_loan_with_aa:
                 - search
@@ -4152,6 +4543,8 @@ domains:
                 - on_status
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4182,6 +4575,8 @@ domains:
                 - on_confirm
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4212,6 +4607,8 @@ domains:
                 - on_confirm
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4287,6 +4684,165 @@ domains:
                 - on_update
                 - on_update
 
+              business_term_loan_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_pre_part_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_foreclosure:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_missed_emi_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
               dedupe_check:
                 - select
                 - on_select
@@ -4320,6 +4876,8 @@ domains:
                 - on_confirm
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4336,6 +4894,15 @@ domains:
               - business_term_loan_with_offline_online_foreclosure
               - business_term_loan_with_offline_online_missed_emi
               - business_term_loan_with_offline_online_pre_part
+              - business_term_loan_pre_part_payment
+              - business_term_loan_foreclosure
+              - business_term_loan_missed_emi_payment
+              - business_term_loan_with_file_upload_pre_part_payment
+              - business_term_loan_with_file_upload_foreclosure
+              - business_term_loan_with_file_upload_missed_emi_payment
+              - business_term_loan_with_aa_pre_part_payment
+              - business_term_loan_with_aa_foreclosure
+              - business_term_loan_with_aa_missed_emi_payment
               - dedupe_check
               - lamf_credit_line_with_mfc_single_redirection
               - lamf_credit_line_with_mfc_single_redirection_with_igm_1.0.0
@@ -4572,6 +5139,8 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -4895,6 +5464,8 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -5241,6 +5812,8 @@ domains:
                 - on_update
                 - issue
                 - on_issue
+                - issue_status
+                - on_issue_status
                 - on_issue_status
                 - issue
 
@@ -6293,3 +6866,3231 @@ domains:
           "Buyer_Initiated_Return_(Full_Order_and_Partial_Order)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, on_status_out_for_delivery, on_status_order_delivered, update_return, on_update_return_init, on_update_return_approved, on_update_return_picked, update_settlement_trail, on_update_settlement_trail]
 
         validationModules: "../validations/ONDC:RETeB2B/validator#validate"
+  ONDC:RET10:
+    versions:
+      "1.2.5":
+        # Full 23-flow set confirmed 2026-10-22 against a real production
+        # session (all 23 flows run, REPORTABLE 23/23) and sourced from
+        # automation-specifications' draft-RET10-1.2.5 branch,
+        # config/flows/GROCERY/<FlowId>.yaml (steps[].api), cross-checked
+        # against automation-config-service's GROCERY/flows/index.yaml for
+        # tags. Previously only 9 of these 23 flows were configured here —
+        # the other 14 (including the 4 IGM flows and Catalog_Rejection_Flow)
+        # were missing entirely, and "Commercial_Model_For_BNP_SNP_Flow" was
+        # a wrong key — the real flow id has a literal "/" in it
+        # ("Commercial_Model_For_BNP/SNP_Flow"), so it never matched and
+        # silently fell back to unsequenced processing.
+        flows:
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Commercial_Model_For_BNP/SNP_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          RTO_And_Part_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Self_Pickup_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+          Slotted_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - update
+          Buyer_Instructions_And_Delivery_Update_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+          Multi_Option_Fulfillment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Forced_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          # IGM (issue/on_issue/on_issue_status) action files for this
+          # domain+version were added 2026-10-22 — copied from
+          # ONDC:LOG10/1.2.5's igmValidations-based implementation, which is
+          # domain-agnostic (pure message-shape dispatch across IGM 1.0.0/2.0.0).
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          # catalog_rejection is a non-standard pseudo-action (added to
+          # src/types/actions.ts and src/utils/constants.ts's `actions` list
+          # 2026-10-22); see ret10CatalogRejectionValidations.ts.
+          Catalog_Rejection_Flow:
+            - search
+            - on_search
+            - catalog_rejection
+
+        # Corrected 2026-10-23 against the OFFICIAL ONDC-Official/
+        # automation-specifications repo's config/flows/index.yaml
+        # (draft-RET10-1.2.5) — our own fork's branch had no tags on these
+        # files, which is why Catalog_Rejection_Flow and
+        # Out_Of_Stock_Flow(Error-code) were wrongly defaulted to OPTIONAL
+        # here on 2026-10-22. The official source tags both MANDATORY, so
+        # they've been removed from this list. Cash_On_Delivery_Flow,
+        # Commercial_Model_For_BNP/SNP_Flow, Replacement_Flow, and
+        # Discovery_Flow_incremental_catalog_refresh_pull are confirmed
+        # OPTIONAL there — unchanged. Also added 5 more flows the official
+        # source tags OPTIONAL that were missing from this list entirely
+        # (Buyer_Delivery_Flow, Buyer_Instructions_And_Delivery_Update_Flow,
+        # Multi_Option_Fulfillment_Flow, Self_Pickup_Flow,
+        # Slotted_Delivery_Flow) — found via a full sweep of every flow's
+        # OPTIONAL/MANDATORY tag against the official repo, not just the
+        # ones already flagged as uncertain.
+        optional_flows:
+          - Cash_On_Delivery_Flow
+          - Commercial_Model_For_BNP/SNP_Flow
+          - Replacement_Flow
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Buyer_Delivery_Flow
+          - Buyer_Instructions_And_Delivery_Update_Flow
+          - Multi_Option_Fulfillment_Flow
+          - Self_Pickup_Flow
+          - Slotted_Delivery_Flow
+
+        validationModules: "../validations/ONDC:RET10/validator#validate"
+      "1.2.0":
+        # v1.2.0 is a genuinely different, smaller flow set than v1.2.5 — NOT the
+        # same flows. Sourced from automation-config-service's
+        # src/config/RET10/v-1.2.0/GROCERY/flows/*.yaml `steps[].api` sequences,
+        # cross-checked against automation-specifications draft-RET10-1.2.0
+        # config/flows/index.yaml (all 7 REPORTABLE flows there are tagged
+        # MANDATORY — no optional_flows for this version).
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - search
+          # Sourced from automation-specifications draft-RET10-1.2.0's
+          # config/flows/GROCERY/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          # (steps[].api) — IGM v1.0.0 only (uses on_issue_status), matching
+          # 1.2.0's era. REPORTABLE was commented out in that branch's
+          # config/flows/index.yaml; confirmed with the user this should be
+          # treated as reportable here regardless.
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        validationModules: "../validations/ONDC:RET10/validator#validate"
+
+  ONDC:RET11:
+    versions:
+      "1.2.5":
+        # Full 21-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET11-1.2.5 branch, config/flows/F&B/<FlowId>.yaml (steps[].api).
+        # Fixed one wrong key: OUT_OF_STOCK -> Out_of_Stock(Error_code) (the real
+        # meta.flowId; distinct from OUT_OF_STOCK(ERROR-CODE), a separate real
+        # flow that was already correctly keyed). Added 4 previously-missing
+        # IGM flows (dispatch files copied byte-identical from ONDC:RET10/1.2.5).
+        flows:
+          BUYER_CANCEL:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          BUYER_DELIVERY:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - update
+            - on_update
+            - update
+            - on_update
+          BUYER_INSTRUCTIONS_AND_ADDRESS_UPDATE_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+            - on_status
+          COMMERCIAL_MODEL_FOR_BNP_SNP_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+          DELIVERY_FLOW_WITH_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+          DELIVERY_FLOW_WITH_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          DELIVERY_FLOW_WITH_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          DELIVERY_FLOW_WITH_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          FORCE_CANCEL:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          FULL_CATALOG:
+            - search
+            - on_search
+          INCREMENTAL_CATALOG:
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - search
+          INCREMENTAL_CATALOG_PULL:
+            - search
+            - on_search
+            - search
+            - on_search
+          MULTI_OPTION_FULFILLMENT_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          OFFERS_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+          ORDER_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          OUT_OF_STOCK(ERROR-CODE):
+            - select
+            - on_select
+          RETURN_FLOW:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - update
+          RTO_PLUS_PART_CANCELLATION:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          SELF_PICKUP:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+          SLOTTED_DELIVERY:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+        # Per automation-specifications draft-RET11-1.2.5 config/flows/index.yaml tags.
+        optional_flows:
+          - BUYER_INSTRUCTIONS_AND_ADDRESS_UPDATE_FLOW
+          - INCREMENTAL_CATALOG_PULL
+          - MULTI_OPTION_FULFILLMENT_FLOW
+          - SELF_PICKUP
+          - SLOTTED_DELIVERY
+
+        validationModules: "../validations/ONDC:RET11/validator#validate"
+      "1.2.0":
+        # v1.2.0 is a genuinely different, smaller flow set than v1.2.5 — sourced from
+        # automation-config-service's src/config/RET11/V-1.2.0/F&B/flows/*.yaml steps[].api
+        # sequences. All 8 flows there are tagged MANDATORY+REPORTABLE.
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - update
+          Buyer_Delivery:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - search
+
+        validationModules: "../validations/ONDC:RET11/validator#validate"
+  ONDC:RET12:
+    versions:
+      "1.2.5":
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Buyer_Instructions_And_Delivery_Update_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+            - on_status
+          Cancel_Return_Request_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - cancel
+            - on_cancel
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Seller_Cred_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+          # IGM (issue/on_issue/on_issue_status) flows — were missing before
+          # this fix (2026-10-23). Sequences from automation-specifications
+          # origin/draft-RET12-1.2.5's config/flows/FASHION/
+          # Delivery_Flow_With_IGM*.yaml steps[].api, cross-checked against
+          # automation-config-service's RET12/V-1.2.5/FASHION/flows/index.yaml.
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+        # Per automation-specifications origin/draft-RET12-1.2.5's
+        # config/flows/index.yaml tags (confirmed 2026-10-23). All 4 newly
+        # added Delivery_Flow_With_IGM* flows are tagged MANDATORY there.
+        optional_flows:
+          - Buyer_Instructions_And_Delivery_Update_Flow
+          - Cash_On_Delivery_Flow
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+
+        validationModules: "../validations/ONDC:RET12/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing/REPORTABLE note — same
+          # action sequence, sourced from draft-RET12-1.2.0's
+          # config/flows/FASHION/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        validationModules: "../validations/ONDC:RET12/validator#validate"
+
+  ONDC:RET13:
+    versions:
+      "1.2.5":
+        # Full 20-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET13-1.2.5 branch, config/flows/BPC/<FlowId>.yaml (steps[].api).
+        # Previously only 15 of these 20 flows were configured here (verified
+        # byte-for-byte identical to the real spec for all 15). The 5 missing
+        # flows were the 4 IGM flows and Catalog_Rejection_Flow, same pattern as
+        # the RET10 audit.
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Cross_Category_Cart_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Offers_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Seller_Cred_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+          # IGM (issue/on_issue/issue_status/on_issue_status) flows -- added
+          # 2026-10-23. Dispatch files (issue.ts/OnIssue.ts/IssueStatus.ts/
+          # OnIssueStatus.ts) created as byte-identical copies of
+          # ONDC:RET10/1.2.5's versions (domain-agnostic).
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          # catalog_rejection is a non-standard pseudo-action, already globally
+          # registered (src/types/actions.ts etc.) -- domain-agnostic. Dispatch
+          # file src/validations/ONDC:RET13/1.2.5/CatalogRejection.ts created as
+          # a byte-identical copy of ONDC:RET10/1.2.5/CatalogRejection.ts.
+          Catalog_Rejection_Flow:
+            - search
+            - on_search
+            - catalog_rejection
+        # Per automation-specifications' config/flows/index.yaml tags
+        # (draft-RET13-1.2.5, confirmed 2026-10-23). Unlike RET10's
+        # Catalog_Rejection_Flow (no tag source, defaulted to optional),
+        # RET13's Catalog_Rejection_Flow and all 4 IGM flows are explicitly
+        # tagged MANDATORY there -- none belong in optional_flows below.
+        optional_flows:
+          - Cash_On_Delivery_Flow
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+        validationModules: "../validations/ONDC:RET13/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing/REPORTABLE note — same
+          # action sequence, sourced from draft-RET13-1.2.0's
+          # config/flows/BPC/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+        validationModules: "../validations/ONDC:RET13/validator#validate"
+  ONDC:RET14:
+    versions:
+      "1.2.5":
+        # Full 18-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET14-1.2.5 branch, config/flows/ELECTRONICS/<FlowId>.yaml
+        # (steps[].api). Previously 14 flows were configured; all 14 verified
+        # byte-exact correct (no key/sequence mismatches). The 4 missing flows
+        # were the IGM flows, added below (IGM dispatch files copied
+        # byte-identical from ONDC:RET10/1.2.5, domain-agnostic).
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Customization_Input_Text_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Purchase_Finance_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          SNP_Collecting_Payment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+        # Per automation-specifications' config/flows/index.yaml tags
+        # (draft-RET14-1.2.5, confirmed 2026-10-23). All 4 IGM flows are
+        # tagged MANDATORY there -- none belong in optional_flows.
+        optional_flows:
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+        validationModules: "../validations/ONDC:RET14/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing/REPORTABLE note — same
+          # action sequence, sourced from draft-RET14-1.2.0's
+          # config/flows/ELECTRONICS/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+        validationModules: "../validations/ONDC:RET14/validator#validate"
+
+  ONDC:RET15:
+    versions:
+      "1.2.5":
+        # Full 19-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET15-1.2.5 branch, config/flows/APPLIANCES/<FlowId>.yaml
+        # (steps[].api). Previously 14 flows were configured; all 14 verified
+        # byte-exact correct. 5 flows were missing entirely (4 IGM flows +
+        # Catalog_Rejection_Flow), added below (dispatch files copied
+        # byte-identical from ONDC:RET10/1.2.5, domain-agnostic). Note RET15's
+        # own "Delivery_Flow_With_IGM(v-2.0.0)" genuinely uses the SAME short
+        # issue/on_issue/on_issue_status/issue sequence as its v-1.0.0 sibling
+        # (confirmed directly against the real spec file) -- unlike RET10/12/
+        # 13/14, where v-2.0.0 has a longer, different sequence. Not a typo.
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Customization_Input_Text_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Purchase_Finance_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          SNP_Collecting_Payment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Catalog_Rejection_Flow:
+            - search
+            - on_search
+            - catalog_rejection
+        # Per automation-specifications' config/flows/index.yaml tags
+        # (draft-RET15-1.2.5, confirmed 2026-10-23): all 5 newly-added flows
+        # (4 IGM + Catalog_Rejection_Flow) are tagged MANDATORY/REPORTABLE
+        # there, not OPTIONAL -- none belong in optional_flows.
+        optional_flows:
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+
+        validationModules: "../validations/ONDC:RET15/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing note. Unlike every
+          # other domain, draft-RET15-1.2.0's config/flows/index.yaml
+          # already has REPORTABLE active (not commented out) for this flow.
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        validationModules: "../validations/ONDC:RET15/validator#validate"
+
+  ONDC:RET16:
+    versions:
+      "1.2.5":
+        # Full 19-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET16-1.2.5 branch, config/flows/HOME&KITCHEN/<FlowId>.yaml
+        # (steps[].api). Previously 14 flows were configured; all 14 verified
+        # byte-exact correct. 5 flows were missing entirely (4 IGM flows +
+        # Catalog_Rejection_Flow), added below (dispatch files copied
+        # byte-identical from ONDC:RET10/1.2.5, domain-agnostic).
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Customization_Input_Text_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Purchase_Finance_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          SNP_Collecting_Payment_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Catalog_Rejection_Flow:
+            - search
+            - on_search
+            - catalog_rejection
+        # Per automation-specifications' config/flows/index.yaml tags
+        # (draft-RET16-1.2.5, confirmed 2026-10-23). All 4 IGM flows and
+        # Catalog_Rejection_Flow are tagged MANDATORY there. Also fixed:
+        # Discovery_Flow_incremental_catalog_refresh_pull was tagged OPTIONAL
+        # but missing from this list before -- added.
+        optional_flows:
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+
+        validationModules: "../validations/ONDC:RET16/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing/REPORTABLE note — same
+          # action sequence, sourced from draft-RET16-1.2.0's
+          # config/flows/HOME&KITCHEN/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        validationModules: "../validations/ONDC:RET16/validator#validate"
+
+  ONDC:RET18:
+    versions:
+      "1.2.5":
+        # Full 22-flow set confirmed 2026-10-23 against automation-specifications'
+        # draft-RET18-1.2.5 branch, config/flows/HEALTH&WELLNESS/<FlowId>.yaml
+        # (steps[].api). Previously 18 flows were configured; all 18 verified
+        # byte-exact correct. 4 missing IGM flows added below (dispatch files
+        # copied byte-identical from ONDC:RET10/1.2.5, domain-agnostic). Note
+        # the real meta.flowId for the No_Action variant is ALL CAPS
+        # "DELIVERY_FLOW_WITH_IGM_No_Action(v-2.0.0)", unlike its 3 mixed-case
+        # siblings -- confirmed directly from the spec file, not a typo here.
+        flows:
+          Buyer_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Buyer_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - update
+          Buyer_Instructions_And_Delivery_Update_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - update
+            - on_update
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_update
+            - on_status
+            - on_status
+          Cash_On_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Cross_Category_Cart_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Discovery_Flow_full_catalog:
+            - search
+            - on_search
+          Discovery_Flow_incremental_catalog:
+            - search
+            - on_search
+            - on_search
+            - search
+          Discovery_Flow_incremental_catalog_refresh_pull:
+            - search
+            - on_search
+            - search
+            - on_search
+          Force_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - cancel
+            - cancel
+            - on_cancel
+            - update
+          Out_Of_Stock_Flow:
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Out_Of_Stock_Flow(Error-code):
+            - select
+            - on_select
+          Replacement_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Return_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Self_Pickup_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+          Seller_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Seller_Cred_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+          Slotted_Delivery_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          Delivery_Flow_With_IGM(v-1.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          Delivery_Flow_With_IGM(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          Delivery_Flow_With_IGM_Rejection(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_update
+          DELIVERY_FLOW_WITH_IGM_No_Action(v-2.0.0):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+            - on_status
+        # Per automation-specifications' config/flows/index.yaml tags
+        # (draft-RET18-1.2.5, confirmed 2026-10-23). All 4 IGM flows are
+        # tagged MANDATORY there.
+        optional_flows:
+          - Buyer_Delivery_Flow
+          - Buyer_Instructions_And_Delivery_Update_Flow
+          - Cash_On_Delivery_Flow
+          - Discovery_Flow_incremental_catalog_refresh_pull
+          - Replacement_Flow
+          - Self_Pickup_Flow
+          - Slotted_Delivery_Flow
+
+        validationModules: "../validations/ONDC:RET18/validator#validate"
+      "1.2.0":
+        flows:
+          Order_to_confirm_to_fulfillment_(Prepaid):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          Buyer_Side_Order_Cancellation:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - update
+            - on_status
+          Out_of_Stock(Error_code):
+            - select
+            - on_select
+          Buyer_Initiated_Return_(Full_Order_and_Partial_Order):
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - update
+            - on_update
+            - on_update
+            - on_update
+            - update
+            - on_update
+          Search_and_Custom_Menu_(Full_Catalog_City):
+            - search
+            - on_search
+          Search_and_Custom_Menu_(Incremental_Push):
+            - search
+            - on_search
+            - on_search
+            - search
+          # See ONDC:RET10's 1.2.0 flows for sourcing/REPORTABLE note — same
+          # action sequence, sourced from draft-RET18-1.2.0's
+          # config/flows/HEALTH&WELLNESS/Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0.yaml
+          Order_to_confirm_to_fulfillment__Prepaid_with_igm_1.0.0:
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        validationModules: "../validations/ONDC:RET18/validator#validate"

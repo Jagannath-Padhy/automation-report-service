@@ -382,6 +382,7 @@ export function generateCustomHTMLReport(data: Report, sessionId: string, flowMa
     : "<p>All flows have been tested</p>";
 
   // Generate flow cards HTML
+  const flowResults: Record<string, "PASS" | "FAIL"> = {};
   const flowCardsHtml = Object.entries(data?.flowErrors || {})
     .map(([flowId, { valid_flow, errors, messages }], index) => {
       const parsedMessages: Record<string, ParsedMessage> = Object.entries(
@@ -410,6 +411,15 @@ export function generateCustomHTMLReport(data: Report, sessionId: string, flowMa
         }
         return acc;
       }, {} as Record<string, ParsedMessage>);
+
+      // A flow only actually passes if the action sequence matched AND no
+      // individual action reported a validation failure — valid_flow alone
+      // only reflects sequence order, not business/schema correctness.
+      const hasValidationFailures = Object.values(parsedMessages).some(
+        (m) => Array.isArray(m.failed) && m.failed.length > 0
+      );
+      const flowPassed = valid_flow && !hasValidationFailures;
+      flowResults[flowId] = flowPassed ? "PASS" : "FAIL";
 
       // Generate errors list
       const errorsHtml = errors.length
@@ -448,8 +458,8 @@ export function generateCustomHTMLReport(data: Report, sessionId: string, flowMa
               </div>
             </div>
             <div class="flow-header-right">
-              <div class="validity ${valid_flow ? "valid" : "invalid"}">
-                ${valid_flow ? "Valid" : "Invalid"}
+              <div class="validity ${flowPassed ? "valid" : "invalid"}">
+                ${flowPassed ? "Valid" : "Invalid"}
               </div>
             </div>
           </div>
@@ -468,11 +478,6 @@ export function generateCustomHTMLReport(data: Report, sessionId: string, flowMa
     })
     .join("");
 
-  // Build per-flow pass/fail results map
-  const flowResults: Record<string, "PASS" | "FAIL"> = {};
-  Object.entries(data?.flowErrors || {}).forEach(([flowId, { valid_flow }]) => {
-    flowResults[flowId] = valid_flow ? "PASS" : "FAIL";
-  });
 logger.info("flowResultsForPASSFAIL",JSON.stringify(flowResults))
   const htmlContent = `
     <!DOCTYPE html>
