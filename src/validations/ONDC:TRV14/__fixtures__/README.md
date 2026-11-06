@@ -4,10 +4,11 @@ There is one JSON file per workbench flow: 18 flows, `unreserved-entry-pass`. Ea
 
 ## Source
 
-- `ONDC-Official/automation-specifications` branch `draft-TRV14-2.0.0`, commit `cc6c1355`. This is the branch the deployed workbench runs.
+- `ONDC-Official/automation-specifications` branch `draft-TRV14-2.0.0`, commit `ca523e5f`. This is the branch the deployed workbench runs.
 - Every step was produced by running the flow's own `mock.generate` through `@ondc/automation-mock-runner@1.3.56` (`MockRunner.runGeneratePayload`). That is the library the mock playground uses, and session data was built from each earlier step's `saveData`, as the playground does it.
-- Each step's `inputs` used their sample or default values, with three exceptions that make the payloads match a correct run:
-  - the `*_Multiple_Tickets` flows select **2** tickets;
+- Each step's `inputs` used their sample or default values, with four exceptions that make the payloads match a correct run:
+  - init's `collected_by` is **BPP**, the workbench UI default; the BPP then settles only the buyer finder fee (`SETTLEMENT_AMOUNT` = 1% of the total);
+  - the `*_Multiple_Tickets` flows and `user_cancellation_partial` select **2** tickets (the partial flow then cancels 1, as in workbench session `lmBigGR_zQsJi9d5I4xg2yuhgwqGfda2`);
   - select steps get `user_inputs.time`, which the workbench's select generators read but its input form doesn't offer;
   - payloads are spaced 5 s apart, because the report treats same-action calls under 1 s apart as duplicates.
 - `HTML_FORM` (`first_form_testing`) has no Beckn payload, so it appears in the manifest only.

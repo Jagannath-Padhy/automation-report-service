@@ -1,5 +1,5 @@
 // TRV14 2.0.0 workbench values. Source of truth: ONDC-Official/automation-specifications
-// draft-TRV14-2.0.0 (commit cc6c1355) — config/validations/index.yaml enums and the
+// draft-TRV14-2.0.0 (commit ca523e5f) — config/validations/index.yaml enums and the
 // payloads its flow generators produce. The TRV14 contract is reference only; where
 // it disagrees (e.g. NOT_PAID) the workbench value wins.
 

@@ -1,6 +1,6 @@
 // TRV14 2.0.0 (unreserved-entry-pass) flow profiles — one per workbench flow.
 //
-// Source of truth: ONDC-Official/automation-specifications draft-TRV14-2.0.0 (commit cc6c1355),
+// Source of truth: ONDC-Official/automation-specifications draft-TRV14-2.0.0 (commit ca523e5f),
 // config/flows/index.yaml (flow ids) and config/flows/unreserved-entry-pass/*.yaml
 // (steps[].action_id, in order). Step validators read these fields instead of
 // branching on flow names, so a new workbench flow only needs a new entry here.

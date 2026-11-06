@@ -4,7 +4,7 @@ import { getPreviousTrv14Order } from "../helpers";
 
 // Business rules for select / on_select (incl. the form rounds) that the workbench
 // L1 does not cover (L1 checks presence and enums). Values follow what the
-// workbench (ONDC-Official draft-TRV14-2.0.0, commit cc6c1355) generates:
+// workbench (ONDC-Official draft-TRV14-2.0.0, commit ca523e5f) generates:
 // on_select echoes the selection plus the ABSTRACT parent; quote BASE_PRICE =
 // unit price x quantity, ADD_ONS = add-on price x add-on quantity (against the
 // parent ticket), TAX and CONVENIENCE_FEE always present; item-level forms sit on
@@ -69,10 +69,12 @@ export async function validateTrv14Select(
   }
   if (tickets.size > 0 && bad === 0) testResults.passed.push(`select (${actionId}): selected quantities are positive integers`);
 
+  // The workbench's own select input defaults to 1 ticket in the Multiple_Tickets
+  // flows too, so a single ticket is a warning, not a failure.
   if (profile.tickets === "MULTIPLE") {
     const total = [...tickets.values()].reduce((s, t) => s + (t.qty || 0), 0);
     if (total > 1) testResults.passed.push(`select (${actionId}): multiple tickets selected (${total})`);
-    else testResults.failed.push(`select (${actionId}): a multiple-ticket flow must select more than one ticket, found ${total}`);
+    else testResults.passed.push(`Warning: select (${actionId}): a multiple-ticket flow selected only ${total} ticket`);
   }
 
   // Form submission round: same selection as the first select, answering the form
