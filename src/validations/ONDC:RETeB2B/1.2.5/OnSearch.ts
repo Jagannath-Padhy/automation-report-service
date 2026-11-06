@@ -15,6 +15,7 @@ import {
   validatePackConfig,
   validateConsumerCareContact,
   validateP2PDescriptor,
+  validateRetailerMappingResponse,
   reportCatalogShape,
 } from "./onSearchB2BChecks";
 import {
@@ -59,6 +60,13 @@ const FLOW_DISCOVERY_BROADCAST = "Discovery_flow_broadcast_search";
 const ACTION_ID_BROADCAST = "on_search";
 const ACTION_ID_P2P = "on_search-1";
 
+// Retailer_Mapping runs three on_search legs: a broadcast catalog (on_search-0), the
+// retailer-to-distributor mapping lookup (on_search-1), then a catalog for the mapped
+// retailer (on_search-2). Only the middle one answers with a mapping instead of a
+// catalog, so it needs its own rule; the other two keep the catalog path they had.
+const FLOW_RETAILER_MAPPING = "Retailer_Mapping";
+const ACTION_ID_MAPPING_RESPONSE = "on_search-1";
+
 export default async function on_search(
   element: Payload,
   sessionID: string,
@@ -79,6 +87,12 @@ export default async function on_search(
         result.failed.push(
           `on_search: this call does not match a step of ${flowId} — the flow expects the catalog response to the broadcast search, then the response to the search sent directly to one seller; check the order of calls`
         );
+      }
+    } else if (flowId === FLOW_RETAILER_MAPPING) {
+      if (actionId === ACTION_ID_MAPPING_RESPONSE) {
+        validateRetailerMappingResponse(message?.catalog, result);
+      } else {
+        validateCatalogStructure(message, result);
       }
     } else if (isOffersFlow(flowId)) {
       // Deep path, no action_id dispatch: these flows have one on_search step.
