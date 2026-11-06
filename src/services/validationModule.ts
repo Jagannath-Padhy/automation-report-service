@@ -45,9 +45,10 @@ const INITIAL_ACTION_COUNTERS: Record<ValidationAction, number> = {
 };
 
 // Interface for session details
-interface SessionDetails {
+export interface SessionDetails {
   domain: string;
   version: string;
+  usecaseId?: string;
 }
 
 // Interface for domain configuration
@@ -69,6 +70,11 @@ interface DomainConfig {
    * so no other domain's reports change.
    */
   mandatory_legs?: Record<string, string[]>;
+  /**
+   * Per-flow `action_id` of each step, aligned 1:1 with `flows[flowId]`. Only the log-upload
+   * report reads it (logsAdapter.assignActionIds) — uploaded logs carry no action_id.
+   */
+  flow_action_ids?: Record<string, string[]>;
   validationModules?: string;
 }
 
@@ -684,6 +690,8 @@ async function processPayloads(
 export async function validationModule(
   groupedPayloads: Record<string, Payload[]>,
   sessionID: string,
+  // Log-upload reports have no live session in Redis, so they pass the details directly.
+  sessionDetailsOverride?: SessionDetails,
   // Per flow, action_ids that ran in the workbench but whose payloads the payload DB
   // did not return (reportService.findUnfetchedActionIds). Optional: callers that
   // don't pass it get the plain "missing mandatory step" message as before.
@@ -708,7 +716,7 @@ export async function validationModule(
   // guarantees it always runs, on every exit path, not just the happy one.
   try {
     // Get session details and domain configuration
-    const sessionDetails = await getSessionDetails(sessionID);
+    const sessionDetails = sessionDetailsOverride ?? await getSessionDetails(sessionID);
     // Use optional chaining for usecaseId to avoid property access error
     const domainConfig: DomainConfig = sessionDetails
       ? loadConfig(

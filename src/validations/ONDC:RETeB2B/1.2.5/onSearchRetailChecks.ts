@@ -7,6 +7,11 @@ import {
   tagGroupsByCode,
   tagValue,
 } from "./onSearchB2BChecks";
+import {
+  CATEGORY_ATTRIBUTES,
+  EB2B_CATEGORIES,
+  statutoryRequirementFor,
+} from "./categoryTaxonomy";
 
 // Checks ported from log-validation-utility's retail on_search validator
 // (utils/Retail_.1.2.5/Search/on_search.ts), adapted for eB2B.
@@ -321,14 +326,51 @@ export function validateCategoryTags(provider: any, result: TestResult): void {
       }
     }
 
+    const isVariantGroup = tagGroupsByCode(category?.tags, "type").some(
+      (group: any) => tagValue(group.list, "type") === "variant_group"
+    );
+    const seenSeq = new Set<string>();
+
     for (const group of tagGroupsByCode(category?.tags, "attr")) {
       const name = tagValue(group.list, "name");
       const seq = tagValue(group.list, "seq");
+
       if (!name || !String(name).trim()) {
         result.failed.push(`on_search: ${catLabel} attr tag is missing its name`);
       }
-      if (seq !== undefined && !/^\d+$/.test(String(seq))) {
-        result.failed.push(`on_search: ${catLabel} attr tag seq '${seq}' must be a positive integer`);
+
+      // automation-specifications CATEGORIES_VARIANT_GROUP_ATTR_VALID_CODES and
+      // CATEGORIES_VARIANT_GROUP_ATTR_SEQ_PRESENT. Both are scoped to variant groups in the
+      // spec (`_CONTINUE_: "!(category_type any in variant_group)"`), so they are scoped
+      // here too — only variant_group categories carry `attr` tags in practice, but a
+      // custom_menu/custom_group category must not be judged by a rule written for
+      // variant groups. The seq format and uniqueness checks below stay ungated: the
+      // format one predates this and applied to every category.
+      if (isVariantGroup) {
+        for (const entry of group.list || []) {
+          if (entry?.code && entry.code !== "name" && entry.code !== "seq") {
+            result.failed.push(
+              `on_search: ${catLabel} attr tag code '${entry.code}' must be 'name' or 'seq'`
+            );
+          }
+        }
+      }
+
+      // 1-based — the old `^\d+$` accepted a seq of 0.
+      if (seq === undefined) {
+        if (isVariantGroup) {
+          result.failed.push(`on_search: ${catLabel} attr tag is missing its seq`);
+        }
+      } else if (!/^[1-9]\d*$/.test(String(seq))) {
+        result.failed.push(
+          `on_search: ${catLabel} attr tag seq '${seq}' must be a positive integer starting at 1`
+        );
+      } else if (seenSeq.has(String(seq))) {
+        result.failed.push(
+          `on_search: ${catLabel} declares two attr tags with the same seq '${seq}' — the variant ordering is ambiguous`
+        );
+      } else {
+        seenSeq.add(String(seq));
       }
     }
 
@@ -462,9 +504,20 @@ export function validateServiceabilityCoverage(provider: any, result: TestResult
   }
 }
 
+/**
+ * At least one `timing` group of type `Order` is mandatory. A provider with NO timing groups
+ * used to return silently, so the most common form of the defect was the one never flagged
+ * (the Vistar tester's V3, docs/RETeB2B-vistar-seller-tester-coverage.md Finding 3). Every
+ * full spec catalog declares Order and Delivery timing.
+ */
 export function validateOrderTimingPresence(provider: any, result: TestResult): void {
   const groups = tagGroupsByCode(provider?.tags, "timing");
-  if (groups.length === 0) return;
+  if (groups.length === 0) {
+    result.failed.push(
+      `on_search: ${providerLabel(provider)} declares no 'timing' tag groups — at least one timing construct of type 'Order' is mandatory`
+    );
+    return;
+  }
 
   const types = groups.map((g) => tagValue(g.list, "type")).filter(Boolean);
   if (!types.includes("Order")) {
@@ -598,10 +651,6 @@ export function validateMandatoryItemTags(items: any[] | undefined, result: Test
       result.failed.push(`on_search: ${itemLabel(item)} origin tag is missing its country`);
     }
 
-    if (tagGroupsByCode(item?.tags, "attribute").length === 0) {
-      result.failed.push(`on_search: ${itemLabel(item)} is missing its mandatory 'attribute' tag`);
-    }
-
     for (const group of tagGroupsByCode(item?.tags, "veg_nonveg")) {
       for (const entry of group.list || []) {
         if (entry?.code && !VEG_NONVEG_CODES.has(entry.code)) {
@@ -615,7 +664,136 @@ export function validateMandatoryItemTags(items: any[] | undefined, result: Test
 
   if (cleanRun()) {
     result.passed.push(
-      `on_search: all ${items.length} item(s) carry mandatory origin/attribute tags with valid veg_nonveg codes`
+      `on_search: all ${items.length} item(s) carry a mandatory origin tag with valid veg_nonveg codes`
+    );
+  }
+}
+
+function isCustomizationItem(item: any): boolean {
+  return tagGroupsByCode(item?.tags, "type").some(
+    (group: any) => tagValue(group.list, "type") === "customization"
+  );
+}
+
+/**
+ * `category_id` must name a category in the eB2B taxonomy. Presence alone used to be
+ * covered by the AJV `required` block, which was removed (see
+ * docs/RETeB2B-on_search-broadcast-validations.md §2), so nothing checked it; and the
+ * value was never checked against the taxonomy at all, which let a near-miss like
+ * `Soft Drinks and Juices` (for `Energy and Soft Drinks`) through every layer.
+ */
+export function validateItemCategory(items: any[] | undefined, result: TestResult): void {
+  if (!Array.isArray(items) || items.length === 0) return;
+  const cleanRun = failureGate(result);
+
+  for (const item of items) {
+    const categoryId = item?.category_id;
+
+    if (categoryId === undefined || categoryId === null || !String(categoryId).trim()) {
+      result.failed.push(`on_search: ${itemLabel(item)} is missing its mandatory category_id`);
+      continue;
+    }
+
+    if (!EB2B_CATEGORIES.has(String(categoryId))) {
+      result.failed.push(
+        `on_search: ${itemLabel(item)} category_id '${categoryId}' is not an eB2B category`
+      );
+    }
+  }
+
+  if (cleanRun()) {
+    result.passed.push(
+      `on_search: all ${items.length} item(s) declare a valid eB2B category_id`
+    );
+  }
+}
+
+/**
+ * The `attribute` tag contract, per the eB2B category taxonomy: every attribute the
+ * category marks mandatory is present, no attribute foreign to the category is sent, and
+ * values satisfy the category's pattern where one is defined.
+ *
+ * Ported from log-validation-utility's `checkMandatoryTags` (utils/index.ts:950), but
+ * driven by the item's own `category_id` instead of by the domain — eB2B carries grocery,
+ * home, health and beauty categories under one domain, where retail splits them across
+ * RET10/RET12/RET13/RET18.
+ */
+export function validateItemAttributeTags(items: any[] | undefined, result: TestResult): void {
+  if (!Array.isArray(items) || items.length === 0) return;
+  const cleanRun = failureGate(result);
+  let checked = 0;
+
+  for (const item of items) {
+    // Customization items carry no attributes of their own, same exemption as the reference.
+    if (isCustomizationItem(item)) continue;
+
+    const categoryId = String(item?.category_id ?? "");
+    const rules = CATEGORY_ATTRIBUTES[categoryId];
+    // A missing or unknown category is already reported by validateItemCategory, and
+    // there is no grid to check against, so don't report the same item twice.
+    if (!rules) continue;
+    checked++;
+
+    const mandatory = Object.keys(rules).filter((code) => rules[code].mandatory);
+    // Every `attribute` group, not only the first: an item may split its attributes across
+    // groups, and validateBrandImagesConsistency reads the same tag that way
+    // (onSearchB2BChecks.ts).
+    const groups = tagGroupsByCode(item?.tags, "attribute");
+
+    if (groups.length === 0) {
+      // Grocery categories mark every attribute optional, so an absent group is valid
+      // there — only a category with a mandatory attribute can fail on absence.
+      if (mandatory.length > 0) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} is missing its 'attribute' tag — category '${categoryId}' requires ${mandatory.join(", ")}`
+        );
+      }
+      continue;
+    }
+
+    const entries: any[] = [];
+    for (const group of groups) {
+      if (Array.isArray(group.list)) entries.push(...group.list);
+    }
+
+    for (const entry of entries) {
+      if (entry?.code && !rules[entry.code]) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} attribute '${entry.code}' is not an attribute of category '${categoryId}'`
+        );
+      }
+    }
+
+    for (const code of Object.keys(rules)) {
+      const rule = rules[code];
+      const value = tagValue(entries, code);
+
+      if (value === undefined || !String(value).trim()) {
+        if (rule.mandatory) {
+          result.failed.push(
+            `on_search: ${itemLabel(item)} is missing mandatory attribute '${code}' for category '${categoryId}'`
+          );
+        }
+        continue;
+      }
+
+      if (Array.isArray(rule.value) && rule.value.length > 0 && !rule.value.includes(value)) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} attribute '${code}' value '${value}' must be one of ${rule.value.join(", ")}`
+        );
+      } else if (rule.value instanceof RegExp && !rule.value.test(value)) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} attribute '${code}' value '${value}' does not match ${rule.value}`
+        );
+      }
+    }
+  }
+
+  if (checked === 0) return;
+
+  if (cleanRun()) {
+    result.passed.push(
+      `on_search: attribute tags match the category taxonomy for all ${checked} item(s)`
     );
   }
 }
@@ -677,9 +855,32 @@ export function validateItemStatutoryFields(items: any[] | undefined, result: Te
   ];
 
   let checked = 0;
+  let demanded = 0;
 
   for (const item of items) {
+    // Which block the item's category requires. The field-level checks below only ever
+    // fired when the block was already present, so a seller could omit it outright and
+    // pass — automation-specifications' ITEMS_STATUTORY_REQS_* rules key the requirement
+    // off category_id, exactly as column B of the taxonomy sheet does.
+    const requirement = statutoryRequirementFor(String(item?.category_id ?? ""));
     const food = item?.["@ondc/org/statutory_reqs_prepackaged_food"];
+    const commoditiesBlock = item?.["@ondc/org/statutory_reqs_packaged_commodities"];
+
+    if (requirement !== "none") {
+      demanded++;
+
+      if (requirement === "prepackaged_food" && !(food && typeof food === "object")) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} category '${item.category_id}' requires '@ondc/org/statutory_reqs_prepackaged_food', which is missing`
+        );
+      }
+      if (!(commoditiesBlock && typeof commoditiesBlock === "object")) {
+        result.failed.push(
+          `on_search: ${itemLabel(item)} category '${item.category_id}' requires '@ondc/org/statutory_reqs_packaged_commodities', which is missing`
+        );
+      }
+    }
+
     if (food && typeof food === "object") {
       checked++;
       for (const field of PREPACKAGED_REQUIRED) {
@@ -704,7 +905,7 @@ export function validateItemStatutoryFields(items: any[] | undefined, result: Te
     }
   }
 
-  if (checked === 0) {
+  if (checked === 0 && demanded === 0) {
     result.passed.push("on_search: no statutory declarations on items — nothing to validate");
     return;
   }

@@ -2,7 +2,7 @@ import { TestResult, Payload } from "../../../types/payload";
 import { DomainValidators } from "../../shared/domainValidator";
 import { saveFromElement } from "../../../utils/specLoader";
 import { getActionData } from "../../../services/actionDataService";
-import { compareOrderIdContinuity } from "./commonChecks";
+import { compareOrderIdContinuity, validateQuoteAmountSigns } from "./commonChecks";
 import { validateCityConsistency, validateOnSelectFulfillmentRefs } from "./selectChecks";
 import {
   validateOrderTimestamps,
@@ -26,6 +26,7 @@ import {
   validateCodSettlementAtDelivery,
   validateFulfillmentRouting,
   validateTrackingTag,
+  validateFulfillmentCustomer,
   validateFulfillmentTimeWindows,
   validateStatusProgression,
 } from "./onStatusChecks";
@@ -61,6 +62,9 @@ export default async function on_status(
     // `created_at` stays optional here — it is present on all 47 reference legs but is
     // re-stamped at each one, so it is never compared across legs (see the doc's §6).
     validateOrderTimestamps(order, context, `on_status (${actionId})`, result);
+    // S8: only discount/offer lines may be negative. The sum check (validateQuoteBreakup) is
+    // deliberately NOT applied after confirm; the sign rule holds on every leg that quotes.
+    if (order?.quote) validateQuoteAmountSigns(order.quote, result, `on_status (${actionId})`);
 
     // Must come before the per-leg rules: all of them take a `length === 0` early return
     // when there is no live delivery fulfillment, so the absence would otherwise be
@@ -86,6 +90,7 @@ export default async function on_status(
 
     validateFulfillmentRouting(order, actionId, result);
     validateTrackingTag(order, actionId, result);
+    validateFulfillmentCustomer(order, actionId, result);
     validateFulfillmentTimeWindows(order, context, actionId, result);
     // Seller leg: the offers it lists must be exactly the offers its quote applies.
     if (isOffersFlow(flowId)) validateOrderOffersMatchApplied(order, `on_status (${actionId})`, result);

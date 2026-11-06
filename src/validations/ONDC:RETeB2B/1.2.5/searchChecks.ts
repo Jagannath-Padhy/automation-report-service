@@ -29,7 +29,7 @@ export function validateBroadcastRouting(context: any, result: TestResult): void
   }
 
   if (cleanRun()) {
-    result.passed.push("search: broadcast leg correctly omits bpp_id/bpp_uri");
+    result.passed.push("search: broadcast search correctly omits bpp_id/bpp_uri");
   }
 }
 
@@ -45,7 +45,7 @@ export function validateP2PRouting(context: any, result: TestResult): void {
 
   if (cleanRun()) {
     result.passed.push(
-      `search-1: P2P leg targets bpp_id '${context?.bpp_id}' with a bpp_uri`
+      `search-1: search sent directly to seller bpp_id '${context?.bpp_id}' with a bpp_uri`
     );
   }
 }

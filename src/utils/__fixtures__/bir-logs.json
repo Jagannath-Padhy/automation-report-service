@@ -1,0 +1,506 @@
+[
+ {
+  "req": {
+   "context": {
+    "action": "select",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "cf3cff73-8ff5-41fd-a215-9d70b53e3613",
+    "timestamp": "2026-10-21T13:06:03.826Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_select",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "cf3cff73-8ff5-41fd-a215-9d70b53e3613",
+    "timestamp": "2026-10-21T13:06:04.296Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "init",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "85f2ed81-36c3-4a63-926e-f02350aa05b3",
+    "timestamp": "2026-10-21T13:06:04.745Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_init",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "85f2ed81-36c3-4a63-926e-f02350aa05b3",
+    "timestamp": "2026-10-21T13:06:04.874Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "confirm",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "05cdba84-a663-4fac-9cb8-5fc878298095",
+    "timestamp": "2026-10-21T13:06:05.039Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_confirm",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "05cdba84-a663-4fac-9cb8-5fc878298095",
+    "timestamp": "2026-10-21T13:06:05.257Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "43b8dfe5-8ca2-45f1-a0e8-7a1e7636fde4",
+    "timestamp": "2026-10-21T13:06:08.063Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "5df9adf3-e26f-4168-93b4-c57fd51165c1",
+    "timestamp": "2026-10-21T13:06:11.271Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "22fc45cb-c462-42fc-8ff6-d232b92acf60",
+    "timestamp": "2026-10-21T13:06:14.642Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "01476832-a39d-4e76-bb35-c7c2634339c7",
+    "timestamp": "2026-10-21T13:06:17.869Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "92ec4664-6c08-4f0d-bfd3-9b871dffac20",
+    "timestamp": "2026-10-21T13:06:20.984Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_status",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "978ffc06-2ac8-4a02-831e-c9f3d40f2fbe",
+    "timestamp": "2026-10-21T13:06:24.120Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "223b7670-2102-455f-8c3c-08aee93c5001",
+    "timestamp": "2026-10-21T13:06:24.325Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "223b7670-2102-455f-8c3c-08aee93c5001",
+    "timestamp": "2026-10-21T13:06:24.477Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "8e0c1c87-860a-4ec0-99d1-bfec4f306e14",
+    "timestamp": "2026-10-21T13:06:27.242Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "43f44dd5-1680-4b9f-abf1-f81d08833b65",
+    "timestamp": "2026-10-21T13:06:30.356Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "4263bd31-e65a-4044-9e95-08170d7efa63",
+    "timestamp": "2026-10-21T13:06:30.479Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ },
+ {
+  "req": {
+   "context": {
+    "action": "on_update",
+    "bap_id": "dev-workbench.ondc.tech",
+    "bap_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/buyer",
+    "bpp_id": "dev-workbench.ondc.tech",
+    "bpp_uri": "https://dev-workbench.ondc.tech/api-service/ONDC:RETeB2B/1.2.5/seller",
+    "city": "std:080",
+    "core_version": "1.2.5",
+    "country": "IND",
+    "domain": "ONDC:RETeB2B",
+    "message_id": "d6671a67-1156-4e66-9020-0446b290d009",
+    "timestamp": "2026-10-21T13:06:30.596Z",
+    "transaction_id": "0d6d48d1-43be-42ea-9649-f14da7c90117",
+    "ttl": "PT30S"
+   }
+  },
+  "res": {
+   "response": {
+    "message": {
+     "ack": {
+      "status": "ACK"
+     }
+    }
+   }
+  }
+ }
+]

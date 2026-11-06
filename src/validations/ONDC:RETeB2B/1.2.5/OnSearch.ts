@@ -15,6 +15,7 @@ import {
   validatePackConfig,
   validateConsumerCareContact,
   validateP2PDescriptor,
+  validateRetailerMappingResponse,
   reportCatalogShape,
 } from "./onSearchB2BChecks";
 import {
@@ -33,12 +34,15 @@ import {
   validateItemLocationRefs,
   validateItemPriceBounds,
   validateItemMaximumCount,
+  validateItemCategory,
+  validateItemAttributeTags,
   validateMandatoryItemTags,
   validateReplacementTerms,
   validateItemStatutoryFields,
   validateOffers,
 } from "./onSearchRetailChecks";
-import { isOffersFlow } from "./offerChecks";
+import { isOffersFlow, validateCatalogOffersPresent } from "./offerChecks";
+import { hasErrorResponse } from "./selectChecks";
 
 // Only Discovery_flow_broadcast_search disambiguates its two on_search legs by
 // action_id (search-0 / on_search / search-1 / on_search-1). Of the other eight
@@ -55,6 +59,13 @@ import { isOffersFlow } from "./offerChecks";
 const FLOW_DISCOVERY_BROADCAST = "Discovery_flow_broadcast_search";
 const ACTION_ID_BROADCAST = "on_search";
 const ACTION_ID_P2P = "on_search-1";
+
+// Retailer_Mapping runs three on_search legs: a broadcast catalog (on_search-0), the
+// retailer-to-distributor mapping lookup (on_search-1), then a catalog for the mapped
+// retailer (on_search-2). Only the middle one answers with a mapping instead of a
+// catalog, so it needs its own rule; the other two keep the catalog path they had.
+const FLOW_RETAILER_MAPPING = "Retailer_Mapping";
+const ACTION_ID_MAPPING_RESPONSE = "on_search-1";
 
 export default async function on_search(
   element: Payload,
@@ -74,12 +85,23 @@ export default async function on_search(
         validateP2PDescriptor(message?.catalog?.["bpp/descriptor"], result);
       } else {
         result.failed.push(
-          `on_search: unexpected action_id '${actionId}' for flow '${flowId}' — expected '${ACTION_ID_BROADCAST}' or '${ACTION_ID_P2P}'`
+          `on_search: this call does not match a step of ${flowId} — the flow expects the catalog response to the broadcast search, then the response to the search sent directly to one seller; check the order of calls`
         );
+      }
+    } else if (flowId === FLOW_RETAILER_MAPPING) {
+      if (actionId === ACTION_ID_MAPPING_RESPONSE) {
+        validateRetailerMappingResponse(message?.catalog, result);
+      } else {
+        validateCatalogStructure(message, result);
       }
     } else if (isOffersFlow(flowId)) {
       // Deep path, no action_id dispatch: these flows have one on_search step.
       validateBroadcastCatalog(element, message, result);
+      // Skipped on a NACK and on a missing provider array — both are already reported.
+      const providers = message?.catalog?.["bpp/providers"];
+      if (!hasErrorResponse(element?.jsonRequest?.error) && Array.isArray(providers) && providers.length > 0) {
+        validateCatalogOffersPresent(providers, result);
+      }
     } else {
       validateCatalogStructure(message, result);
     }
@@ -142,6 +164,10 @@ function validateBroadcastCatalog(element: Payload, message: any, result: TestRe
     validateItemMaximumCount(provider?.items, result);
     validateItemPriceBounds(provider?.items, result);
     validatePackConfig(provider?.items, result);
+    // Category first: an unknown category_id is reported once here, and the attribute and
+    // statutory checks that key off it then skip the item rather than pile on.
+    validateItemCategory(provider?.items, result);
+    validateItemAttributeTags(provider?.items, result);
     validateMandatoryItemTags(provider?.items, result);
     validateReplacementTerms(provider?.items, result);
     validateItemStatutoryFields(provider?.items, result);

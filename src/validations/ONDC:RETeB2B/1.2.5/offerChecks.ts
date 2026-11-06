@@ -121,9 +121,6 @@ export function isOffersFlow(flowId: string | undefined): boolean {
 
 const OFFER_EPSILON = 0.01;
 
-/** Shown in every note for a rule the contract does not define well enough to evaluate. */
-const UNDEFINED_NOTE = "not evaluated (undefined in contract)";
-
 /** The only qualifier codes the contract defines (L5085-5093). */
 const DEFINED_QUALIFIERS = new Set(["min_value", "item_count", "item_count_upper"]);
 
@@ -351,7 +348,9 @@ function assessApplicability(order: any, context: any, provider: any, offer: any
     qualifier.forEach((entry: any) => {
       const code = String(entry?.code);
       if (!DEFINED_QUALIFIERS.has(code)) {
-        undefinedNotes.push(`${ref} qualifier '${code}' = '${entry?.value}' ${UNDEFINED_NOTE}`);
+        undefinedNotes.push(
+          `${ref} qualifier '${code}' = '${entry?.value}' was not checked — only ${[...DEFINED_QUALIFIERS].join(", ")} qualifiers have a defined meaning`
+        );
       }
     });
 
@@ -393,6 +392,28 @@ function assessApplicability(order: any, context: any, provider: any, offer: any
 // ---------------------------------------------------------------------------
 // Per-leg checks
 // ---------------------------------------------------------------------------
+
+/**
+ * An offers-flow on_search must advertise at least one offer. These flows exist to exercise
+ * catalog offers, and `validateOffers` returns silently on an absent `offers`, so a catalog
+ * with none used to surface only one leg later, as on_select's "not advertised" failure.
+ *
+ * Catalog-wide, not per provider: a multi-provider catalog may legitimately run its schemes
+ * through one distributor only. A non-array `offers` counts as none here; its shape is
+ * `validateOffers`' job.
+ */
+export function validateCatalogOffersPresent(providers: any, result: TestResult): void {
+  const withOffers = asArray(providers).filter((p: any) => Array.isArray(p?.offers) && p.offers.length > 0);
+  if (withOffers.length === 0) {
+    result.failed.push(
+      "on_search: no provider advertises any offer — an offers flow's catalog must carry the available offers in bpp/providers[].offers"
+    );
+    return;
+  }
+  result.passed.push(
+    `on_search: catalog advertises offers (${withOffers.map((p: any) => `${p?.id ?? "?"}: ${p.offers.length}`).join(", ")})`
+  );
+}
 
 /** D9: an offers-flow on_select must apply at least one offer. */
 export function validateOfferLinesPresent(order: any, label: string, result: TestResult): void {
@@ -616,7 +637,9 @@ export function validateOfferBenefit(order: any, provider: any | null, label: st
       const valueType = tagValue(benefit, "value_type");
       const value = toAmount(tagValue(benefit, "value"));
       if (valueType !== "percent" && valueType !== "amount") {
-        result.passed.push(`${ref} benefit value_type '${valueType}' for a ${code} offer ${UNDEFINED_NOTE}`);
+        result.passed.push(
+          `${ref} benefit was not priced — a ${code} offer's value_type must be 'percent' or 'amount', got '${valueType}'`
+        );
         return;
       }
       if (value === null) {
@@ -678,7 +701,9 @@ export function validateOfferBenefit(order: any, provider: any | null, label: st
       return;
     }
 
-    result.passed.push(`${ref} benefit for descriptor.code '${code}' ${UNDEFINED_NOTE}`);
+    result.passed.push(
+      `${ref} benefit was not priced — price checks are defined only for discount, slab, buyXgetY and freebie offers (got descriptor.code '${code}')`
+    );
   });
 
   if (ok()) {

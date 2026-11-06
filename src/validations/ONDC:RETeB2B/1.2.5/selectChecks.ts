@@ -103,7 +103,7 @@ export function validateSelectProvider(
 
   if (!descriptor || typeof descriptor !== "object") {
     result.failed.push(
-      `${label}: order.provider.descriptor is required — the API contract names it in both the /select and /on_select sections, and every flow's mock builds it from the seller catalog`
+      `${label}: order.provider.descriptor is required — it must carry the provider's name as listed in the on_search catalog`
     );
   } else {
     if (!descriptor.name || !String(descriptor.name).trim()) {
@@ -586,7 +586,7 @@ export function validateErrorResponse(error: any, result: TestResult): void {
     result.passed.push(
       known
         ? `on_select: well-formed error response (type '${error.type}', code '${error.code}' — ${known})`
-        : `on_select: well-formed error response (type '${error.type}', code '${error.code}' is not one of the documented codes ${Object.keys(DOCUMENTED_ERROR_CODES).join(", ")}, but is not rejected)`
+        : `on_select: well-formed error response (type '${error.type}', code '${error.code}' is not a standard code for this call (known: ${Object.entries(DOCUMENTED_ERROR_CODES).map(([c, d]) => `${c} ${d}`).join("; ")}); accepted)`
     );
   }
 }
@@ -627,6 +627,90 @@ export function validateMandatoryOutOfStockError(error: any, result: TestResult)
   if (cleanRun()) {
     result.passed.push(
       `on_select: mandatory out-of-stock error present (type '${error.type}', code '${error.code}')`
+    );
+  }
+}
+
+/**
+ * The rejection itself must say less is available than was asked for. Contract
+ * "/on_select (Out of stock)" fn 217, on the breakup line's `@ondc/org/item_quantity.count`:
+ * "can be 0 (completely out of stock) or the reduced quantity in stock". So for every item
+ * the 40002 error names, the quoted count must be below the count `select0` requested.
+ * A rejection that still quotes the full basket used to pass: only the buyer's retry was held
+ * to the reported availability (validateRetrySelectAgainstOutOfStock), never the seller.
+ *
+ * Reads `@ondc/org/item_quantity.count`, the field fn 217 annotates, and NOT
+ * `item.quantity.available.count`: the contract's own example leaves that at "500" while
+ * quoting 0. Skips silently when the error is not 40002 or its message does not parse into
+ * item ids (both are validateMandatoryOutOfStockError's business), and when select0's data is
+ * not stored.
+ */
+export function validateOutOfStockQuantityReduced(
+  order: any,
+  error: any,
+  selectData: Record<string, any> | null,
+  result: TestResult
+): void {
+  if (error?.code !== OUT_OF_STOCK_ERROR_CODE) return;
+
+  let reported: any;
+  try {
+    reported = JSON.parse(String(error.message));
+  } catch (_) {
+    return;
+  }
+  const flagged = (Array.isArray(reported) ? reported : [])
+    .map((entry: any) => entry?.item_id)
+    .filter(Boolean)
+    .map(String);
+  if (flagged.length === 0) return;
+
+  const selectedItems: any[] = Array.isArray(selectData?.items) ? selectData!.items : selectData?.items ? [selectData.items] : [];
+  if (selectedItems.length === 0) return;
+  const requestedById = new Map<string, number>();
+  for (const item of selectedItems) {
+    const count = Number(item?.quantity?.count);
+    if (item?.id && Number.isInteger(count)) requestedById.set(String(item.id), count);
+  }
+
+  const breakup: any[] = Array.isArray(order?.quote?.breakup) ? order.quote.breakup : [];
+  const cleanRun = failureGate(result);
+  const reduced: string[] = [];
+
+  for (const itemId of new Set(flagged)) {
+    const requested = requestedById.get(itemId);
+    if (requested === undefined) continue; // not in select0 — another check's business
+
+    const line = breakup.find(
+      (b: any) => String(b?.["@ondc/org/item_id"]) === itemId && b?.["@ondc/org/title_type"] === "item"
+    );
+    if (!line) {
+      result.failed.push(
+        `on_select: out-of-stock item ${itemId} has no 'item' line in quote.breakup — the rejection must quote it at 0 or the reduced quantity in stock`
+      );
+      continue;
+    }
+
+    const raw = line?.["@ondc/org/item_quantity"]?.count;
+    const quoted = Number(raw);
+    if (!Number.isInteger(quoted) || quoted < 0) {
+      result.failed.push(
+        `on_select: out-of-stock item ${itemId} breakup @ondc/org/item_quantity.count '${raw}' must be a non-negative integer`
+      );
+      continue;
+    }
+    if (quoted >= requested) {
+      result.failed.push(
+        `on_select: item ${itemId} is reported out of stock (40002) but quoted at ${quoted} of the ${requested} requested — the quoted count must be 0 (completely out of stock) or the reduced quantity in stock`
+      );
+      continue;
+    }
+    reduced.push(`${itemId}: ${quoted} of ${requested}`);
+  }
+
+  if (cleanRun() && reduced.length > 0) {
+    result.passed.push(
+      `on_select: every out-of-stock item is quoted below the requested quantity (${reduced.join(", ")})`
     );
   }
 }

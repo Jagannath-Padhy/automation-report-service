@@ -2,12 +2,13 @@ import { TestResult, Payload } from "../../../types/payload";
 import { DomainValidators } from "../../shared/domainValidator";
 import { saveFromElement } from "../../../utils/specLoader";
 import { getActionData } from "../../../services/actionDataService";
-import { validateOrderState, compareOrderIdContinuity } from "./commonChecks";
+import { validateOrderState, compareOrderIdContinuity, validateQuoteAmountSigns } from "./commonChecks";
 import {
   resolveRaisedReturnId,
   validateReturnStateProgression,
   validateReturnIdContinuity,
   validateAdjustmentArithmetic,
+  validateDeliveryStaysDeliveredDuringReturn,
   asArray,
 } from "./returnChecks";
 import {
@@ -16,7 +17,7 @@ import {
   validateOrderStateNoRegression,
 } from "./orderFormationChecks";
 import { validatePartCancelPrecondition } from "./rtoChecks";
-import { validateOnSelectFulfillmentRefs } from "./selectChecks";
+import { validateOnSelectFulfillmentRefs, validateSelectProvider } from "./selectChecks";
 
 export default async function on_update(
   element: Payload,
@@ -46,6 +47,15 @@ export default async function on_update(
     if (order?.tags && Array.isArray(order.tags)) {
       result.passed.push(`on_update: order.tags present with ${order.tags.length} entries`);
     }
+
+    // provider.id + a named descriptor: all 11 contract /on_update examples (part cancel and
+    // every return state) carry descriptor {name, code, short_desc}. The RTO spec example and
+    // mock for on_update_part_cancel omit it; that is an upstream defect and FAILS here.
+    validateSelectProvider(order, result, `on_update (${actionId})`);
+    validateDeliveryStaysDeliveredDuringReturn(order, `on_update (${actionId})`, result);
+    // S8: only discount/offer lines may be negative. The sum check (validateQuoteBreakup) is
+    // deliberately NOT applied after confirm; the sign rule holds on every leg that quotes.
+    if (order?.quote) validateQuoteAmountSigns(order.quote, result, `on_update (${actionId})`);
 
     const txnId = element?.jsonRequest?.context?.transaction_id as string | undefined;
     if (txnId) {

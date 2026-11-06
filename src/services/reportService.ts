@@ -76,7 +76,7 @@ export class ReportService {
       }
 
       const htmlReport = generateCustomHTMLReport(
-        await validationModule(flows, sessionId, unfetchedActionIds),
+        await validationModule(flows, sessionId, undefined, unfetchedActionIds),
         sessionId,
         flowMap
       );

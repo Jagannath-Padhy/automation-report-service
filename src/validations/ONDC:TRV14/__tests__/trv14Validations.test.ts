@@ -445,7 +445,7 @@ describe("TRV14 2.0.0 report validations", () => {
       store.set(`sessionDetails:${sessionID}`, JSON.stringify({ domain: "ONDC:TRV14", version: "2.0.0", usecaseId: "unreserved-entry-pass" }));
       const soft = ["update_soft_partial_cancellation", "on_update_soft_partial_cancellation"];
       const payloads = load(PC[1]).filter((x: any) => !soft.includes(x.action_id));
-      const withInfo = await validationModule({ [PC[0]]: payloads }, sessionID, { [PC[0]]: soft });
+      const withInfo = await validationModule({ [PC[0]]: payloads }, sessionID, undefined, { [PC[0]]: soft });
       const errs: string[] = withInfo.flowErrors[PC[0]].errors;
       check("unreadable payloads reported as missing from the workbench DB",
         errs.some((e) => e.includes("missing from the workbench payload DB: update_soft_partial_cancellation, on_update_soft_partial_cancellation")) &&
