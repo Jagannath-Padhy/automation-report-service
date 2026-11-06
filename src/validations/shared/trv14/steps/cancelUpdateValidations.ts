@@ -5,7 +5,7 @@ import { getPreviousTrv14Order, getTrv14ActionData, trv14FulfillmentShape } from
 // Business rules for cancel / on_cancel (soft, confirm, rejected, unsolicited) and
 // update / on_update (partial cancellation) that the workbench L1 does not cover
 // (L1 checks presence and the reason / descriptor enums). Values follow what the
-// workbench (ONDC-Official draft-TRV14-2.0.0, commit cc6c1355) generates:
+// workbench (ONDC-Official draft-TRV14-2.0.0, commit ca523e5f) generates:
 // - cancel: order_id = confirmed order; SOFT_CANCEL then CONFIRM_CANCEL; same reason
 //   both times; 000 in technical cancellation, a user reason otherwise.
 // - on_cancel: the confirmed order (id, created_at, items, payments, ticket QR); the

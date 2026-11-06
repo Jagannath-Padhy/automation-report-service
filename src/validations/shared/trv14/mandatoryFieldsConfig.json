@@ -1,5 +1,5 @@
 {
-  "_source": "ONDC-Official/automation-specifications draft-TRV14-2.0.0 (commit cc6c1355): fields marked 'mandatory' in config/attributes/unreserved-entry-pass.yaml that config/validations/index.yaml (L1) has no presence check for. status.order_id is handled in code (technical-cancellation flows send ref_id instead).",
+  "_source": "ONDC-Official/automation-specifications draft-TRV14-2.0.0 (commit ca523e5f): fields marked 'mandatory' in config/attributes/unreserved-entry-pass.yaml that config/validations/index.yaml (L1) has no presence check for. status.order_id is handled in code (technical-cancellation flows send ref_id instead).",
   "fields": {
     "on_search": [
       "$.message.catalog.providers.categories.descriptor.code",

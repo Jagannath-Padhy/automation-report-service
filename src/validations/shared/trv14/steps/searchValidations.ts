@@ -5,7 +5,7 @@ import { Trv14FlowProfile } from "../flowProfiles";
 // Business rules for search / on_search that the workbench L1 does not cover (L1
 // already checks presence, enums, tag code lists and that item location_ids /
 // category_ids / fulfillment_ids point into the catalog). Values follow what the
-// workbench (ONDC-Official draft-TRV14-2.0.0, commit cc6c1355) generates:
+// workbench (ONDC-Official draft-TRV14-2.0.0, commit ca523e5f) generates:
 // page 1 is provider-only with PAGINATION_ID + MAX_PAGE_NUMBER, later pages add
 // CURRENT_PAGE_NUMBER (not necessarily increasing) and the items.
 

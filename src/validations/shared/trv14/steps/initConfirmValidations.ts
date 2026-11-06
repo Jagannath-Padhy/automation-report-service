@@ -5,11 +5,11 @@ import { getPreviousTrv14Order } from "../helpers";
 // Business rules for init / on_init / confirm / on_confirm (incl. the
 // "_bap_ convenience" variants) that the workbench L1 does not cover (L1 checks
 // presence, enums and payment params presence). Values follow what the workbench
-// (ONDC-Official draft-TRV14-2.0.0, commit cc6c1355) generates: the order built at
+// (ONDC-Official draft-TRV14-2.0.0, commit ca523e5f) generates: the order built at
 // select is carried unchanged to on_confirm; the quote stays the last on_select
 // quote, plus a BAP_CONVENIENCE_FEE line when the BAP adds one at init; confirm pays
-// params.amount = quote total; BPP_TERMS.SETTLEMENT_AMOUNT = total less the buyer
-// finder fee; on_confirm adds the order id, timestamps and the ticket QR.
+// params.amount = quote total; on_confirm adds the order id, timestamps and the
+// ticket QR. BPP_TERMS.SETTLEMENT_AMOUNT is checked on every call (settlement.ts).
 
 const isOnSelectStep = (id: string) => id.startsWith("on_select");
 const isInitStep = (id: string) => id.startsWith("init");
@@ -112,18 +112,6 @@ export async function validateTrv14InitConfirm(
       }
     }
 
-    // BPP settlement amount = quote total less the buyer finder fee.
-    const bpp = tagMap(order?.tags).BPP_TERMS;
-    if (bpp?.SETTLEMENT_AMOUNT !== undefined && order?.quote?.price?.value !== undefined) {
-      const total = num(order.quote.price.value);
-      let expected: number | undefined;
-      if (bpp.BUYER_FINDER_FEES_TYPE === "percent") expected = total * (1 - num(bpp.BUYER_FINDER_FEES_PERCENTAGE) / 100);
-      if (bpp.BUYER_FINDER_FEES_TYPE === "amount") expected = total - num(bpp.BUYER_FINDER_FEES_AMOUNT);
-      if (expected !== undefined) {
-        if (sameAmount(bpp.SETTLEMENT_AMOUNT, expected)) testResults.passed.push(`${label}: BPP_TERMS.SETTLEMENT_AMOUNT is the quote total less the buyer finder fee`);
-        else testResults.failed.push(`${label}: BPP_TERMS.SETTLEMENT_AMOUNT ${bpp.SETTLEMENT_AMOUNT} must be ${expected.toFixed(2)} (quote ${total} less the buyer finder fee)`);
-      }
-    }
     return;
   }
 

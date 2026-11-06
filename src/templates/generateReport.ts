@@ -18,8 +18,12 @@ function generateApiValidationHtml(
     displayName = `form${dynamicFormMatch[1]}`;
   }
 
+  // Form steps (html_form_N / dynamic_form_N) are form fetches, not Beckn calls,
+  // so they have no ACK to show.
+  const isFormStep = /^(html_form|dynamic_form)_\d+$/.test(api);
+
   let ackHtml = "";
-  if (ackStatus) {
+  if (ackStatus && !isFormStep) {
     const ackClass =
       ackStatus === "ACK" ? "ack" : ackStatus === "NACK" ? "nack" : "no-response";
     ackHtml = `<span class="ack-status ${ackClass}">${ackStatus}</span>`;

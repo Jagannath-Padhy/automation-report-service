@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "messageId": "05938519-b6c5-4fb2-88ea-70852fbbf07b",
+    "messageId": "fa19346e-bce7-422d-bb42-d7cebf5178a4",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "SELECT",
@@ -13,9 +13,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "select",
-        "timestamp": "2026-11-05T11:09:55.000Z",
+        "timestamp": "2026-11-06T09:08:56.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "05938519-b6c5-4fb2-88ea-70852fbbf07b",
+        "message_id": "fa19346e-bce7-422d-bb42-d7cebf5178a4",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -45,14 +45,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -90,8 +82,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:09:55.000Z",
-    "updatedAt": "2026-11-05T11:09:55.000Z",
+    "createdAt": "2026-11-06T09:08:56.000Z",
+    "updatedAt": "2026-11-06T09:08:56.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -99,7 +91,7 @@
   },
   {
     "id": 2,
-    "messageId": "05938519-b6c5-4fb2-88ea-70852fbbf07b",
+    "messageId": "fa19346e-bce7-422d-bb42-d7cebf5178a4",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_SELECT",
@@ -111,9 +103,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_select",
-        "timestamp": "2026-11-05T11:10:00.000Z",
+        "timestamp": "2026-11-06T09:09:01.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "05938519-b6c5-4fb2-88ea-70852fbbf07b",
+        "message_id": "fa19346e-bce7-422d-bb42-d7cebf5178a4",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -342,10 +334,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -568,8 +566,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:00.000Z",
-    "updatedAt": "2026-11-05T11:10:00.000Z",
+    "createdAt": "2026-11-06T09:09:01.000Z",
+    "updatedAt": "2026-11-06T09:09:01.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -577,7 +575,7 @@
   },
   {
     "id": 3,
-    "messageId": "9df04392-dee7-484e-95d8-ff996808e5ec",
+    "messageId": "f1525c6e-7cef-40d0-9bf0-fb3c5b40166b",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "INIT",
@@ -589,9 +587,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "init",
-        "timestamp": "2026-11-05T11:10:05.000Z",
+        "timestamp": "2026-11-06T09:09:06.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "9df04392-dee7-484e-95d8-ff996808e5ec",
+        "message_id": "f1525c6e-7cef-40d0-9bf0-fb3c5b40166b",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -611,7 +609,7 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -626,14 +624,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -716,8 +706,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:05.000Z",
-    "updatedAt": "2026-11-05T11:10:05.000Z",
+    "createdAt": "2026-11-06T09:09:06.000Z",
+    "updatedAt": "2026-11-06T09:09:06.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -725,7 +715,7 @@
   },
   {
     "id": 4,
-    "messageId": "9df04392-dee7-484e-95d8-ff996808e5ec",
+    "messageId": "f1525c6e-7cef-40d0-9bf0-fb3c5b40166b",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_INIT",
@@ -737,9 +727,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_init",
-        "timestamp": "2026-11-05T11:10:10.000Z",
+        "timestamp": "2026-11-06T09:09:11.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "9df04392-dee7-484e-95d8-ff996808e5ec",
+        "message_id": "f1525c6e-7cef-40d0-9bf0-fb3c5b40166b",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -885,10 +875,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -1186,7 +1182,7 @@
           ],
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -1255,7 +1251,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -1279,13 +1275,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -1313,8 +1309,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:10.000Z",
-    "updatedAt": "2026-11-05T11:10:10.000Z",
+    "createdAt": "2026-11-06T09:09:11.000Z",
+    "updatedAt": "2026-11-06T09:09:11.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -1322,7 +1318,7 @@
   },
   {
     "id": 5,
-    "messageId": "b42976bc-d977-4c1a-9d74-12803bf17074",
+    "messageId": "5c4aa957-b157-49c5-8b72-90b75daba5d9",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "CONFIRM",
@@ -1334,9 +1330,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "confirm",
-        "timestamp": "2026-11-05T11:10:15.000Z",
+        "timestamp": "2026-11-06T09:09:16.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "b42976bc-d977-4c1a-9d74-12803bf17074",
+        "message_id": "5c4aa957-b157-49c5-8b72-90b75daba5d9",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1356,12 +1352,12 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "16022183-a748-4df6-978a-0c26b3d23687",
+                "transaction_id": "b0afe6db-69dd-4f9c-9e57-efe8b5fd50b3",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -1376,14 +1372,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -1476,7 +1464,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -1500,13 +1488,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -1535,8 +1523,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:15.000Z",
-    "updatedAt": "2026-11-05T11:10:15.000Z",
+    "createdAt": "2026-11-06T09:09:16.000Z",
+    "updatedAt": "2026-11-06T09:09:16.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -1544,7 +1532,7 @@
   },
   {
     "id": 6,
-    "messageId": "b42976bc-d977-4c1a-9d74-12803bf17074",
+    "messageId": "5c4aa957-b157-49c5-8b72-90b75daba5d9",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_CONFIRM",
@@ -1556,9 +1544,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_confirm",
-        "timestamp": "2026-11-05T11:10:20.000Z",
+        "timestamp": "2026-11-06T09:09:21.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "b42976bc-d977-4c1a-9d74-12803bf17074",
+        "message_id": "5c4aa957-b157-49c5-8b72-90b75daba5d9",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1576,7 +1564,7 @@
       },
       "message": {
         "order": {
-          "id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+          "id": "901f7509-fb97-4d54-8592-a376ea9ca749",
           "status": "ACTIVE",
           "items": [
             {
@@ -1705,10 +1693,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -1816,8 +1810,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "470532613f624fd88fef2484506f9f6f",
-                    "valid_to": "2026-11-10T11:09:55.213Z",
+                    "token": "76d25c28f20243b4869c37e9019befbe",
+                    "valid_to": "2026-11-11T09:08:56.188Z",
                     "status": "UNCLAIMED"
                   }
                 },
@@ -1929,12 +1923,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "16022183-a748-4df6-978a-0c26b3d23687",
+                "transaction_id": "b0afe6db-69dd-4f9c-9e57-efe8b5fd50b3",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -2003,7 +1997,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2027,13 +2021,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2138,8 +2132,8 @@
               "value": "450"
             }
           },
-          "created_at": "2026-11-05T11:09:55.201Z",
-          "updated_at": "2026-11-05T11:09:55.207Z",
+          "created_at": "2026-11-06T09:08:56.176Z",
+          "updated_at": "2026-11-06T09:08:56.182Z",
           "billing": {}
         }
       }
@@ -2152,8 +2146,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:20.000Z",
-    "updatedAt": "2026-11-05T11:10:20.000Z",
+    "createdAt": "2026-11-06T09:09:21.000Z",
+    "updatedAt": "2026-11-06T09:09:21.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -2161,7 +2155,7 @@
   },
   {
     "id": 7,
-    "messageId": "5bdb59a6-0d9d-4fd3-98a1-35bed3cd1998",
+    "messageId": "3939d6c3-3499-4be7-8ca3-588f393724b3",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "STATUS",
@@ -2173,9 +2167,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "status",
-        "timestamp": "2026-11-05T11:10:25.000Z",
+        "timestamp": "2026-11-06T09:09:26.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5bdb59a6-0d9d-4fd3-98a1-35bed3cd1998",
+        "message_id": "3939d6c3-3499-4be7-8ca3-588f393724b3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2192,7 +2186,7 @@
         }
       },
       "message": {
-        "order_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06"
+        "order_id": "901f7509-fb97-4d54-8592-a376ea9ca749"
       }
     },
     "jsonResponse": {
@@ -2203,8 +2197,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:25.000Z",
-    "updatedAt": "2026-11-05T11:10:25.000Z",
+    "createdAt": "2026-11-06T09:09:26.000Z",
+    "updatedAt": "2026-11-06T09:09:26.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2212,7 +2206,7 @@
   },
   {
     "id": 8,
-    "messageId": "5bdb59a6-0d9d-4fd3-98a1-35bed3cd1998",
+    "messageId": "3939d6c3-3499-4be7-8ca3-588f393724b3",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_STATUS",
@@ -2224,9 +2218,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_status",
-        "timestamp": "2026-11-05T11:10:30.000Z",
+        "timestamp": "2026-11-06T09:09:31.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5bdb59a6-0d9d-4fd3-98a1-35bed3cd1998",
+        "message_id": "3939d6c3-3499-4be7-8ca3-588f393724b3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2244,7 +2238,7 @@
       },
       "message": {
         "order": {
-          "id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+          "id": "901f7509-fb97-4d54-8592-a376ea9ca749",
           "status": "COMPLETED",
           "items": [
             {
@@ -2373,10 +2367,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -2484,8 +2484,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "470532613f624fd88fef2484506f9f6f",
-                    "valid_to": "2026-11-10T11:09:55.213Z",
+                    "token": "76d25c28f20243b4869c37e9019befbe",
+                    "valid_to": "2026-11-11T09:08:56.188Z",
                     "status": "CLAIMED"
                   }
                 },
@@ -2597,12 +2597,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "16022183-a748-4df6-978a-0c26b3d23687",
+                "transaction_id": "b0afe6db-69dd-4f9c-9e57-efe8b5fd50b3",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -2759,7 +2759,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2783,13 +2783,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2806,8 +2806,8 @@
               ]
             }
           ],
-          "created_at": "2026-11-05T11:09:55.201Z",
-          "updated_at": "2026-11-05T11:09:55.207Z",
+          "created_at": "2026-11-06T09:08:56.176Z",
+          "updated_at": "2026-11-06T09:08:56.182Z",
           "billing": {}
         }
       }
@@ -2820,8 +2820,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:30.000Z",
-    "updatedAt": "2026-11-05T11:10:30.000Z",
+    "createdAt": "2026-11-06T09:09:31.000Z",
+    "updatedAt": "2026-11-06T09:09:31.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -2829,7 +2829,7 @@
   },
   {
     "id": 9,
-    "messageId": "5a4c5eac-e15f-4bfc-9738-72a2f3fb28ae",
+    "messageId": "ea2a56ff-3b62-4233-a668-a4fd4c8cf6bb",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ISSUE",
@@ -2841,9 +2841,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "issue",
-        "timestamp": "2026-11-05T11:10:35.000Z",
+        "timestamp": "2026-11-06T09:09:36.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5a4c5eac-e15f-4bfc-9738-72a2f3fb28ae",
+        "message_id": "ea2a56ff-3b62-4233-a668-a4fd4c8cf6bb",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2861,11 +2861,11 @@
       },
       "message": {
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "OPEN",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.227Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.203Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -2874,7 +2874,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -2961,15 +2961,15 @@
               }
             ]
           },
-          "last_action_id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+          "last_action_id": "d273eaee-cffe-4514-9424-f5f696658b68",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
@@ -2987,8 +2987,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:35.000Z",
-    "updatedAt": "2026-11-05T11:10:35.000Z",
+    "createdAt": "2026-11-06T09:09:36.000Z",
+    "updatedAt": "2026-11-06T09:09:36.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2996,7 +2996,7 @@
   },
   {
     "id": 10,
-    "messageId": "5a4c5eac-e15f-4bfc-9738-72a2f3fb28ae",
+    "messageId": "ea2a56ff-3b62-4233-a668-a4fd4c8cf6bb",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -3008,9 +3008,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:10:40.000Z",
+        "timestamp": "2026-11-06T09:09:41.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5a4c5eac-e15f-4bfc-9738-72a2f3fb28ae",
+        "message_id": "ea2a56ff-3b62-4233-a668-a4fd4c8cf6bb",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3034,11 +3034,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.234Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.210Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -3047,7 +3047,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -3148,27 +3148,27 @@
               }
             ]
           },
-          "last_action_id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+          "last_action_id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -3186,8 +3186,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:40.000Z",
-    "updatedAt": "2026-11-05T11:10:40.000Z",
+    "createdAt": "2026-11-06T09:09:41.000Z",
+    "updatedAt": "2026-11-06T09:09:41.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -3195,7 +3195,7 @@
   },
   {
     "id": 11,
-    "messageId": "c2efe099-66b8-4fca-aeed-4ec80a33636a",
+    "messageId": "1dcb16e3-0880-422f-b7a2-999022a2a9c6",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -3207,9 +3207,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:10:45.000Z",
+        "timestamp": "2026-11-06T09:09:46.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "c2efe099-66b8-4fca-aeed-4ec80a33636a",
+        "message_id": "1dcb16e3-0880-422f-b7a2-999022a2a9c6",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3233,11 +3233,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.241Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.217Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -3246,7 +3246,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -3366,41 +3366,41 @@
               }
             ]
           },
-          "last_action_id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+          "last_action_id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -3414,7 +3414,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -3425,7 +3425,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -3461,8 +3461,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:45.000Z",
-    "updatedAt": "2026-11-05T11:10:45.000Z",
+    "createdAt": "2026-11-06T09:09:46.000Z",
+    "updatedAt": "2026-11-06T09:09:46.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -3470,7 +3470,7 @@
   },
   {
     "id": 12,
-    "messageId": "5a906e73-e2ec-4f44-bd53-3530a46e84a1",
+    "messageId": "ea00c248-f1a4-4302-add9-991798a1b984",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ISSUE",
@@ -3482,9 +3482,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "issue",
-        "timestamp": "2026-11-05T11:10:50.000Z",
+        "timestamp": "2026-11-06T09:09:51.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5a906e73-e2ec-4f44-bd53-3530a46e84a1",
+        "message_id": "ea00c248-f1a4-4302-add9-991798a1b984",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3508,11 +3508,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.249Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.225Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -3521,7 +3521,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -3646,55 +3646,55 @@
               }
             ]
           },
-          "last_action_id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+          "last_action_id": "96331a45-0b72-43df-85ac-15a617ea8053",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
@@ -3708,7 +3708,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -3719,7 +3719,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -3755,8 +3755,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:50.000Z",
-    "updatedAt": "2026-11-05T11:10:50.000Z",
+    "createdAt": "2026-11-06T09:09:51.000Z",
+    "updatedAt": "2026-11-06T09:09:51.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -3764,7 +3764,7 @@
   },
   {
     "id": 13,
-    "messageId": "5a906e73-e2ec-4f44-bd53-3530a46e84a1",
+    "messageId": "ea00c248-f1a4-4302-add9-991798a1b984",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -3776,9 +3776,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:10:55.000Z",
+        "timestamp": "2026-11-06T09:09:56.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "5a906e73-e2ec-4f44-bd53-3530a46e84a1",
+        "message_id": "ea00c248-f1a4-4302-add9-991798a1b984",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3802,11 +3802,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.256Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.232Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -3815,7 +3815,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -3932,67 +3932,67 @@
               }
             ]
           },
-          "last_action_id": "e323a38c-97b9-4038-8f14-24f93f338107",
+          "last_action_id": "70a61e65-16ef-4290-9a75-612158e37d25",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -4009,7 +4009,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -4020,7 +4020,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -4056,8 +4056,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:55.000Z",
-    "updatedAt": "2026-11-05T11:10:55.000Z",
+    "createdAt": "2026-11-06T09:09:56.000Z",
+    "updatedAt": "2026-11-06T09:09:56.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -4065,7 +4065,7 @@
   },
   {
     "id": 14,
-    "messageId": "091e2a76-1851-4d2e-8e93-7a571e489ab9",
+    "messageId": "f108ec29-4904-4243-b4f9-d357a17806c4",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -4077,9 +4077,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:11:00.000Z",
+        "timestamp": "2026-11-06T09:10:01.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "091e2a76-1851-4d2e-8e93-7a571e489ab9",
+        "message_id": "f108ec29-4904-4243-b4f9-d357a17806c4",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -4103,11 +4103,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "ISSUE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.263Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.240Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -4116,7 +4116,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -4236,81 +4236,81 @@
               }
             ]
           },
-          "last_action_id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+          "last_action_id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -4324,7 +4324,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -4335,7 +4335,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -4367,7 +4367,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -4403,8 +4403,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:00.000Z",
-    "updatedAt": "2026-11-05T11:11:00.000Z",
+    "createdAt": "2026-11-06T09:10:01.000Z",
+    "updatedAt": "2026-11-06T09:10:01.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -4412,7 +4412,7 @@
   },
   {
     "id": 15,
-    "messageId": "2c08845c-a511-4e6b-b739-6e63d04685a2",
+    "messageId": "7a1e952d-3b2b-4533-9c24-f5aff0af26a3",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ISSUE",
@@ -4424,9 +4424,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "issue",
-        "timestamp": "2026-11-05T11:11:05.000Z",
+        "timestamp": "2026-11-06T09:10:06.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "2c08845c-a511-4e6b-b739-6e63d04685a2",
+        "message_id": "7a1e952d-3b2b-4533-9c24-f5aff0af26a3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -4444,11 +4444,11 @@
       },
       "message": {
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.271Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.248Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -4457,7 +4457,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -4576,93 +4576,93 @@
               }
             ]
           },
-          "last_action_id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+          "last_action_id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
@@ -4682,7 +4682,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -4693,7 +4693,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -4725,7 +4725,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -4761,8 +4761,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:05.000Z",
-    "updatedAt": "2026-11-05T11:11:05.000Z",
+    "createdAt": "2026-11-06T09:10:06.000Z",
+    "updatedAt": "2026-11-06T09:10:06.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -4770,7 +4770,7 @@
   },
   {
     "id": 16,
-    "messageId": "2c08845c-a511-4e6b-b739-6e63d04685a2",
+    "messageId": "7a1e952d-3b2b-4533-9c24-f5aff0af26a3",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -4782,9 +4782,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:11:10.000Z",
+        "timestamp": "2026-11-06T09:10:11.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "2c08845c-a511-4e6b-b739-6e63d04685a2",
+        "message_id": "7a1e952d-3b2b-4533-9c24-f5aff0af26a3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -4808,11 +4808,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.279Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.255Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -4821,7 +4821,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -4938,105 +4938,105 @@
               }
             ]
           },
-          "last_action_id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+          "last_action_id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+              "id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.279Z",
+              "updated_at": "2026-11-06T09:08:56.255Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -5053,7 +5053,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -5064,7 +5064,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5096,7 +5096,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5132,8 +5132,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:10.000Z",
-    "updatedAt": "2026-11-05T11:11:10.000Z",
+    "createdAt": "2026-11-06T09:10:11.000Z",
+    "updatedAt": "2026-11-06T09:10:11.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -5141,7 +5141,7 @@
   },
   {
     "id": 17,
-    "messageId": "902a9783-e26f-4347-9200-41d234379212",
+    "messageId": "2b612265-8610-4d4e-9103-78ef972ff159",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -5153,9 +5153,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:11:15.000Z",
+        "timestamp": "2026-11-06T09:10:16.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "902a9783-e26f-4347-9200-41d234379212",
+        "message_id": "2b612265-8610-4d4e-9103-78ef972ff159",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -5179,11 +5179,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.286Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.263Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -5192,7 +5192,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -5312,119 +5312,119 @@
               }
             ]
           },
-          "last_action_id": "27a5b8e2-3537-4834-b798-62199810985d",
+          "last_action_id": "db1b3c54-f32b-4e7f-848c-25471c1b64b7",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+              "id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.279Z",
+              "updated_at": "2026-11-06T09:08:56.255Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "27a5b8e2-3537-4834-b798-62199810985d",
+              "id": "db1b3c54-f32b-4e7f-848c-25471c1b64b7",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -5438,7 +5438,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -5449,7 +5449,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5481,7 +5481,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5513,7 +5513,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5549,8 +5549,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:15.000Z",
-    "updatedAt": "2026-11-05T11:11:15.000Z",
+    "createdAt": "2026-11-06T09:10:16.000Z",
+    "updatedAt": "2026-11-06T09:10:16.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -5558,7 +5558,7 @@
   },
   {
     "id": 18,
-    "messageId": "09439f44-1613-4bad-9569-f3a9df7d0dea",
+    "messageId": "82687f95-1a09-45c4-ad84-e2c14789e8d6",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ISSUE",
@@ -5570,9 +5570,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "issue",
-        "timestamp": "2026-11-05T11:11:20.000Z",
+        "timestamp": "2026-11-06T09:10:21.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "09439f44-1613-4bad-9569-f3a9df7d0dea",
+        "message_id": "82687f95-1a09-45c4-ad84-e2c14789e8d6",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -5596,11 +5596,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "PROCESSING",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.294Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.272Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -5609,7 +5609,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -5734,133 +5734,133 @@
               }
             ]
           },
-          "last_action_id": "4ac988f7-4429-41bf-8895-60fd47d0fa3d",
+          "last_action_id": "ccc8b64f-d888-47b1-9017-93066c1b443a",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+              "id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.279Z",
+              "updated_at": "2026-11-06T09:08:56.255Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "27a5b8e2-3537-4834-b798-62199810985d",
+              "id": "db1b3c54-f32b-4e7f-848c-25471c1b64b7",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "4ac988f7-4429-41bf-8895-60fd47d0fa3d",
+              "id": "ccc8b64f-d888-47b1-9017-93066c1b443a",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_ACCEPTED",
                 "short_desc": "Resolution is accepted"
               },
-              "updated_at": "2026-11-05T11:09:55.294Z",
+              "updated_at": "2026-11-06T09:08:56.272Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
@@ -5874,7 +5874,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -5885,7 +5885,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5917,7 +5917,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5949,7 +5949,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -5985,8 +5985,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:20.000Z",
-    "updatedAt": "2026-11-05T11:11:20.000Z",
+    "createdAt": "2026-11-06T09:10:21.000Z",
+    "updatedAt": "2026-11-06T09:10:21.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -5994,7 +5994,7 @@
   },
   {
     "id": 19,
-    "messageId": "09439f44-1613-4bad-9569-f3a9df7d0dea",
+    "messageId": "82687f95-1a09-45c4-ad84-e2c14789e8d6",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ON_ISSUE",
@@ -6006,9 +6006,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_issue",
-        "timestamp": "2026-11-05T11:11:25.000Z",
+        "timestamp": "2026-11-06T09:10:26.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "09439f44-1613-4bad-9569-f3a9df7d0dea",
+        "message_id": "82687f95-1a09-45c4-ad84-e2c14789e8d6",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -6032,11 +6032,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "RESOLVED",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.302Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.280Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -6045,7 +6045,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -6165,147 +6165,147 @@
               }
             ]
           },
-          "last_action_id": "1a7bf74b-055e-4b56-8738-daa2d9726416",
+          "last_action_id": "be181224-1ae6-400c-8918-64e99a697192",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+              "id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.279Z",
+              "updated_at": "2026-11-06T09:08:56.255Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "27a5b8e2-3537-4834-b798-62199810985d",
+              "id": "db1b3c54-f32b-4e7f-848c-25471c1b64b7",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "4ac988f7-4429-41bf-8895-60fd47d0fa3d",
+              "id": "ccc8b64f-d888-47b1-9017-93066c1b443a",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_ACCEPTED",
                 "short_desc": "Resolution is accepted"
               },
-              "updated_at": "2026-11-05T11:09:55.294Z",
+              "updated_at": "2026-11-06T09:08:56.272Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "1a7bf74b-055e-4b56-8738-daa2d9726416",
+              "id": "be181224-1ae6-400c-8918-64e99a697192",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLVED",
                 "short_desc": "Complaint is Resolved"
               },
-              "updated_at": "2026-11-05T11:09:55.302Z",
+              "updated_at": "2026-11-06T09:08:56.280Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
@@ -6319,7 +6319,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -6330,7 +6330,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6362,7 +6362,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6394,7 +6394,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6430,8 +6430,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:25.000Z",
-    "updatedAt": "2026-11-05T11:11:25.000Z",
+    "createdAt": "2026-11-06T09:10:26.000Z",
+    "updatedAt": "2026-11-06T09:10:26.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -6439,7 +6439,7 @@
   },
   {
     "id": 20,
-    "messageId": "2284b917-43eb-4454-8524-edb1ccfca508",
+    "messageId": "55d4ca3e-1723-43e0-8e9f-044c76e516e1",
     "transactionId": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
     "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
     "action": "ISSUE",
@@ -6451,9 +6451,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "issue",
-        "timestamp": "2026-11-05T11:11:30.000Z",
+        "timestamp": "2026-11-06T09:10:31.000Z",
         "transaction_id": "4bd4e7d7-a75b-4cae-9170-0ae75ed137c4",
-        "message_id": "2284b917-43eb-4454-8524-edb1ccfca508",
+        "message_id": "55d4ca3e-1723-43e0-8e9f-044c76e516e1",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -6477,11 +6477,11 @@
           }
         ],
         "issue": {
-          "id": "b8cbda95-e3ce-48d6-9b18-7f19059895ea",
+          "id": "c6f9f89b-9209-4c60-a526-db084bdd4789",
           "status": "CLOSED",
           "level": "GRIEVANCE",
-          "created_at": "2026-11-05T11:09:55.227Z",
-          "updated_at": "2026-11-05T11:09:55.310Z",
+          "created_at": "2026-11-06T09:08:56.203Z",
+          "updated_at": "2026-11-06T09:08:56.289Z",
           "expected_response_time": {
             "duration": "PT2H"
           },
@@ -6490,7 +6490,7 @@
           },
           "refs": [
             {
-              "ref_id": "6a4b1fc4-a1d3-4640-a18b-a98260032f06",
+              "ref_id": "901f7509-fb97-4d54-8592-a376ea9ca749",
               "ref_type": "ORDER"
             },
             {
@@ -6615,159 +6615,159 @@
               }
             ]
           },
-          "last_action_id": "df91684b-11d4-4622-af35-941cdce6eec0",
+          "last_action_id": "3a278dc3-f86d-4dc5-b58e-d5244d52aadf",
           "actions": [
             {
-              "id": "d684e80a-2f26-4ac3-bfca-fd363b5d00dd",
+              "id": "d273eaee-cffe-4514-9424-f5f696658b68",
               "descriptor": {
                 "code": "OPEN",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.227Z",
+              "updated_at": "2026-11-06T09:08:56.203Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "a82755d5-4f93-499a-beff-9c78020b04f6",
+              "id": "9f9a35a2-b519-419d-ba05-1e65f2628318",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.234Z",
+              "updated_at": "2026-11-06T09:08:56.210Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "2ed080d1-94cf-4c4a-8ee8-e997d12d6e67",
+              "id": "7d3d0e45-ce97-4db0-aaef-2d5aa051ff38",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "6ba58a52-1c4a-4942-aaf7-ab97453f3b9c",
+              "id": "96331a45-0b72-43df-85ac-15a617ea8053",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_REJECTED",
                 "short_desc": "Resolution is rejected"
               },
-              "updated_at": "2026-11-05T11:09:55.249Z",
+              "updated_at": "2026-11-06T09:08:56.225Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "e323a38c-97b9-4038-8f14-24f93f338107",
+              "id": "70a61e65-16ef-4290-9a75-612158e37d25",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.256Z",
+              "updated_at": "2026-11-06T09:08:56.232Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "173ed124-05ab-4b59-b628-c9e2b1cb58be",
+              "id": "5ce15e44-e2a1-4c38-97a4-fa3eeaefa555",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "cecba415-9cd2-49f3-bf20-f668445ca45f",
+              "id": "b3a42213-b601-4616-9cb9-6038e3e77f76",
               "descriptor": {
                 "code": "ESCALATED",
                 "short_desc": "Complaint Escalated"
               },
-              "updated_at": "2026-11-05T11:09:55.271Z",
+              "updated_at": "2026-11-06T09:08:56.248Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "ba31b2e2-8bc2-4aae-b427-d5e72ff365d0",
+              "id": "3aaf44af-9a20-4f3b-891a-3d4174b592a4",
               "descriptor": {
                 "code": "PROCESSING",
                 "short_desc": "Complaint created"
               },
-              "updated_at": "2026-11-05T11:09:55.279Z",
+              "updated_at": "2026-11-06T09:08:56.255Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "27a5b8e2-3537-4834-b798-62199810985d",
+              "id": "db1b3c54-f32b-4e7f-848c-25471c1b64b7",
               "ref_id": "R_PARENT",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_PROPOSED",
                 "short_desc": "Resolution is proposed"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "4ac988f7-4429-41bf-8895-60fd47d0fa3d",
+              "id": "ccc8b64f-d888-47b1-9017-93066c1b443a",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLUTION_ACCEPTED",
                 "short_desc": "Resolution is accepted"
               },
-              "updated_at": "2026-11-05T11:09:55.294Z",
+              "updated_at": "2026-11-06T09:08:56.272Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
               }
             },
             {
-              "id": "1a7bf74b-055e-4b56-8738-daa2d9726416",
+              "id": "be181224-1ae6-400c-8918-64e99a697192",
               "ref_id": "RESOLUTION123",
               "ref_type": "RESOLUTIONS",
               "descriptor": {
                 "code": "RESOLVED",
                 "short_desc": "Complaint is Resolved"
               },
-              "updated_at": "2026-11-05T11:09:55.302Z",
+              "updated_at": "2026-11-06T09:08:56.280Z",
               "action_by": "NP2",
               "actor_details": {
                 "name": "mock-seller"
               }
             },
             {
-              "id": "df91684b-11d4-4622-af35-941cdce6eec0",
+              "id": "3a278dc3-f86d-4dc5-b58e-d5244d52aadf",
               "descriptor": {
                 "code": "CLOSED",
                 "short_desc": "Closing the complaint"
               },
-              "updated_at": "2026-11-05T11:09:55.310Z",
+              "updated_at": "2026-11-06T09:08:56.289Z",
               "action_by": "NP1",
               "actor_details": {
                 "name": "mock-buyer"
@@ -6796,7 +6796,7 @@
                 "code": "PARENT",
                 "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2"
             },
             {
@@ -6807,7 +6807,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.241Z",
+              "updated_at": "2026-11-06T09:08:56.217Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6839,7 +6839,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.263Z",
+              "updated_at": "2026-11-06T09:08:56.240Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6871,7 +6871,7 @@
                 "code": "REFUND",
                 "short_desc": "Providing refund for the item"
               },
-              "updated_at": "2026-11-05T11:09:55.286Z",
+              "updated_at": "2026-11-06T09:08:56.263Z",
               "proposed_by": "NP2",
               "tags": [
                 {
@@ -6907,8 +6907,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:11:30.000Z",
-    "updatedAt": "2026-11-05T11:11:30.000Z",
+    "createdAt": "2026-11-06T09:10:31.000Z",
+    "updatedAt": "2026-11-06T09:10:31.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"

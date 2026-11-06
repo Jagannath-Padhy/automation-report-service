@@ -17,6 +17,13 @@ jest.mock("../../../utils/redisUtils", () => ({
   saveData: async (s: string, t: string, k: string, v: any) => { store.set(`${s}|${t}|${k}`, v); },
   fetchData: async (s: string, t: string, k: string) => store.get(`${s}|${t}|${k}`) ?? null,
 }));
+jest.mock("@ondc/ondc-automation-cache-lib", () => ({
+  RedisService: {
+    useDb: () => {},
+    getKey: async (k: string) => store.get(k) ?? null,
+    setKey: async (k: string, v: any) => { store.set(k, v); },
+  },
+}));
 jest.mock("../../shared/externalSchemaValidator", () => ({
   runExternalSchemaAndL1Validation: async () => {},
   prefetchExternalValidation: () => {},
@@ -41,6 +48,21 @@ async function runFlow(flowId: string, file: string, mutate: (p: any[]) => void)
     failed.push(...(result.failed || []).filter((f) => f.startsWith("L2: ")));
   }
   return failed;
+}
+
+/** Like runFlow, but returns both the L2 passes and failures. */
+async function runFlowResults(flowId: string, file: string, mutate: (p: any[]) => void): Promise<{ passed: string[]; failed: string[] }> {
+  const payloads: Payload[] = load(file);
+  mutate(payloads);
+  const sessionID = `trv14-test-${Math.random().toString(36).slice(2)}`;
+  const passed: string[] = [];
+  const failed: string[] = [];
+  for (const element of payloads) {
+    const result: TestResult = await validate(element, sessionID, flowId, element.action_id as string);
+    passed.push(...(result.passed || []).filter((f) => f.startsWith("L2: ")));
+    failed.push(...(result.failed || []).filter((f) => f.startsWith("L2: ")));
+  }
+  return { passed, failed };
 }
 
 function makeExpectFail(log: string[], onBad: () => void) {
@@ -191,8 +213,16 @@ describe("TRV14 2.0.0 report validations", () => {
       (p) => { ticket(p, "on_select_without_form").xinput = { form: { id: "x", mime_type: "text/html", url: "https://x.example" } }; }, "must not carry xinput");
     await expectFail("order-level form flow with an item-level form", ...OL,
       (p) => { ticket(p, "on_select_submission_cultural").xinput = { form: { id: "x" } }; }, "found items[].xinput");
-    await expectFail("multiple-ticket flow selecting one ticket", ...MT,
-      (p) => { ticket(p, "select").quantity.selected.count = 1; }, "must select more than one ticket");
+    {
+      // A single ticket in a multi-ticket flow is a warning (the workbench defaults to 1), not a failure.
+      const { passed, failed } = await runFlowResults(MT[0], MT[1], (p) => {
+        ticket(p, "select").quantity.selected.count = 1;
+        ticket(p, "on_select_without_form").quantity.selected.count = 1;
+      });
+      const ok = passed.some((m) => m.includes("Warning: select (select): a multiple-ticket flow selected only 1 ticket")) &&
+        !failed.some((m) => m.includes("multiple-ticket"));
+      console.log(`${ok ? "PASS" : "FAIL"}  multiple-ticket flow selecting one ticket gives a warning, not a failure`);
+    }
 
     expect(log.filter((m) => m.startsWith("PASS")).length).toBeGreaterThan(5);
     expect(log.filter((m) => m.startsWith("FAIL"))).toEqual([]);
@@ -221,9 +251,9 @@ describe("TRV14 2.0.0 report validations", () => {
     await expectFail("on_init quote differs from on_select", ...NF,
       (p) => { const q = ord(p, "on_init").quote; q.breakup.find((b: any) => b.title === "TAX").price.value = "10"; q.price.value = String(Number(q.price.value) + 10); }, "quote (460) differs from on_select_without_form");
     await expectFail("on_init changes the payment collector", ...NF,
-      (p) => { ord(p, "on_init").payments[0].collected_by = "BPP"; }, "payments (id, collected_by, type) differ from init");
+      (p) => { ord(p, "on_init").payments[0].collected_by = "BAP"; }, "payments (id, collected_by, type) differ from init");
     await expectFail("wrong BPP settlement amount", ...NF,
-      (p) => { tag(ord(p, "on_init"), "BPP_TERMS", "SETTLEMENT_AMOUNT").value = "450"; }, "SETTLEMENT_AMOUNT 450 must be 445.50");
+      (p) => { tag(ord(p, "on_init"), "BPP_TERMS", "SETTLEMENT_AMOUNT").value = "450"; }, "SETTLEMENT_AMOUNT 450 must be 4.50");
     await expectFail("confirm pays less than the quote", ...NF,
       (p) => { ord(p, "confirm").payments[0].params.amount = "400"; }, "params.amount 400 must equal the quote total 450");
     await expectFail("confirm changes BPP_TERMS", ...NF,
@@ -328,11 +358,11 @@ describe("TRV14 2.0.0 report validations", () => {
     await expectFail("rejection with a non-TRV14 error code", ...CR,
       (p) => { byId(p, "on_cancel_rejected").error.code = "90203"; }, "TRV14 error code (932xx)");
     await expectFail("partial update raises the quantity", ...PC,
-      (p) => { ord(p, "update_soft_partial_cancellation").items[0].quantity.selected.count = 5; }, "must be lower than the confirmed 1");
+      (p) => { ord(p, "update_soft_partial_cancellation").items[0].quantity.selected.count = 5; }, "must be lower than the confirmed 2");
     await expectFail("partial update with a wrong target", ...PC,
       (p) => { msg(p, "update_soft_partial_cancellation").update_target = "order.fulfillments"; }, "update_target must point at order.items");
     await expectFail("on_update does not apply the new quantity", ...PC,
-      (p) => { ord(p, "on_update_soft_partial_cancellation").items.find((i: any) => i.id === "I1").quantity.selected.count = 1; }, "must be the updated 0");
+      (p) => { ord(p, "on_update_soft_partial_cancellation").items.find((i: any) => i.id === "I1").quantity.selected.count = 2; }, "must be the updated 1");
     await expectFail("on_update without a REFUND", ...PC,
       (p) => { const o = ord(p, "on_update_soft_partial_cancellation"); o.quote.breakup = o.quote.breakup.filter((b: any) => b.title !== "REFUND"); o.quote.price.value = "450"; }, "needs a negative REFUND for I1");
     await expectFail("confirmed on_update quote differs from the soft one", ...PC,
@@ -366,6 +396,80 @@ describe("TRV14 2.0.0 report validations", () => {
 
     expect(log.filter((m) => m.startsWith("PASS")).length).toBe(6);
     expect(log.filter((m) => m.startsWith("FAIL"))).toEqual([]);
+    expect(bad).toBe(0);
+  });
+
+  test("fixes for workbench session report lmBigGR_zQsJi9d5I4xg2yuhgwqGfda2", async () => {
+    const log: string[] = [];
+    let bad = 0;
+    const expectFail = makeExpectFail(log, () => bad++);
+    const NF = ["purchase_journey_without_form", "purchase_journey_without_form.json"] as const;
+    const UC = ["User Cancellation (Full)", "User_Cancellation_Full.json"] as const;
+    const PC = ["user_cancellation_partial", "user_cancellation_partial.json"] as const;
+    const TC = ["technical_cancellation", "technical_cancellation.json"] as const;
+    const ord = (p: any[], aid: string) => byId(p, aid).message.order;
+    const settlement = (o: any) => o.tags.find((t: any) => t.descriptor.code === "BPP_TERMS").list.find((l: any) => l.descriptor.code === "SETTLEMENT_AMOUNT");
+    const withOrders = (p: any[], fn: (o: any) => void) => p.forEach((x) => { const o = x.jsonRequest?.message?.order; if (o && typeof o === "object") fn(o); });
+    const check = (name: string, ok: boolean, detail = "") => { log.push(`${ok ? "PASS" : "FAIL"}  ${name}${ok ? "" : "  -> " + detail}`); if (!ok) bad++; };
+
+    // R1: settlement follows who collects the payment.
+    {
+      const { failed } = await runFlowResults(NF[0], NF[1], (p) => withOrders(p, (o) => {
+        (o.payments ?? []).forEach((pm: any) => { pm.collected_by = "BAP"; });
+        const s = o.tags && o.tags.some((t: any) => t.descriptor.code === "BPP_TERMS") ? settlement(o) : null;
+        if (s) s.value = "445.5";
+      }));
+      check("BAP collects: settlement 445.5 (total less fee) passes", failed.length === 0, JSON.stringify(failed));
+    }
+    await expectFail("BAP collects but settlement is the fee", ...NF,
+      (p) => withOrders(p, (o) => { (o.payments ?? []).forEach((pm: any) => { pm.collected_by = "BAP"; }); }), "SETTLEMENT_AMOUNT 4.5 must be 445.50");
+    await expectFail("confirm settlement checked against on_init's total", ...NF,
+      (p) => { settlement(ord(p, "confirm")).value = "9"; }, "must be 4.50, the buyer finder fee on on_init quote total 450");
+    await expectFail("settlement not recomputed after cancellation", ...UC,
+      (p) => { settlement(ord(p, "on_cancel_soft_user_cancellation")).value = "4.5"; }, "SETTLEMENT_AMOUNT 4.5 must be 0.45");
+    await expectFail("settlement not recomputed after partial cancellation", ...PC,
+      (p) => { settlement(ord(p, "on_update_soft_partial_cancellation")).value = "8"; }, "SETTLEMENT_AMOUNT 8 must be 3.50");
+
+    // R5: the late on_confirm in technical cancellation is NACKed on purpose.
+    {
+      const { passed, failed } = await runFlowResults(TC[0], TC[1], (p) => {
+        p.find((x) => x.action_id === "on_confirm_technical_cancellation").jsonResponse = { message: { ack: { status: "NACK" } } };
+      });
+      check("technical cancellation: on_confirm NACK noted as expected", passed.some((m) => m.includes("NACK expected")) && failed.length === 0, JSON.stringify(failed));
+    }
+
+    // R3: steps that ran but whose payloads the workbench DB did not return.
+    {
+      const { validationModule } = require("../../../services/validationModule");
+      const sessionID = `trv14-r3-${Math.random().toString(36).slice(2)}`;
+      store.set(`sessionDetails:${sessionID}`, JSON.stringify({ domain: "ONDC:TRV14", version: "2.0.0", usecaseId: "unreserved-entry-pass" }));
+      const soft = ["update_soft_partial_cancellation", "on_update_soft_partial_cancellation"];
+      const payloads = load(PC[1]).filter((x: any) => !soft.includes(x.action_id));
+      const withInfo = await validationModule({ [PC[0]]: payloads }, sessionID, undefined, { [PC[0]]: soft });
+      const errs: string[] = withInfo.flowErrors[PC[0]].errors;
+      check("unreadable payloads reported as missing from the workbench DB",
+        errs.some((e) => e.includes("missing from the workbench payload DB: update_soft_partial_cancellation, on_update_soft_partial_cancellation")) &&
+        !errs.some((e) => e.includes("is missing")), JSON.stringify(errs));
+      store.set(`sessionDetails:${sessionID}-c`, JSON.stringify({ domain: "ONDC:TRV14", version: "2.0.0", usecaseId: "unreserved-entry-pass" }));
+      const plain = await validationModule({ [PC[0]]: load(PC[1]).filter((x: any) => !soft.includes(x.action_id)) }, `${sessionID}-c`);
+      check("without that information the plain 'missing mandatory step' message is kept",
+        plain.flowErrors[PC[0]].errors.some((e: string) => e.includes("is missing 2 mandatory step(s)")), JSON.stringify(plain.flowErrors[PC[0]].errors));
+    }
+
+    // R4: form steps show no ACK badge.
+    {
+      const { generateCustomHTMLReport } = require("../../../templates/generateReport");
+      const msg = JSON.stringify({ passed: ["ok"], failed: [] });
+      const { html } = generateCustomHTMLReport(
+        { finalReport: {}, flowErrors: { f: { valid_flow: true, errors: [], messages: { select_1: JSON.stringify({ passed: [], failed: [], response: { message: { ack: { status: "ACK" } } } }), html_form_1: msg } } } },
+        "s", {}
+      );
+      const formPart = html.slice(html.indexOf("html_form_1"), html.indexOf("html_form_1") + 400);
+      check("html_form step has no ACK badge", !formPart.includes("ack-status") && html.includes("ack-status ack"), formPart.slice(0, 200));
+    }
+
+    expect(log.filter((m) => m.startsWith("FAIL"))).toEqual([]);
+    expect(log.filter((m) => m.startsWith("PASS")).length).toBe(9);
     expect(bad).toBe(0);
   });
 });

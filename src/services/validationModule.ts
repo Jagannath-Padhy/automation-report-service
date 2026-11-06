@@ -691,7 +691,11 @@ export async function validationModule(
   groupedPayloads: Record<string, Payload[]>,
   sessionID: string,
   // Log-upload reports have no live session in Redis, so they pass the details directly.
-  sessionDetailsOverride?: SessionDetails
+  sessionDetailsOverride?: SessionDetails,
+  // Per flow, action_ids that ran in the workbench but whose payloads the payload DB
+  // did not return (reportService.findUnfetchedActionIds). Optional: callers that
+  // don't pass it get the plain "missing mandatory step" message as before.
+  unfetchedActionIds: Record<string, string[]> = {}
 ): Promise<Report> {
   logger.info(MESSAGES.services.validationEnter, { sessionID, flowCount: Object.keys(groupedPayloads).length });
 
@@ -763,12 +767,24 @@ export async function validationModule(
           );
           if (missingLegs.length > 0) {
             validSequence = false;
-            errors = [
-              ...errors,
-              `Error: flow '${flowId}' is missing ${missingLegs.length} mandatory step(s): ` +
-                `${missingLegs.join(", ")}. These must all be exercised for this flow to be valid.`,
-            ];
-            logger.info("Mandatory legs missing", { flowId, missingLegs });
+            const unfetched = new Set((unfetchedActionIds[flowId] ?? []).map((a) => a.toLowerCase()));
+            const notRun = missingLegs.filter((leg) => !unfetched.has(String(leg).toLowerCase()));
+            const unreadable = missingLegs.filter((leg) => unfetched.has(String(leg).toLowerCase()));
+            if (notRun.length > 0) {
+              errors = [
+                ...errors,
+                `Error: flow '${flowId}' is missing ${notRun.length} mandatory step(s): ` +
+                  `${notRun.join(", ")}. These must all be exercised for this flow to be valid.`,
+              ];
+            }
+            if (unreadable.length > 0) {
+              errors = [
+                ...errors,
+                `Error: flow '${flowId}' ran ${unreadable.length} mandatory step(s) whose payloads are missing from the workbench payload DB: ` +
+                  `${unreadable.join(", ")}. They cannot be validated until the payloads are available.`,
+              ];
+            }
+            logger.info("Mandatory legs missing", { flowId, missingLegs, unreadable });
           }
 
           logger.info(MESSAGES.validations.actionValidationDone(flowId), { flowId });
