@@ -699,3 +699,64 @@ export function validateP2PDescriptor(descriptor: any, result: TestResult): void
     );
   }
 }
+
+/**
+ * The mapping-lookup leg of Retailer_Mapping (`on_search-1`) answers a retailer-to-distributor
+ * lookup, not a catalog request: it returns the mapping as `retailer_mapping` tag groups on
+ * catalog['bpp/descriptor'] and carries no `bpp/providers` at all. Every non-Discovery flow used
+ * to fall through to validateCatalogStructure, whose non-empty-provider rule made that a false
+ * failure. What must be present instead is, per group, the distributor it resolves to and the
+ * customer_id the mapping gives the retailer there.
+ *
+ * Shape note: here `bpp/descriptor` is the ordinary descriptor object and the groups sit on its
+ * `tags`. On Discovery's P2P leg `bpp/descriptor` is itself the array of groups — that one is
+ * validateP2PDescriptor's, and the two shapes are deliberately not merged.
+ */
+export function validateRetailerMappingResponse(catalog: any, result: TestResult): void {
+  const descriptor = catalog?.["bpp/descriptor"];
+
+  if (!descriptor || typeof descriptor !== "object" || Array.isArray(descriptor)) {
+    result.failed.push(
+      "on_search: the mapping response must carry catalog['bpp/descriptor'] holding the retailer_mapping tag groups"
+    );
+    return;
+  }
+
+  const groups = tagGroupsByCode(descriptor.tags, "retailer_mapping");
+  if (groups.length === 0) {
+    result.failed.push(
+      "on_search: the mapping response carries no retailer_mapping tag group — the lookup resolved nothing"
+    );
+    return;
+  }
+
+  const cleanRun = failureGate(result);
+
+  for (const [index, group] of groups.entries()) {
+    const label = `retailer_mapping[${index}]`;
+
+    if (!Array.isArray(group.list) || group.list.length === 0) {
+      result.failed.push(`on_search: ${label} list must not be empty`);
+      continue;
+    }
+    if (!tagValue(group.list, "provider_id")) {
+      result.failed.push(
+        `on_search: ${label} is missing provider_id — the mapping must name the distributor it resolves to`
+      );
+    }
+    if (!tagValue(group.list, "customer_id")) {
+      result.failed.push(
+        `on_search: ${label} is missing customer_id — the mapping must return the retailer's id at that distributor`
+      );
+    }
+  }
+
+  if (cleanRun()) {
+    const providerIds = groups
+      .map((group: any) => tagValue(group?.list, "provider_id"))
+      .filter(Boolean);
+    result.passed.push(
+      `on_search: all ${groups.length} retailer_mapping group(s) resolve to a provider_id and customer_id (provider_id: ${providerIds.join(", ")})`
+    );
+  }
+}
