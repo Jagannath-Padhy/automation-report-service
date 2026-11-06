@@ -199,12 +199,9 @@ export function validateRetailerInfoRequiredTags(provider: any, result: TestResu
   const cleanRun = failureGate(result);
   const groups = tagGroupsByCode(provider?.tags, "retailer_info_required");
 
-  if (groups.length === 0) {
-    result.failed.push(
-      `on_search: ${providerLabel(provider)} provider.tags must include at least one 'retailer_info_required' group — a non-empty list of code/value entries naming the retailer details the seller needs from the buyer`
-    );
-    return;
-  }
+  // Optional per the contract: a provider that publishes none is an open catalogue (or inherits
+  // the descriptor-level group), so absence is not a failure — only published groups are checked.
+  if (groups.length === 0) return;
 
   for (const group of groups) {
     if (!Array.isArray(group.list) || group.list.length === 0) {
