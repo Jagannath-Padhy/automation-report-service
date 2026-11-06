@@ -4,7 +4,7 @@ import { getPreviousTrv14Order, trv14FulfillmentShape } from "../helpers";
 
 // Business rules for status / on_status that the workbench L1 does not cover.
 // Values follow what the workbench (ONDC-Official draft-TRV14-2.0.0, commit
-// cc6c1355) generates: status asks for the confirmed order_id (technical
+// ca523e5f) generates: status asks for the confirmed order_id (technical
 // cancellation asks by ref_id — mandatoryFields.ts); on_status returns the
 // confirmed order with the same id, created_at, items, quote, payments and ticket
 // QR (token, valid_to), only its state moves on (stateTable.ts).

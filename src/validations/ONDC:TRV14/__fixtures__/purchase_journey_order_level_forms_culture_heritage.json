@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "messageId": "4b336bbc-aa4a-47df-89b8-f376c1ab64ec",
+    "messageId": "39ea193b-e776-48a2-8c72-f5652a81c835",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "SELECT",
@@ -13,9 +13,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "select",
-        "timestamp": "2026-11-05T11:09:54.000Z",
+        "timestamp": "2026-11-06T09:08:55.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "4b336bbc-aa4a-47df-89b8-f376c1ab64ec",
+        "message_id": "39ea193b-e776-48a2-8c72-f5652a81c835",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -45,14 +45,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -90,8 +82,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:09:54.000Z",
-    "updatedAt": "2026-11-05T11:09:54.000Z",
+    "createdAt": "2026-11-06T09:08:55.000Z",
+    "updatedAt": "2026-11-06T09:08:55.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -99,7 +91,7 @@
   },
   {
     "id": 2,
-    "messageId": "4b336bbc-aa4a-47df-89b8-f376c1ab64ec",
+    "messageId": "39ea193b-e776-48a2-8c72-f5652a81c835",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "ON_SELECT",
@@ -111,9 +103,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_select",
-        "timestamp": "2026-11-05T11:09:59.000Z",
+        "timestamp": "2026-11-06T09:09:00.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "4b336bbc-aa4a-47df-89b8-f376c1ab64ec",
+        "message_id": "39ea193b-e776-48a2-8c72-f5652a81c835",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -310,10 +302,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -591,8 +589,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:09:59.000Z",
-    "updatedAt": "2026-11-05T11:09:59.000Z",
+    "createdAt": "2026-11-06T09:09:00.000Z",
+    "updatedAt": "2026-11-06T09:09:00.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -600,7 +598,7 @@
   },
   {
     "id": 3,
-    "messageId": "3580043e-fb8b-4294-8c60-d7ef2db307b1",
+    "messageId": "3ba13d3c-4738-4222-be64-de83d62ee1de",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "SELECT",
@@ -612,9 +610,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "select",
-        "timestamp": "2026-11-05T11:10:04.000Z",
+        "timestamp": "2026-11-06T09:09:05.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "3580043e-fb8b-4294-8c60-d7ef2db307b1",
+        "message_id": "3ba13d3c-4738-4222-be64-de83d62ee1de",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -641,14 +639,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -667,7 +657,7 @@
             },
             "form_response": {
               "status": "SUCCESS",
-              "submission_id": "55fa1b65-9784-45f1-9ae6-ade6cb435b17"
+              "submission_id": "74f3ebc6-121e-4d7e-9a17-1cb929859947"
             }
           },
           "provider": {
@@ -698,8 +688,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:04.000Z",
-    "updatedAt": "2026-11-05T11:10:04.000Z",
+    "createdAt": "2026-11-06T09:09:05.000Z",
+    "updatedAt": "2026-11-06T09:09:05.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -707,7 +697,7 @@
   },
   {
     "id": 4,
-    "messageId": "3580043e-fb8b-4294-8c60-d7ef2db307b1",
+    "messageId": "3ba13d3c-4738-4222-be64-de83d62ee1de",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "ON_SELECT",
@@ -719,9 +709,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_select",
-        "timestamp": "2026-11-05T11:10:09.000Z",
+        "timestamp": "2026-11-06T09:09:10.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "3580043e-fb8b-4294-8c60-d7ef2db307b1",
+        "message_id": "3ba13d3c-4738-4222-be64-de83d62ee1de",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -866,10 +856,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -1184,8 +1180,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:09.000Z",
-    "updatedAt": "2026-11-05T11:10:09.000Z",
+    "createdAt": "2026-11-06T09:09:10.000Z",
+    "updatedAt": "2026-11-06T09:09:10.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -1193,7 +1189,7 @@
   },
   {
     "id": 5,
-    "messageId": "be3ad18b-e630-46ae-9f7d-cb4821331ad6",
+    "messageId": "18a539a1-abbf-4b1c-b58b-0e0b3c23cc95",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "INIT",
@@ -1205,9 +1201,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "init",
-        "timestamp": "2026-11-05T11:10:14.000Z",
+        "timestamp": "2026-11-06T09:09:15.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "be3ad18b-e630-46ae-9f7d-cb4821331ad6",
+        "message_id": "18a539a1-abbf-4b1c-b58b-0e0b3c23cc95",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1227,7 +1223,7 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -1242,14 +1238,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -1332,8 +1320,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:14.000Z",
-    "updatedAt": "2026-11-05T11:10:14.000Z",
+    "createdAt": "2026-11-06T09:09:15.000Z",
+    "updatedAt": "2026-11-06T09:09:15.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -1341,7 +1329,7 @@
   },
   {
     "id": 6,
-    "messageId": "be3ad18b-e630-46ae-9f7d-cb4821331ad6",
+    "messageId": "18a539a1-abbf-4b1c-b58b-0e0b3c23cc95",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "ON_INIT",
@@ -1353,9 +1341,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_init",
-        "timestamp": "2026-11-05T11:10:19.000Z",
+        "timestamp": "2026-11-06T09:09:20.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "be3ad18b-e630-46ae-9f7d-cb4821331ad6",
+        "message_id": "18a539a1-abbf-4b1c-b58b-0e0b3c23cc95",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1501,10 +1489,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -1802,7 +1796,7 @@
           ],
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -1871,7 +1865,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -1895,13 +1889,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -1929,8 +1923,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:19.000Z",
-    "updatedAt": "2026-11-05T11:10:19.000Z",
+    "createdAt": "2026-11-06T09:09:20.000Z",
+    "updatedAt": "2026-11-06T09:09:20.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -1938,7 +1932,7 @@
   },
   {
     "id": 7,
-    "messageId": "16e964f6-336d-4ce1-beaf-2361380a8484",
+    "messageId": "8e9fca1c-ded3-4adf-a867-282688fc209e",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "CONFIRM",
@@ -1950,9 +1944,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "confirm",
-        "timestamp": "2026-11-05T11:10:24.000Z",
+        "timestamp": "2026-11-06T09:09:25.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "16e964f6-336d-4ce1-beaf-2361380a8484",
+        "message_id": "8e9fca1c-ded3-4adf-a867-282688fc209e",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1972,12 +1966,12 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "0f57c0dc-cf06-4ae7-bf11-9cdd4ddb0381",
+                "transaction_id": "5f024632-9a08-4ead-ae8a-a55ab5aa93c7",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -1992,14 +1986,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -2092,7 +2078,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2116,13 +2102,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2151,8 +2137,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:24.000Z",
-    "updatedAt": "2026-11-05T11:10:24.000Z",
+    "createdAt": "2026-11-06T09:09:25.000Z",
+    "updatedAt": "2026-11-06T09:09:25.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2160,7 +2146,7 @@
   },
   {
     "id": 8,
-    "messageId": "16e964f6-336d-4ce1-beaf-2361380a8484",
+    "messageId": "8e9fca1c-ded3-4adf-a867-282688fc209e",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "ON_CONFIRM",
@@ -2172,9 +2158,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_confirm",
-        "timestamp": "2026-11-05T11:10:29.000Z",
+        "timestamp": "2026-11-06T09:09:30.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "16e964f6-336d-4ce1-beaf-2361380a8484",
+        "message_id": "8e9fca1c-ded3-4adf-a867-282688fc209e",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2192,7 +2178,7 @@
       },
       "message": {
         "order": {
-          "id": "c53019ae-388a-4d73-b324-054b032a8a54",
+          "id": "f2d8efe5-74e0-4b70-af2c-a3bfcdacf22a",
           "status": "ACTIVE",
           "items": [
             {
@@ -2321,10 +2307,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -2432,8 +2424,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "8fdbc0bbbb0f42fdb8177e1228b5c5e0",
-                    "valid_to": "2026-11-10T11:09:54.717Z",
+                    "token": "e907073fbbb04ccebe7e317008d60a85",
+                    "valid_to": "2026-11-11T09:08:55.676Z",
                     "status": "UNCLAIMED"
                   }
                 },
@@ -2545,12 +2537,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "0f57c0dc-cf06-4ae7-bf11-9cdd4ddb0381",
+                "transaction_id": "5f024632-9a08-4ead-ae8a-a55ab5aa93c7",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -2619,7 +2611,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2643,13 +2635,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2754,8 +2746,8 @@
               "value": "450"
             }
           },
-          "created_at": "2026-11-05T11:09:54.708Z",
-          "updated_at": "2026-11-05T11:09:54.713Z",
+          "created_at": "2026-11-06T09:08:55.667Z",
+          "updated_at": "2026-11-06T09:08:55.672Z",
           "billing": {}
         }
       }
@@ -2768,8 +2760,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:29.000Z",
-    "updatedAt": "2026-11-05T11:10:29.000Z",
+    "createdAt": "2026-11-06T09:09:30.000Z",
+    "updatedAt": "2026-11-06T09:09:30.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -2777,7 +2769,7 @@
   },
   {
     "id": 9,
-    "messageId": "ddbeb0da-1b3d-4854-818c-e31616812463",
+    "messageId": "11fc64a2-cc02-4b91-8ac8-6aef90e62ea9",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "STATUS",
@@ -2789,9 +2781,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "status",
-        "timestamp": "2026-11-05T11:10:34.000Z",
+        "timestamp": "2026-11-06T09:09:35.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "ddbeb0da-1b3d-4854-818c-e31616812463",
+        "message_id": "11fc64a2-cc02-4b91-8ac8-6aef90e62ea9",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2808,7 +2800,7 @@
         }
       },
       "message": {
-        "order_id": "c53019ae-388a-4d73-b324-054b032a8a54"
+        "order_id": "f2d8efe5-74e0-4b70-af2c-a3bfcdacf22a"
       }
     },
     "jsonResponse": {
@@ -2819,8 +2811,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:34.000Z",
-    "updatedAt": "2026-11-05T11:10:34.000Z",
+    "createdAt": "2026-11-06T09:09:35.000Z",
+    "updatedAt": "2026-11-06T09:09:35.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2828,7 +2820,7 @@
   },
   {
     "id": 10,
-    "messageId": "ddbeb0da-1b3d-4854-818c-e31616812463",
+    "messageId": "11fc64a2-cc02-4b91-8ac8-6aef90e62ea9",
     "transactionId": "88b299db-9d03-4d9d-aea8-c640aec487bb",
     "flowId": "purchase_journey_order_level_forms_culture_heritage",
     "action": "ON_STATUS",
@@ -2840,9 +2832,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_status",
-        "timestamp": "2026-11-05T11:10:39.000Z",
+        "timestamp": "2026-11-06T09:09:40.000Z",
         "transaction_id": "88b299db-9d03-4d9d-aea8-c640aec487bb",
-        "message_id": "ddbeb0da-1b3d-4854-818c-e31616812463",
+        "message_id": "11fc64a2-cc02-4b91-8ac8-6aef90e62ea9",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2860,7 +2852,7 @@
       },
       "message": {
         "order": {
-          "id": "c53019ae-388a-4d73-b324-054b032a8a54",
+          "id": "f2d8efe5-74e0-4b70-af2c-a3bfcdacf22a",
           "status": "COMPLETED",
           "items": [
             {
@@ -2989,10 +2981,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -3100,8 +3098,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "8fdbc0bbbb0f42fdb8177e1228b5c5e0",
-                    "valid_to": "2026-11-10T11:09:54.717Z",
+                    "token": "e907073fbbb04ccebe7e317008d60a85",
+                    "valid_to": "2026-11-11T09:08:55.676Z",
                     "status": "CLAIMED"
                   }
                 },
@@ -3213,12 +3211,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "0f57c0dc-cf06-4ae7-bf11-9cdd4ddb0381",
+                "transaction_id": "5f024632-9a08-4ead-ae8a-a55ab5aa93c7",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -3375,7 +3373,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -3399,13 +3397,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -3422,8 +3420,8 @@
               ]
             }
           ],
-          "created_at": "2026-11-05T11:09:54.708Z",
-          "updated_at": "2026-11-05T11:09:54.713Z",
+          "created_at": "2026-11-06T09:08:55.667Z",
+          "updated_at": "2026-11-06T09:08:55.672Z",
           "billing": {}
         }
       }
@@ -3436,8 +3434,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:39.000Z",
-    "updatedAt": "2026-11-05T11:10:39.000Z",
+    "createdAt": "2026-11-06T09:09:40.000Z",
+    "updatedAt": "2026-11-06T09:09:40.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"

@@ -5,6 +5,7 @@ import { getTrv14FlowProfile } from "./flowProfiles";
 import { checkTrv14MandatoryFields } from "./mandatoryFields";
 import { checkTrv14State } from "./stateTable";
 import { checkTrv14Continuity } from "./continuity";
+import { checkTrv14Settlement } from "./settlement";
 import { checkTrv14QuoteCurrency } from "./helpers";
 import { validateTrv14Search, validateTrv14OnSearch } from "./steps/searchValidations";
 import { validateTrv14Select, validateTrv14OnSelect } from "./steps/selectValidations";
@@ -50,11 +51,17 @@ export async function validateTrv14Step(
     checkTrv14MandatoryFields(jsonRequest, action, profile, testResults);
     checkTrv14State(jsonRequest, actionId, testResults);
     checkTrv14QuoteCurrency(jsonRequest, testResults);
+    // Technical cancellation: the BPP's on_confirm is sent after the TTL on purpose,
+    // so a NACK from the BAP is the expected outcome, not a fault.
+    if (profile.postConfirm === "TECH_CANCEL" && action === "on_confirm" && element?.jsonResponse?.message?.ack?.status === "NACK") {
+      testResults.passed.push(`${action} (${actionId}): NACK expected — the technical-cancellation flow delivers on_confirm after its TTL`);
+    }
   });
 
   if (profile && isKnownStep) {
     const stepResults: TestResult = { response: {}, passed: [], failed: [] };
     await checkTrv14Continuity(element, sessionID, flowId, actionId, profile, stepResults);
+    await checkTrv14Settlement(element, sessionID, flowId, actionId, profile, stepResults);
     if (action === "search") await validateTrv14Search(element, sessionID, flowId, profile, stepResults);
     if (action === "on_search") await validateTrv14OnSearch(element, sessionID, flowId, actionId, stepResults);
     if (action === "select") await validateTrv14Select(element, sessionID, flowId, actionId, profile, stepResults);

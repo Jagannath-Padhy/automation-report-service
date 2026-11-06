@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "messageId": "9b882054-104d-4fe6-a700-5f300cad223d",
+    "messageId": "29ab94bb-9e0e-4c8f-bf27-8c969015480f",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "SELECT",
@@ -13,9 +13,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "select",
-        "timestamp": "2026-11-05T11:09:54.000Z",
+        "timestamp": "2026-11-06T09:08:55.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "9b882054-104d-4fe6-a700-5f300cad223d",
+        "message_id": "29ab94bb-9e0e-4c8f-bf27-8c969015480f",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -45,14 +45,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -90,8 +82,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:09:54.000Z",
-    "updatedAt": "2026-11-05T11:09:54.000Z",
+    "createdAt": "2026-11-06T09:08:55.000Z",
+    "updatedAt": "2026-11-06T09:08:55.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -99,7 +91,7 @@
   },
   {
     "id": 2,
-    "messageId": "9b882054-104d-4fe6-a700-5f300cad223d",
+    "messageId": "29ab94bb-9e0e-4c8f-bf27-8c969015480f",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_SELECT",
@@ -111,9 +103,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_select",
-        "timestamp": "2026-11-05T11:09:59.000Z",
+        "timestamp": "2026-11-06T09:09:00.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "9b882054-104d-4fe6-a700-5f300cad223d",
+        "message_id": "29ab94bb-9e0e-4c8f-bf27-8c969015480f",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -310,10 +302,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -591,8 +589,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:09:59.000Z",
-    "updatedAt": "2026-11-05T11:09:59.000Z",
+    "createdAt": "2026-11-06T09:09:00.000Z",
+    "updatedAt": "2026-11-06T09:09:00.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -600,7 +598,7 @@
   },
   {
     "id": 3,
-    "messageId": "92677181-2ac6-477d-858e-e5706822c63f",
+    "messageId": "9aad8a08-4084-4c83-8656-837c10c06830",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "SELECT",
@@ -612,9 +610,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "select",
-        "timestamp": "2026-11-05T11:10:04.000Z",
+        "timestamp": "2026-11-06T09:09:05.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "92677181-2ac6-477d-858e-e5706822c63f",
+        "message_id": "9aad8a08-4084-4c83-8656-837c10c06830",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -641,14 +639,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -665,7 +655,7 @@
                 },
                 "form_response": {
                   "status": "SUCCESS",
-                  "submission_id": "de562d6a-9c65-48a6-bc15-44c45003fa6f"
+                  "submission_id": "692c19d2-8d72-48a6-8927-d3a7cad4ffeb"
                 }
               }
             }
@@ -698,8 +688,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:04.000Z",
-    "updatedAt": "2026-11-05T11:10:04.000Z",
+    "createdAt": "2026-11-06T09:09:05.000Z",
+    "updatedAt": "2026-11-06T09:09:05.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -707,7 +697,7 @@
   },
   {
     "id": 4,
-    "messageId": "92677181-2ac6-477d-858e-e5706822c63f",
+    "messageId": "9aad8a08-4084-4c83-8656-837c10c06830",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_SELECT",
@@ -719,9 +709,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_select",
-        "timestamp": "2026-11-05T11:10:09.000Z",
+        "timestamp": "2026-11-06T09:09:10.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "92677181-2ac6-477d-858e-e5706822c63f",
+        "message_id": "9aad8a08-4084-4c83-8656-837c10c06830",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -866,10 +856,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -954,7 +950,7 @@
                 },
                 "form_response": {
                   "status": "SUCCESS",
-                  "submission_id": "de562d6a-9c65-48a6-bc15-44c45003fa6f"
+                  "submission_id": "692c19d2-8d72-48a6-8927-d3a7cad4ffeb"
                 }
               }
             }
@@ -1185,8 +1181,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:09.000Z",
-    "updatedAt": "2026-11-05T11:10:09.000Z",
+    "createdAt": "2026-11-06T09:09:10.000Z",
+    "updatedAt": "2026-11-06T09:09:10.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -1194,7 +1190,7 @@
   },
   {
     "id": 5,
-    "messageId": "ff0183a0-3e1c-4fdc-afcd-7097a930cbf4",
+    "messageId": "1f565900-fd04-452f-a445-6143d3550224",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "INIT",
@@ -1206,9 +1202,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "init",
-        "timestamp": "2026-11-05T11:10:14.000Z",
+        "timestamp": "2026-11-06T09:09:15.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "ff0183a0-3e1c-4fdc-afcd-7097a930cbf4",
+        "message_id": "1f565900-fd04-452f-a445-6143d3550224",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1228,7 +1224,7 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -1243,14 +1239,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -1333,8 +1321,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:14.000Z",
-    "updatedAt": "2026-11-05T11:10:14.000Z",
+    "createdAt": "2026-11-06T09:09:15.000Z",
+    "updatedAt": "2026-11-06T09:09:15.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -1342,7 +1330,7 @@
   },
   {
     "id": 6,
-    "messageId": "ff0183a0-3e1c-4fdc-afcd-7097a930cbf4",
+    "messageId": "1f565900-fd04-452f-a445-6143d3550224",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_INIT",
@@ -1354,9 +1342,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_init",
-        "timestamp": "2026-11-05T11:10:19.000Z",
+        "timestamp": "2026-11-06T09:09:20.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "ff0183a0-3e1c-4fdc-afcd-7097a930cbf4",
+        "message_id": "1f565900-fd04-452f-a445-6143d3550224",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1502,10 +1490,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -1803,7 +1797,7 @@
           ],
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "NOT-PAID",
               "type": "PRE_ORDER"
@@ -1872,7 +1866,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -1896,13 +1890,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -1930,8 +1924,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:19.000Z",
-    "updatedAt": "2026-11-05T11:10:19.000Z",
+    "createdAt": "2026-11-06T09:09:20.000Z",
+    "updatedAt": "2026-11-06T09:09:20.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -1939,7 +1933,7 @@
   },
   {
     "id": 7,
-    "messageId": "9a64a0fc-41c2-405b-9e24-db633c2180ae",
+    "messageId": "cdde95a6-7041-4e17-a5e9-2df4964747c3",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "CONFIRM",
@@ -1951,9 +1945,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "confirm",
-        "timestamp": "2026-11-05T11:10:24.000Z",
+        "timestamp": "2026-11-06T09:09:25.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "9a64a0fc-41c2-405b-9e24-db633c2180ae",
+        "message_id": "cdde95a6-7041-4e17-a5e9-2df4964747c3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -1973,12 +1967,12 @@
         "order": {
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "be792a62-c244-4782-bd10-4d088c97c7c9",
+                "transaction_id": "7b815b27-1e8c-428c-a929-23fc45b4b583",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -1993,14 +1987,6 @@
                 }
               },
               "parent_item_id": "I0",
-              "margin": {
-                "selected": {
-                  "measure": {
-                    "value": "10",
-                    "unit": "INR"
-                  }
-                }
-              },
               "add_ons": [
                 {
                   "id": "A1",
@@ -2093,7 +2079,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2117,13 +2103,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2152,8 +2138,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:24.000Z",
-    "updatedAt": "2026-11-05T11:10:24.000Z",
+    "createdAt": "2026-11-06T09:09:25.000Z",
+    "updatedAt": "2026-11-06T09:09:25.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2161,7 +2147,7 @@
   },
   {
     "id": 8,
-    "messageId": "9a64a0fc-41c2-405b-9e24-db633c2180ae",
+    "messageId": "cdde95a6-7041-4e17-a5e9-2df4964747c3",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_CONFIRM",
@@ -2173,9 +2159,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_confirm",
-        "timestamp": "2026-11-05T11:10:29.000Z",
+        "timestamp": "2026-11-06T09:09:30.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "9a64a0fc-41c2-405b-9e24-db633c2180ae",
+        "message_id": "cdde95a6-7041-4e17-a5e9-2df4964747c3",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2193,7 +2179,7 @@
       },
       "message": {
         "order": {
-          "id": "f2f92fe0-7f4e-4ea1-88df-23f576a62efd",
+          "id": "aebbd68e-7cba-433a-b9b5-0bf0bc8c9357",
           "status": "ACTIVE",
           "items": [
             {
@@ -2322,10 +2308,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -2433,8 +2425,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "452fdeefd02c427e942468c37d94fd29",
-                    "valid_to": "2026-11-10T11:09:54.626Z",
+                    "token": "4157f25d9079429685a5786268c00a66",
+                    "valid_to": "2026-11-11T09:08:55.580Z",
                     "status": "UNCLAIMED"
                   }
                 },
@@ -2546,12 +2538,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "be792a62-c244-4782-bd10-4d088c97c7c9",
+                "transaction_id": "7b815b27-1e8c-428c-a929-23fc45b4b583",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -2620,7 +2612,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -2644,13 +2636,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "445.5"
+                  "value": "4.5"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -2755,8 +2747,8 @@
               "value": "450"
             }
           },
-          "created_at": "2026-11-05T11:09:54.617Z",
-          "updated_at": "2026-11-05T11:09:54.622Z",
+          "created_at": "2026-11-06T09:08:55.571Z",
+          "updated_at": "2026-11-06T09:08:55.576Z",
           "billing": {}
         }
       }
@@ -2769,8 +2761,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:29.000Z",
-    "updatedAt": "2026-11-05T11:10:29.000Z",
+    "createdAt": "2026-11-06T09:09:30.000Z",
+    "updatedAt": "2026-11-06T09:09:30.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -2778,7 +2770,7 @@
   },
   {
     "id": 9,
-    "messageId": "ca6f974d-f0c4-4422-9b65-f84e7c7a2ea2",
+    "messageId": "085be452-3fd1-4e91-a550-71d75606425d",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "CANCEL",
@@ -2790,9 +2782,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "cancel",
-        "timestamp": "2026-11-05T11:10:34.000Z",
+        "timestamp": "2026-11-06T09:09:35.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "ca6f974d-f0c4-4422-9b65-f84e7c7a2ea2",
+        "message_id": "085be452-3fd1-4e91-a550-71d75606425d",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2814,7 +2806,7 @@
           "code": "SOFT_CANCEL",
           "name": "Ride Cancellation"
         },
-        "order_id": "f2f92fe0-7f4e-4ea1-88df-23f576a62efd"
+        "order_id": "aebbd68e-7cba-433a-b9b5-0bf0bc8c9357"
       }
     },
     "jsonResponse": {
@@ -2825,8 +2817,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:34.000Z",
-    "updatedAt": "2026-11-05T11:10:34.000Z",
+    "createdAt": "2026-11-06T09:09:35.000Z",
+    "updatedAt": "2026-11-06T09:09:35.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -2834,7 +2826,7 @@
   },
   {
     "id": 10,
-    "messageId": "ca6f974d-f0c4-4422-9b65-f84e7c7a2ea2",
+    "messageId": "085be452-3fd1-4e91-a550-71d75606425d",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_CANCEL",
@@ -2846,9 +2838,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_cancel",
-        "timestamp": "2026-11-05T11:10:39.000Z",
+        "timestamp": "2026-11-06T09:09:40.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "ca6f974d-f0c4-4422-9b65-f84e7c7a2ea2",
+        "message_id": "085be452-3fd1-4e91-a550-71d75606425d",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -2866,7 +2858,7 @@
       },
       "message": {
         "order": {
-          "id": "f2f92fe0-7f4e-4ea1-88df-23f576a62efd",
+          "id": "aebbd68e-7cba-433a-b9b5-0bf0bc8c9357",
           "status": "SOFT_CANCEL",
           "items": [
             {
@@ -2995,10 +2987,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -3106,8 +3104,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "452fdeefd02c427e942468c37d94fd29",
-                    "valid_to": "2026-11-10T11:09:54.626Z",
+                    "token": "4157f25d9079429685a5786268c00a66",
+                    "valid_to": "2026-11-11T09:08:55.580Z",
                     "status": "UNCLAIMED"
                   }
                 },
@@ -3219,12 +3217,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "be792a62-c244-4782-bd10-4d088c97c7c9",
+                "transaction_id": "7b815b27-1e8c-428c-a929-23fc45b4b583",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -3293,7 +3291,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -3317,13 +3315,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "44.55"
+                  "value": "0.45"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -3456,8 +3454,8 @@
               "value": "45"
             }
           },
-          "created_at": "2026-11-05T11:09:54.617Z",
-          "updated_at": "2026-11-05T11:09:54.622Z",
+          "created_at": "2026-11-06T09:08:55.571Z",
+          "updated_at": "2026-11-06T09:08:55.576Z",
           "billing": {},
           "cancellation": {
             "cancelled_by": "CONSUMER",
@@ -3478,8 +3476,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:39.000Z",
-    "updatedAt": "2026-11-05T11:10:39.000Z",
+    "createdAt": "2026-11-06T09:09:40.000Z",
+    "updatedAt": "2026-11-06T09:09:40.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"
@@ -3487,7 +3485,7 @@
   },
   {
     "id": 11,
-    "messageId": "18b45b38-b40a-4675-9e26-0a2e61bc70db",
+    "messageId": "3261691e-4e9a-4353-8226-e3a11bcb4936",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "CANCEL",
@@ -3499,9 +3497,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "cancel",
-        "timestamp": "2026-11-05T11:10:44.000Z",
+        "timestamp": "2026-11-06T09:09:45.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "18b45b38-b40a-4675-9e26-0a2e61bc70db",
+        "message_id": "3261691e-4e9a-4353-8226-e3a11bcb4936",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3522,7 +3520,7 @@
           "code": "CONFIRM_CANCEL",
           "name": "Ride Cancellation"
         },
-        "order_id": "f2f92fe0-7f4e-4ea1-88df-23f576a62efd",
+        "order_id": "aebbd68e-7cba-433a-b9b5-0bf0bc8c9357",
         "cancellation_reason_id": "001"
       }
     },
@@ -3534,8 +3532,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:44.000Z",
-    "updatedAt": "2026-11-05T11:10:44.000Z",
+    "createdAt": "2026-11-06T09:09:45.000Z",
+    "updatedAt": "2026-11-06T09:09:45.000Z",
     "sessionDetails": {
       "npType": "BPP",
       "owner": "BAP"
@@ -3543,7 +3541,7 @@
   },
   {
     "id": 12,
-    "messageId": "18b45b38-b40a-4675-9e26-0a2e61bc70db",
+    "messageId": "3261691e-4e9a-4353-8226-e3a11bcb4936",
     "transactionId": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
     "flowId": "User_Cancellation_FULL_With_Form",
     "action": "ON_CANCEL",
@@ -3555,9 +3553,9 @@
       "context": {
         "domain": "ONDC:TRV14",
         "action": "on_cancel",
-        "timestamp": "2026-11-05T11:10:49.000Z",
+        "timestamp": "2026-11-06T09:09:50.000Z",
         "transaction_id": "7bf7a8f3-2fd2-405a-bd0f-71aaae2f1f62",
-        "message_id": "18b45b38-b40a-4675-9e26-0a2e61bc70db",
+        "message_id": "3261691e-4e9a-4353-8226-e3a11bcb4936",
         "bap_id": "bap.example.com",
         "bap_uri": "https://bap.example.com",
         "ttl": "PT30S",
@@ -3575,7 +3573,7 @@
       },
       "message": {
         "order": {
-          "id": "f2f92fe0-7f4e-4ea1-88df-23f576a62efd",
+          "id": "aebbd68e-7cba-433a-b9b5-0bf0bc8c9357",
           "status": "CANCELLED",
           "items": [
             {
@@ -3704,10 +3702,16 @@
                 "L1"
               ],
               "margin": {
-                "selected": {
+                "maximum": {
                   "measure": {
-                    "value": "10",
-                    "unit": "INR"
+                    "unit": "PERCENT",
+                    "value": "10"
+                  }
+                },
+                "minimum": {
+                  "measure": {
+                    "unit": "PERCENT",
+                    "value": "8"
                   }
                 }
               },
@@ -3815,8 +3819,8 @@
                   "type": "START",
                   "authorization": {
                     "type": "QR",
-                    "token": "452fdeefd02c427e942468c37d94fd29",
-                    "valid_to": "2026-11-10T11:09:54.626Z",
+                    "token": "4157f25d9079429685a5786268c00a66",
+                    "valid_to": "2026-11-11T09:08:55.580Z",
                     "status": "UNCLAIMED"
                   }
                 },
@@ -3928,12 +3932,12 @@
           },
           "payments": [
             {
-              "collected_by": "BAP",
+              "collected_by": "BPP",
               "id": "PA1",
               "status": "PAID",
               "type": "PRE_ORDER",
               "params": {
-                "transaction_id": "be792a62-c244-4782-bd10-4d088c97c7c9",
+                "transaction_id": "7b815b27-1e8c-428c-a929-23fc45b4b583",
                 "amount": "450",
                 "currency": "INR"
               }
@@ -4002,7 +4006,7 @@
                   "descriptor": {
                     "code": "STATIC_TERMS"
                   },
-                  "value": "https://dev-automation.ondc.org/booking/terms"
+                  "value": "https://api.example-bap.com/booking/terms"
                 },
                 {
                   "descriptor": {
@@ -4026,13 +4030,13 @@
                   "descriptor": {
                     "code": "SETTLEMENT_AMOUNT"
                   },
-                  "value": "44.55"
+                  "value": "0.45"
                 },
                 {
                   "descriptor": {
                     "code": "SETTLEMENT_TYPE"
                   },
-                  "value": "upi"
+                  "value": "neft"
                 },
                 {
                   "descriptor": {
@@ -4165,8 +4169,8 @@
               "value": "45"
             }
           },
-          "created_at": "2026-11-05T11:09:54.617Z",
-          "updated_at": "2026-11-05T11:09:54.622Z",
+          "created_at": "2026-11-06T09:08:55.571Z",
+          "updated_at": "2026-11-06T09:08:55.576Z",
           "billing": {},
           "cancellation": {
             "cancelled_by": "CONSUMER",
@@ -4187,8 +4191,8 @@
       }
     },
     "httpStatus": 200,
-    "createdAt": "2026-11-05T11:10:49.000Z",
-    "updatedAt": "2026-11-05T11:10:49.000Z",
+    "createdAt": "2026-11-06T09:09:50.000Z",
+    "updatedAt": "2026-11-06T09:09:50.000Z",
     "sessionDetails": {
       "npType": "BAP",
       "owner": "BPP"

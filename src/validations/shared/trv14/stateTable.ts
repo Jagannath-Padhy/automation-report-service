@@ -2,7 +2,7 @@ import { TestResult } from "../../../types/payload";
 
 // Order / fulfillment / payment state each workbench step must carry. Source of
 // truth: the payloads ONDC-Official/automation-specifications draft-TRV14-2.0.0
-// (commit cc6c1355) generates for every flow — each action_id produces exactly
+// (commit ca523e5f) generates for every flow — each action_id produces exactly
 // one combination there. Payment type is left to L1 (its enum is PRE_ORDER only).
 export interface Trv14ExpectedState {
   orderStatus?: string;
