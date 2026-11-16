@@ -1,0 +1,5 @@
+save-data:
+  context: "$.context"
+  update_target: "$.message.update_target"
+  order: "$.message.order"
+  items: "$.message.order.items[*]"

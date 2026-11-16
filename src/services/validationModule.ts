@@ -41,13 +41,16 @@ const INITIAL_ACTION_COUNTERS: Record<ValidationAction, number> = {
   on_issue: 1,
   issue_status: 1,
   on_issue_status: 1,
+  recon: 1,
+  on_recon: 1,
   catalog_rejection: 1,
 };
 
 // Interface for session details
-interface SessionDetails {
+export interface SessionDetails {
   domain: string;
   version: string;
+  usecaseId?: string;
 }
 
 // Interface for domain configuration
@@ -69,6 +72,11 @@ interface DomainConfig {
    * so no other domain's reports change.
    */
   mandatory_legs?: Record<string, string[]>;
+  /**
+   * Per-flow `action_id` of each step, aligned 1:1 with `flows[flowId]`. Only the log-upload
+   * report reads it (logsAdapter.assignActionIds) — uploaded logs carry no action_id.
+   */
+  flow_action_ids?: Record<string, string[]>;
   validationModules?: string;
 }
 
@@ -683,7 +691,13 @@ async function processPayloads(
 // Main validation module function
 export async function validationModule(
   groupedPayloads: Record<string, Payload[]>,
-  sessionID: string
+  sessionID: string,
+  // Log-upload reports have no live session in Redis, so they pass the details directly.
+  sessionDetailsOverride?: SessionDetails,
+  // Per flow, action_ids that ran in the workbench but whose payloads the payload DB
+  // did not return (reportService.findUnfetchedActionIds). Optional: callers that
+  // don't pass it get the plain "missing mandatory step" message as before.
+  unfetchedActionIds: Record<string, string[]> = {}
 ): Promise<Report> {
   logger.info(MESSAGES.services.validationEnter, { sessionID, flowCount: Object.keys(groupedPayloads).length });
 
@@ -704,7 +718,7 @@ export async function validationModule(
   // guarantees it always runs, on every exit path, not just the happy one.
   try {
     // Get session details and domain configuration
-    const sessionDetails = await getSessionDetails(sessionID);
+    const sessionDetails = sessionDetailsOverride ?? await getSessionDetails(sessionID);
     // Use optional chaining for usecaseId to avoid property access error
     const domainConfig: DomainConfig = sessionDetails
       ? loadConfig(
@@ -755,12 +769,24 @@ export async function validationModule(
           );
           if (missingLegs.length > 0) {
             validSequence = false;
-            errors = [
-              ...errors,
-              `Error: flow '${flowId}' is missing ${missingLegs.length} mandatory step(s): ` +
-                `${missingLegs.join(", ")}. These must all be exercised for this flow to be valid.`,
-            ];
-            logger.info("Mandatory legs missing", { flowId, missingLegs });
+            const unfetched = new Set((unfetchedActionIds[flowId] ?? []).map((a) => a.toLowerCase()));
+            const notRun = missingLegs.filter((leg) => !unfetched.has(String(leg).toLowerCase()));
+            const unreadable = missingLegs.filter((leg) => unfetched.has(String(leg).toLowerCase()));
+            if (notRun.length > 0) {
+              errors = [
+                ...errors,
+                `Error: flow '${flowId}' is missing ${notRun.length} mandatory step(s): ` +
+                  `${notRun.join(", ")}. These must all be exercised for this flow to be valid.`,
+              ];
+            }
+            if (unreadable.length > 0) {
+              errors = [
+                ...errors,
+                `Error: flow '${flowId}' ran ${unreadable.length} mandatory step(s) whose payloads are missing from the workbench payload DB: ` +
+                  `${unreadable.join(", ")}. They cannot be validated until the payloads are available.`,
+              ];
+            }
+            logger.info("Mandatory legs missing", { flowId, missingLegs, unreadable });
           }
 
           logger.info(MESSAGES.validations.actionValidationDone(flowId), { flowId });

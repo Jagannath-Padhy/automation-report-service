@@ -1,0 +1,61 @@
+{
+  "_source": "ONDC-Official/automation-specifications draft-TRV14-2.0.0 (commit ca523e5f): fields marked 'mandatory' in config/attributes/unreserved-entry-pass.yaml that config/validations/index.yaml (L1) has no presence check for. status.order_id is handled in code (technical-cancellation flows send ref_id instead).",
+  "fields": {
+    "on_search": [
+      "$.message.catalog.providers.categories.descriptor.code",
+      "$.message.catalog.providers.descriptor.short_desc",
+      "$.message.catalog.providers.locations",
+      "$.message.catalog.providers.locations.descriptor",
+      "$.message.catalog.providers.locations.descriptor.images.size_type",
+      "$.message.catalog.providers.locations.gps"
+    ],
+    "on_select": [
+      "$.message.order.items.descriptor.images.size_type",
+      "$.message.order.provider.descriptor.images.size_type",
+      "$.message.order.quote.breakup.price.currency",
+      "$.message.order.quote.breakup.price.value",
+      "$.message.order.quote.price.currency",
+      "$.message.order.quote.price.value",
+      "$.message.order.replacement_terms.external_ref.mimetype",
+      "$.message.order.replacement_terms.external_ref.url"
+    ],
+    "on_init": [
+      "$.message.order.items.descriptor.images.size_type",
+      "$.message.order.provider.descriptor.images.size_type",
+      "$.message.order.quote.breakup.price.currency",
+      "$.message.order.quote.breakup.price.value",
+      "$.message.order.quote.price.currency",
+      "$.message.order.quote.price.value",
+      "$.message.order.replacement_terms.external_ref.mimetype",
+      "$.message.order.replacement_terms.external_ref.url"
+    ],
+    "on_confirm": [
+      "$.message.order.fulfillments.type",
+      "$.message.order.fulfillments.vehicle.category",
+      "$.message.order.items.descriptor.images.size_type",
+      "$.message.order.provider.descriptor.images.size_type",
+      "$.message.order.quote.breakup.price.currency",
+      "$.message.order.quote.breakup.price.value",
+      "$.message.order.quote.price.currency",
+      "$.message.order.quote.price.value",
+      "$.message.order.replacement_terms.external_ref.mimetype",
+      "$.message.order.replacement_terms.external_ref.url"
+    ],
+    "on_status": [
+      "$.message.order.fulfillments.stops.authorization.status",
+      "$.message.order.fulfillments.stops.authorization.token",
+      "$.message.order.fulfillments.stops.authorization.type",
+      "$.message.order.fulfillments.stops.authorization.valid_to",
+      "$.message.order.fulfillments.type",
+      "$.message.order.fulfillments.vehicle.category",
+      "$.message.order.items.descriptor.images.size_type",
+      "$.message.order.provider.descriptor.images.size_type",
+      "$.message.order.quote.breakup.price.currency",
+      "$.message.order.quote.breakup.price.value",
+      "$.message.order.quote.price.currency",
+      "$.message.order.quote.price.value",
+      "$.message.order.replacement_terms.external_ref.mimetype",
+      "$.message.order.replacement_terms.external_ref.url"
+    ]
+  }
+}

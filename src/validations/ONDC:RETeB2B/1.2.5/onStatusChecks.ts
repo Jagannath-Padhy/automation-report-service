@@ -183,7 +183,7 @@ export function validateStatusLegStates(
     checked++;
     if (String(code) !== leg.fulfillmentState) {
       result.failed.push(
-        `on_status (${actionId}): fulfillment ${fulfillment?.id ?? "?"} reports state '${code}', but this leg must report '${leg.fulfillmentState}'`
+        `on_status (${actionId}): fulfillment ${fulfillment?.id ?? "?"} reports state '${code}', but this status update must report '${leg.fulfillmentState}'`
       );
     }
   }
@@ -295,7 +295,7 @@ export function validateCodSettlementAtDelivery(
     if (leg.isDelivery) {
       if (String(status) !== "PAID") {
         result.failed.push(
-          `on_status (${actionId}): ${ref}.status is '${status}' at the delivery leg — the order is delivered, so the payment must be PAID${isCod ? " (COD money is collected on fulfillment)" : ""}`
+          `on_status (${actionId}): ${ref}.status is '${status}' when the order is delivered — payment must be PAID at delivery${isCod ? " (cash on delivery is collected at this point)" : ""}`
         );
       }
       return;
@@ -305,7 +305,7 @@ export function validateCodSettlementAtDelivery(
     // on_status legs, including `accepted` — so this must never fire for a prepaid flow.
     if (isCod && String(status) === "PAID") {
       result.failed.push(
-        `on_status (${actionId}): ${ref} is COD (${mode === "cod" ? `flow mode cod, type '${payment?.type}'` : "type ON-FULFILLMENT"}) and already reports PAID while the fulfillment is only '${leg.fulfillmentState}' — COD is collected at delivery, not before`
+        `on_status (${actionId}): ${ref} already reports PAID while the fulfillment is only '${leg.fulfillmentState}' — this is a cash-on-delivery order (payment type '${payment?.type}'), so payment is collected at delivery, not before`
       );
     }
   });
@@ -315,7 +315,7 @@ export function validateCodSettlementAtDelivery(
     // old wording for every non-delivery leg — misdescribed every prepaid pass.
     const cod = payments.filter((p: any) => mode === "cod" || String(p?.type) === "ON-FULFILLMENT").length;
     const detail = leg.isDelivery
-      ? "PAID at the delivery leg"
+      ? "PAID at delivery"
       : cod > 0
         ? `COD and not yet collected (fulfillment is '${leg.fulfillmentState}')`
         : `prepaid and already PAID`;
@@ -344,13 +344,13 @@ export function validateDeliveryFulfillmentPresent(
   if (!Array.isArray(order?.fulfillments)) return; // nothing to judge; L1 requires the array
   if (leg?.fulfillmentType) {
     if (legFulfillmentsOf(order, leg).length > 0) {
-      result.passed.push(`on_status (${actionId}): the ${leg.fulfillmentType} fulfillment this leg reports on is present`);
+      result.passed.push(`on_status (${actionId}): the ${leg.fulfillmentType} fulfillment this status update reports on is present`);
     } else {
       const present = fulfillmentsOf(order)
         .map((f: any) => `${f?.id ?? "?"} (type ${f?.type ?? "?"}, state ${f?.state?.descriptor?.code ?? "?"})`)
         .join("; ");
       result.failed.push(
-        `on_status (${actionId}): no fulfillment of type '${leg.fulfillmentType}' — this leg must report it in state '${leg.fulfillmentState}'${present ? ` [found: ${present}]` : ""}`
+        `on_status (${actionId}): no fulfillment of type '${leg.fulfillmentType}' — this status update must include it in state '${leg.fulfillmentState}'${present ? ` [found: ${present}]` : ""}`
       );
     }
     return;
@@ -465,6 +465,39 @@ export function validateTrackingTag(order: any, actionId: string, result: TestRe
 
   if (checked > 0 && cleanRun()) {
     result.passed.push(`on_status (${actionId}): all ${checked} fulfillment tracking tag(s) are coherent`);
+  }
+}
+
+/**
+ * The retailer the order ships to: `customer` with its `id`, REQUIRED on every live delivery
+ * fulfillment. The contract's on_status fulfillment carries it, as do 47/47 reference
+ * Delivery legs (all `CUST-2024-0015421`); the rest of the object varies by flow, so only
+ * the id is pinned. Neither L0 nor L1 checks it, so a seller dropping `customer` entirely
+ * passed every layer (the Vistar tester's V9, docs/RETeB2B-vistar-seller-tester-coverage.md).
+ */
+export function validateFulfillmentCustomer(order: any, actionId: string, result: TestResult): void {
+  const fulfillments = deliveryFulfillmentsOf(order);
+  if (fulfillments.length === 0) return; // reported once by validateDeliveryFulfillmentPresent
+
+  const cleanRun = failureGate(result);
+
+  for (const fulfillment of fulfillments) {
+    const ref = `fulfillment ${fulfillment?.id ?? "?"}`;
+    const customer = fulfillment?.customer;
+
+    if (!customer || typeof customer !== "object") {
+      result.failed.push(
+        `on_status (${actionId}): ${ref} is missing 'customer' — a delivery fulfillment must identify the retailer it ships to`
+      );
+    } else if (isAbsent(customer.id) || !String(customer.id).trim()) {
+      result.failed.push(`on_status (${actionId}): ${ref} customer.id is required`);
+    }
+  }
+
+  if (cleanRun()) {
+    result.passed.push(
+      `on_status (${actionId}): all ${fulfillments.length} delivery fulfillment(s) carry a customer.id`
+    );
   }
 }
 

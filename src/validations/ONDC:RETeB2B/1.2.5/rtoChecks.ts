@@ -264,6 +264,62 @@ export function validateNoCancelledFulfillmentRevived(
   }
 }
 
+/**
+ * Fulfillment id continuity across a cancellation, against the ids saved at on_confirm:
+ *
+ *  - the Delivery fulfillment keeps its confirmed id. Contract /on_cancel: the Delivery
+ *    stays `F1` and only its state moves to Cancelled. A seller renaming it (`F9`) severs the
+ *    cancellation from the order the buyer confirmed (the Vistar tester's V17).
+ *  - a Cancel or RTO fulfillment carries a NEW id, never one already confirmed. Contract:
+ *    Cancel `cancel_id_8189`, RTO `rto_id`, both distinct from F1. Reusing `F1` makes two
+ *    records share one id (V16).
+ *
+ * Both spec on_cancel examples comply (Buyer_Side `F1` + `cancel_id_8189`; RTO `F1` +
+ * `part_cancel_id_12391` + `rto_mock_id_121`). A Cancel fulfillment raised earlier at
+ * on_update is not confirmed, so carrying it forward is fine. Skips without saved ids.
+ */
+export function validateCancelFulfillmentIdContinuity(
+  order: any,
+  confirmedIds: string[],
+  label: string,
+  result: TestResult
+): void {
+  const confirmed = new Set(confirmedIds.filter(Boolean).map(String));
+  if (confirmed.size === 0) return;
+  const fulfillments = fulfillmentsOf(order);
+  if (fulfillments.length === 0) return;
+
+  const ok = failureGate(result);
+  const confirmedList = [...confirmed].join(", ");
+
+  fulfillments.forEach((f: any) => {
+    const id = f?.id === undefined || f?.id === null ? undefined : String(f.id);
+    if (f?.type === "Delivery" && id !== undefined && !confirmed.has(id)) {
+      result.failed.push(
+        `${label}: Delivery fulfillment '${id}' was not confirmed at on_confirm (confirmed: ${confirmedList}) — the Delivery fulfillment must keep its confirmed id`
+      );
+    }
+    if ((f?.type === "Cancel" || f?.type === "RTO") && id !== undefined && confirmed.has(id)) {
+      result.failed.push(
+        `${label}: ${f.type} fulfillment reuses id '${id}', which was confirmed at on_confirm — ${f.type} fulfillments must carry a new id`
+      );
+    }
+  });
+
+  const present = new Set(fulfillments.map((f: any) => String(f?.id)));
+  confirmed.forEach((id) => {
+    if (!present.has(id)) {
+      result.failed.push(`${label}: confirmed fulfillment '${id}' is missing — it must be carried on the cancellation`);
+    }
+  });
+
+  if (ok()) {
+    result.passed.push(
+      `${label}: confirmed fulfillment id(s) ${confirmedList} kept; Cancel/RTO fulfillment(s) carry new ids`
+    );
+  }
+}
+
 // ---------------------------------------------------------------------------
 // on_update — merchant part cancel
 // ---------------------------------------------------------------------------

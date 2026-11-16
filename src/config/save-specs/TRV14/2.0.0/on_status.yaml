@@ -1,0 +1,13 @@
+save-data:
+  context: "$.context"
+  order: "$.message.order"
+  order_id: "$.message.order.id"
+  order_status: "$.message.order.status"
+  provider_id: "$.message.order.provider.id"
+  items: "$.message.order.items[*]"
+  fulfillments: "$.message.order.fulfillments[*]"
+  quote: "$.message.order.quote"
+  payments: "$.message.order.payments[*]"
+  created_at: "$.message.order.created_at"
+  updated_at: "$.message.order.updated_at"
+  error: "$.error"

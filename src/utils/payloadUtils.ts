@@ -9,6 +9,12 @@ export interface TestItem {
 const normalizeUsecaseKey = (value: string) =>
   value.toLowerCase().replace(/[-_\s]+/g, " ").trim();
 
+// Usecases renamed in automation-specifications. Maps the normalized legacy name to the
+// normalized current name so sessions created before the rename still resolve.
+const LEGACY_USECASE_ALIASES: Record<string, string> = {
+  "unified credit": "business loan",
+};
+
 // Session usecaseIds can arrive as slugs ("transit-insurance") or in a different case,
 // while FLOW_ID_MAP is keyed by display name ("TRANSIT INSURANCE").
 export function resolveUsecaseKey(
@@ -17,7 +23,8 @@ export function resolveUsecaseKey(
 ): string | undefined {
   if (!usecases || !usecaseId) return undefined;
   if (usecases[usecaseId]) return usecaseId;
-  const target = normalizeUsecaseKey(usecaseId);
+  const normalized = normalizeUsecaseKey(usecaseId);
+  const target = LEGACY_USECASE_ALIASES[normalized] ?? normalized;
   return Object.keys(usecases).find((k) => normalizeUsecaseKey(k) === target);
 }
 

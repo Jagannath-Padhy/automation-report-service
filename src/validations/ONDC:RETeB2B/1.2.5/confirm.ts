@@ -29,6 +29,7 @@ import {
   validateItemsAgainstOnSelect,
   validateShipFromLocation,
   validateFulfillmentContactAndTracking,
+  validateDeliveryLocality,
   validateOrderDurations,
   validateTaxNumberPanConsistency,
   validateDistinctTaxIdentities,
@@ -98,6 +99,7 @@ export default async function confirm(
     // and tracking EXIST at this leg; this adds the shape it cannot see. The start.contact
     // branch finds nothing here — confirm carries no fulfillment start.
     validateFulfillmentContactAndTracking(order, "confirm", result);
+    validateDeliveryLocality(order, "confirm", result);
     validateOrderDurations(order, "confirm", result);
 
     const txnId = context?.transaction_id as string | undefined;

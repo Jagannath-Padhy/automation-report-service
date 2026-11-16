@@ -511,6 +511,73 @@ domains:
             - status
             - on_status
 
+          ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+
+          ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_SJT:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+
+          "ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_SJT (W/O search_1 & select)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+
+          ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_RJT:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+
+          "ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_RJT (W/O search_1 & select)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+
           USER_CANCELLATION_FLOW:
             - search
             - on_search
@@ -518,6 +585,18 @@ domains:
             - on_search
             - select
             - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+
+          "USER_CANCELLATION_FLOW (W/O search_1 & select)":
+            - search
+            - on_search
             - init
             - on_init
             - confirm
@@ -543,7 +622,75 @@ domains:
             - cancel
             - on_cancel
 
+          "TECHNICAL_CANCELLATION_FLOW (W/O search_1 & select)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - cancel
+            - on_cancel
+
+          PARTIAL_CANCELLATION_FLOW:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - update
+            - on_update
+
+          PARTIAL_CANCELLATION_FLOW_WITHOUT_SEARCH_ND_SELECT:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - update
+            - on_update
+
+          SELLER_OFFLINE_CANCELLATION_WITHOUT_SEARCH_ND_SELECT:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_cancel
+
+          "ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_SJT_WITHOUT_SEARCH_ND_SELECT_WITH_IGM_1_0_0":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
         optional_flows:
+          - PARTIAL_CANCELLATION_FLOW
+          - PARTIAL_CANCELLATION_FLOW_WITHOUT_SEARCH_ND_SELECT
+          - SELLER_OFFLINE_CANCELLATION_WITHOUT_SEARCH_ND_SELECT
+          - "ORDER_TO_CONFIRM_TO_JOURNEY_COMPLETION_SJT_WITHOUT_SEARCH_ND_SELECT_WITH_IGM_1_0_0"
 
         validationModules: "../validations/ONDC:TRV11/validator#validate"
   "nic2004:60232":
@@ -1692,6 +1839,379 @@ domains:
           - lamf_credit_line_with_mfc_single_redirection
           - lamf_credit_line_with_mfc_single_redirection_with_igm_1.0.0
         validationModules: "../validations/ONDC:FIS12:SL/validator#validate"
+  ONDC:FIS12:BL:
+    versions:
+      "2.3.0":
+        flows:
+          master_search:
+            - search
+            - on_search
+
+          dedupe_check:
+            - select
+            - on_select
+
+          business_term_loan_without_aa:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+
+          business_term_loan_with_file_upload:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+
+          business_term_loan_with_aa:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+
+          business_term_loan_with_offline_online_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_with_offline_online_missed_emi:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_with_offline_online_pre_part:
+            - search
+            - on_search
+            - select
+            - on_select
+            - select
+            - on_select
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - DYNAMIC_FORM
+            - on_status
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_update
+            - update
+            - on_update
+            - on_update
+
+          business_term_loan_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_pre_part_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_foreclosure:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_file_upload_missed_emi_payment:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_pre_part_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_foreclosure:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_with_aa_missed_emi_payment:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - update
+            - on_update
+            - DYNAMIC_FORM
+            - on_update
+
+          business_term_loan_without_aa_with_igm_1.0.0:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+          business_term_loan_with_file_upload_with_igm_1.0.0:
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+          business_term_loan_with_aa_with_igm_1.0.0:
+            - search
+            - on_search
+            - search
+            - on_search
+            - select
+            - on_select
+            - on_status
+            - on_status
+            - on_status
+            - DYNAMIC_FORM
+            - select
+            - on_select
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - issue_status
+            - on_issue_status
+            - on_issue_status
+            - issue
+
+        optional_flows:
+          - master_search
+          - dedupe_check
+          - business_term_loan_without_aa
+          - business_term_loan_with_file_upload
+          - business_term_loan_with_aa
+          - business_term_loan_with_offline_online_foreclosure
+          - business_term_loan_with_offline_online_missed_emi
+          - business_term_loan_with_offline_online_pre_part
+          - business_term_loan_pre_part_payment
+          - business_term_loan_foreclosure
+          - business_term_loan_missed_emi_payment
+          - business_term_loan_with_file_upload_pre_part_payment
+          - business_term_loan_with_file_upload_foreclosure
+          - business_term_loan_with_file_upload_missed_emi_payment
+          - business_term_loan_with_aa_pre_part_payment
+          - business_term_loan_with_aa_foreclosure
+          - business_term_loan_with_aa_missed_emi_payment
+          - business_term_loan_without_aa_with_igm_1.0.0
+          - business_term_loan_with_file_upload_with_igm_1.0.0
+          - business_term_loan_with_aa_with_igm_1.0.0
+        validationModules: "../validations/ONDC:FIS12:BL/validator#validate"
   ONDC:FIS10:
     versions:
       "2.1.0":
@@ -4134,7 +4654,7 @@ domains:
             validationModules: "../validations/ONDC:FIS12/validator#validate"
       "2.3.0":
         usecases:
-          UNIFIED CREDIT:
+          BUSINESS LOAN:
             flows:
               business_term_loan_with_aa:
                 - search
@@ -4316,6 +4836,165 @@ domains:
                 - on_update
                 - on_update
 
+              business_term_loan_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_pre_part_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_foreclosure:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_file_upload_missed_emi_payment:
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_pre_part_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_foreclosure:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
+              business_term_loan_with_aa_missed_emi_payment:
+                - search
+                - on_search
+                - search
+                - on_search
+                - select
+                - on_select
+                - on_status
+                - on_status
+                - on_status
+                - DYNAMIC_FORM
+                - select
+                - on_select
+                - on_confirm
+                - update
+                - on_update
+                - DYNAMIC_FORM
+                - on_update
+
               dedupe_check:
                 - select
                 - on_select
@@ -4367,6 +5046,15 @@ domains:
               - business_term_loan_with_offline_online_foreclosure
               - business_term_loan_with_offline_online_missed_emi
               - business_term_loan_with_offline_online_pre_part
+              - business_term_loan_pre_part_payment
+              - business_term_loan_foreclosure
+              - business_term_loan_missed_emi_payment
+              - business_term_loan_with_file_upload_pre_part_payment
+              - business_term_loan_with_file_upload_foreclosure
+              - business_term_loan_with_file_upload_missed_emi_payment
+              - business_term_loan_with_aa_pre_part_payment
+              - business_term_loan_with_aa_foreclosure
+              - business_term_loan_with_aa_missed_emi_payment
               - dedupe_check
               - lamf_credit_line_with_mfc_single_redirection
               - lamf_credit_line_with_mfc_single_redirection_with_igm_1.0.0
@@ -5456,6 +6144,445 @@ domains:
               - Payment_Failure_Motor_Insurance(PRE-ORDER)
             validationModules: "../validations/ONDC:FIS13/validator#validate"
       
+  ONDC:TRV14:
+    versions:
+      "2.0.0":
+        # Sourced 2026-11-05 from ONDC-Official/automation-specifications draft-TRV14-2.0.0
+        # (commit ca523e5f) — the branch the deployed workbench runs: config/flows/index.yaml
+        # (flow ids, tags) + config/flows/unreserved-entry-pass/*.yaml (steps[].api / action_id).
+        flows:
+          "Cancellation Rejected":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          "User Cancellation (Full)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "User_Cancellation_FULL_With_Form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "incremental_pull_journey":
+            - search
+            - on_search
+            - on_search
+            - on_search
+            - on_search
+          "purchase_journey_order_level_forms_culture_heritage":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_with_form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_with_form_Multiple_Tickets":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form_Multiple_Tickets":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+          "purchase_journey_without_form_with_IGM(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - on_issue
+            - issue
+            - on_issue
+            - issue
+          "seller_app_pagination_journey":
+            - search
+            - on_search
+            - on_search
+            - on_search
+          "technical_cancellation":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "technical_cancellation_with_form":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+            - cancel
+            - on_cancel
+            - cancel
+            - on_cancel
+          "user_cancellation_partial":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - update
+            - on_update
+          "Cancellation Flow(unsolicited on_cancel)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_cancel
+          "purchase_journey_with_form (BAP Convenience fee)":
+            - select
+            - on_select
+            - html_form
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - status
+            - on_status
+        # Tagged OPTIONAL in the workbench index, plus the IGM flows (TRV14 reporting covers
+        # their purchase steps only — plan decision Q2).
+        optional_flows:
+          - "Cancellation Rejected"
+          - "purchase_journey_order_level_forms_culture_heritage"
+          - "purchase_journey_without_form_with_IGM(v-2.0.0)"
+          - "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)"
+          - "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)"
+          - "user_cancellation_partial"
+        # Every workbench action_id (except the HTML_FORM step, which has no Beckn payload) must arrive.
+        mandatory_legs:
+          "Cancellation Rejected":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_rejected"
+          "User Cancellation (Full)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_user_cancellation"
+            - "on_cancel_soft_user_cancellation"
+            - "cancel_confirm_user_cancellation"
+            - "on_cancel_confirm_user_cancellation"
+          "User_Cancellation_FULL_With_Form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "cancel_soft_user_cancellation"
+            - "on_cancel_soft_user_cancellation"
+            - "cancel_confirm_user_cancellation"
+            - "on_cancel_confirm_user_cancellation"
+          "incremental_pull_journey":
+            - "search_incremental_pull"
+            - "on_search_incremental_pull_1"
+            - "on_search_incremental_pull_2"
+            - "on_search_incremental_pull_3"
+          "purchase_journey_order_level_forms_culture_heritage":
+            - "select"
+            - "on_select_submission_cultural"
+            - "select_form_submission_cultural"
+            - "on_select_form_submission_culture"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_with_form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_with_form_Multiple_Tickets":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form_Multiple_Tickets":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+          "purchase_journey_without_form_with_IGM(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open"
+            - "on_issue_processing"
+            - "on_issue_need_more_info"
+            - "issue_info_provided"
+            - "on_issue_provided"
+            - "on_issue_resolution"
+            - "issue_resolution_accept"
+            - "on_issue_resolved"
+            - "issue_close"
+          "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open_2"
+            - "on_issue_processing"
+            - "on_issue_resolution_igm_3"
+            - "issue_resolution_accept_igm_3"
+            - "on_issue_resolved_igm_3"
+            - "issue_close_igm_3"
+          "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+            - "issue_open"
+            - "on_issue_processing"
+            - "on_issue_resolution"
+            - "issue_resolution_reject"
+            - "on_issue_processing_1"
+            - "on_issue_resolution_1"
+            - "issue_escalate"
+            - "on_issue_processing_2"
+            - "on_issue_resolution_2"
+            - "issue_resolution_accept"
+            - "on_issue_resolved"
+            - "issue_close"
+          "seller_app_pagination_journey":
+            - "search_seller_pagination"
+            - "on_search_seller_pagination_1"
+            - "on_search_seller_pagination_2"
+            - "on_search_seller_pagination_3"
+          "technical_cancellation":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm_technical_cancellation"
+            - "status"
+            - "on_status_technical_cancellation"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_soft_technical_cancellation"
+            - "cancel_confirm_technical_cancellation"
+            - "on_cancel_confirm_technical_cancellation"
+          "technical_cancellation_with_form":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm_technical_cancellation"
+            - "status"
+            - "on_status_technical_cancellation"
+            - "cancel_soft_technical_cancellation"
+            - "on_cancel_soft_technical_cancellation"
+            - "cancel_confirm_technical_cancellation"
+            - "on_cancel_confirm_technical_cancellation"
+          "user_cancellation_partial":
+            - "select_for_partial_cancellation"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "update_soft_partial_cancellation"
+            - "on_update_soft_partial_cancellation"
+            - "update_confirm_partial_cancellation"
+            - "on_update_confirm_partial_cancellation"
+          "Cancellation Flow(unsolicited on_cancel)":
+            - "select"
+            - "on_select_without_form"
+            - "init"
+            - "on_init"
+            - "confirm"
+            - "on_confirm"
+            - "on_cancel_unsolicited"
+          "purchase_journey_with_form (BAP Convenience fee)":
+            - "select"
+            - "on_select"
+            - "select_form_submission"
+            - "on_select_form_submission"
+            - "init_bap_ convenience"
+            - "on_init_bap_ convenience"
+            - "confirm_bap_ convenience"
+            - "on_confirm"
+            - "status"
+            - "on_status"
+        validationModules: "../validations/ONDC:TRV14/validator#validate"
+
   ONDC:TRV13:
     versions:
       "2.0.1":
@@ -6244,6 +7371,12 @@ domains:
             - on_status            # on_status_order_delivered
 
           "Buyer_Initiated_Return_(Full_Order_and_Partial_Order)":
+            - select
+            - on_select
+            - init
+            - on_init
+            - confirm
+            - on_confirm
             - on_status            # on_status_accepted
             - on_status            # on_status_packed
             - on_status            # on_status_agent_assigned
@@ -6306,6 +7439,22 @@ domains:
             - on_status_picked
             - on_status_out_for_delivery
             - on_status_order_delivered
+
+        # action_id of each step, aligned 1:1 with that flow's `flows` list above. Only read
+        # by the log-upload report (POST /logs-report): downloaded logs carry no action_id, and
+        # the validators key their per-leg contract on it (on_status_packed, …). Copied from
+        # automation-specifications config/flows/eB2B/*.yaml (`action_id` per step, in order).
+        # Live sessions get action_id from the backend's flow state and never read this.
+        flow_action_ids:
+          Discovery_flow_broadcast_search: [search-0, on_search, search-1, on_search-1]
+          "Order_to_confirm_to_fulfillment_(cod)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Order_to_confirm_to_fulfillment_(Prepaid)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          Buyer_Side_Order_Cancellation: [select, on_select, init, on_init, confirm, on_confirm, cancel, on_cancel]
+          "Out_of_Stock(Error_code)": [select0, on_select_out_of_stock, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          Merchant_Side_RTO_and_Part_Order_Cancellation_Flow: [select, on_select, init, on_init, confirm, on_confirm, on_update_part_cancel, update_settlement_trail, on_status_packed, on_status_agent_assigned, on_status_picked, on_status_out_for_delivery, on_cancel_rto, on_status_rto_delivered]
+          "Order_to_confirm_to_fulfillment_with_offers(Prepaid)": [search, on_search, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Order_to_confirm_to_fulfillment_with_offers(cod)": [search, on_search, select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, track, on_track, on_status_out_for_delivery, on_status_order_delivered]
+          "Buyer_Initiated_Return_(Full_Order_and_Partial_Order)": [select, on_select, init, on_init, confirm, on_confirm, on_status_accepted, on_status_packed, on_status_agent_assigned, on_status_picked, on_status_out_for_delivery, on_status_order_delivered, update_return, on_update_return_init, on_update_return_approved, on_update_return_picked, update_settlement_trail, on_update_settlement_trail]
 
         validationModules: "../validations/ONDC:RETeB2B/validator#validate"
   ONDC:RET10:
@@ -9536,3 +10685,26 @@ domains:
             - issue
 
         validationModules: "../validations/ONDC:RET18/validator#validate"
+  ONDC:NTS10:
+    versions:
+      "2.1.0":
+        flows:
+          RECON_buyer_initiated:
+            - recon
+            - on_recon
+            - recon
+            - on_recon
+
+          RECON_seller_initiated:
+            - recon
+            - on_recon
+            - recon
+            - on_recon
+
+          ERROR_on_recon:
+            - recon
+            - on_recon
+        optional_flows:
+          - RECON_seller_initiated
+          - ERROR_on_recon
+        validationModules: "../validations/ONDC:NTS10/validator#validate"

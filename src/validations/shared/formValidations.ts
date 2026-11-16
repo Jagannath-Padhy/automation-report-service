@@ -353,7 +353,12 @@ export async function validateHTMLForm(
       return;
     }
 
-    const formUrls: string[] = formUrlsData.urls;
+    // Mock form URLs can carry a trailing slash before the query string
+    // (".../investor_details_form/?transaction_id=..."), which breaks the
+    // form name/domain parsing below -- drop it.
+    const formUrls: string[] = formUrlsData.urls.map((u: string) =>
+      u.replace(/\/+(\?|$)/, "$1")
+    );
     
     // Deduplicate form URLs by extracting form name (to avoid processing same form twice)
     const uniqueFormUrls = new Map<string, string>();

@@ -1,0 +1,1577 @@
+{
+  "spec_repo": "ONDC-Official/automation-specifications",
+  "spec_branch": "draft-TRV14-2.0.0",
+  "spec_commit": "ca523e5f",
+  "generated_with": "@ondc/automation-mock-runner@1.3.56 (runGeneratePayload, step sample inputs) + user_inputs.time on select steps + 2 tickets in *_Multiple_Tickets flows",
+  "flows": [
+    {
+      "flowId": "Cancellation Rejected",
+      "tags": [
+        "WORKBENCH",
+        "OPTIONAL"
+      ],
+      "file": "Cancellation_Rejected.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_soft_technical_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_rejected",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "User Cancellation (Full)",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "User_Cancellation_Full.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_soft_user_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_soft_user_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_confirm_user_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_confirm_user_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "User_Cancellation_FULL_With_Form",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "User_Cancellation_FULL_With_Form.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_soft_user_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_soft_user_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_confirm_user_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_confirm_user_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "incremental_pull_journey",
+      "tags": [
+        "WORKBENCH",
+        "MANDATORY"
+      ],
+      "file": "incremental_pull_journey.json",
+      "steps": [
+        {
+          "action_id": "search_incremental_pull",
+          "api": "search",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_search_incremental_pull_1",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_search_incremental_pull_2",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "on_search_incremental_pull_3",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "on_search_incremental_pull_3",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_order_level_forms_culture_heritage",
+      "tags": [
+        "PRAMAAN",
+        "OPTIONAL",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_order_level_forms_culture_heritage.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_submission_cultural",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission_cultural",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission_culture",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_with_form",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_with_form.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_with_form_Multiple_Tickets",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_with_form_Multiple_Tickets.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_without_form",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_without_form.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_without_form_Multiple_Tickets",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_without_form_Multiple_Tickets.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_without_form_with_IGM(v-2.0.0)",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_without_form_with_IGM_v-2.0.0.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_open",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_processing",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_need_more_info",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_info_provided",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_provided",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolution",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_resolution_accept",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolved",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_close",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_without_form_with_IGM_No_Action_v-2.0.0.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_open_2",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_processing",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolution_igm_3",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_resolution_accept_igm_3",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolved_igm_3",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_close_igm_3",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_without_form_with_IGM_Rejection_v-2.0.0.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_open",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_processing",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolution",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_resolution_reject",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_processing_1",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolution_1",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_escalate",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_processing_2",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolution_2",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "issue_resolution_accept",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_issue_resolved",
+          "api": "on_issue",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "issue_close",
+          "api": "issue",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "seller_app_pagination_journey",
+      "tags": [
+        "WORKBENCH",
+        "MANDATORY"
+      ],
+      "file": "seller_app_pagination_journey.json",
+      "steps": [
+        {
+          "action_id": "search_seller_pagination",
+          "api": "search",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_search_seller_pagination_1",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_search_seller_pagination_2",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        },
+        {
+          "action_id": "on_search_seller_pagination_3",
+          "api": "on_search",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        }
+      ]
+    },
+    {
+      "flowId": "technical_cancellation",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "technical_cancellation.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm_technical_cancellation",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status_technical_cancellation",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_soft_technical_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_soft_technical_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_confirm_technical_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_confirm_technical_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "technical_cancellation_with_form",
+      "tags": [
+        "PRAMAAN",
+        "MANDATORY",
+        "REPORTABLE",
+        "WORKBENCH"
+      ],
+      "file": "technical_cancellation_with_form.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm_technical_cancellation",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status_technical_cancellation",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_soft_technical_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_soft_technical_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "cancel_confirm_technical_cancellation",
+          "api": "cancel",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_confirm_technical_cancellation",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "user_cancellation_partial",
+      "tags": [
+        "WORKBENCH",
+        "OPTIONAL"
+      ],
+      "file": "user_cancellation_partial.json",
+      "steps": [
+        {
+          "action_id": "select_for_partial_cancellation",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "update_soft_partial_cancellation",
+          "api": "update",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_update_soft_partial_cancellation",
+          "api": "on_update",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "update_confirm_partial_cancellation",
+          "api": "update",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_update_confirm_partial_cancellation",
+          "api": "on_update",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    },
+    {
+      "flowId": "Cancellation Flow(unsolicited on_cancel)",
+      "tags": [
+        "WORKBENCH",
+        "MANDATORY"
+      ],
+      "file": "Cancellation_Flow_unsolicited_on_cancel.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_without_form",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_cancel_unsolicited",
+          "api": "on_cancel",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": true
+        }
+      ]
+    },
+    {
+      "flowId": "purchase_journey_with_form (BAP Convenience fee)",
+      "tags": [
+        "MANDATORY",
+        "WORKBENCH"
+      ],
+      "file": "purchase_journey_with_form_BAP_Convenience_fee.json",
+      "steps": [
+        {
+          "action_id": "select",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "first_form_testing",
+          "api": "html_form",
+          "owner": "BPP",
+          "source": "not-a-beckn-call",
+          "unsolicited": false
+        },
+        {
+          "action_id": "select_form_submission",
+          "api": "select",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_select_form_submission",
+          "api": "on_select",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "init_bap_ convenience",
+          "api": "init",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_init_bap_ convenience",
+          "api": "on_init",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "confirm_bap_ convenience",
+          "api": "confirm",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_confirm",
+          "api": "on_confirm",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "status",
+          "api": "status",
+          "owner": "BAP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        },
+        {
+          "action_id": "on_status",
+          "api": "on_status",
+          "owner": "BPP",
+          "source": "mock-runner-generated",
+          "unsolicited": false
+        }
+      ]
+    }
+  ]
+}

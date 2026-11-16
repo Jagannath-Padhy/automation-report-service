@@ -1,0 +1,3997 @@
+[
+  {
+    "id": 1,
+    "messageId": "f85efffc-47da-4220-87df-482d1533b186",
+    "transactionId": "8c6088d0-6091-4583-b471-fd789b06f808",
+    "flowId": "seller_app_pagination_journey",
+    "action": "SEARCH",
+    "action_id": "search_seller_pagination",
+    "bppId": null,
+    "bapId": "bap.example.com",
+    "payloadId": "seller_app_pagination_journey-1",
+    "jsonRequest": {
+      "context": {
+        "domain": "ONDC:TRV14",
+        "action": "search",
+        "timestamp": "2026-11-06T09:08:56.000Z",
+        "transaction_id": "8c6088d0-6091-4583-b471-fd789b06f808",
+        "message_id": "f85efffc-47da-4220-87df-482d1533b186",
+        "bap_id": "bap.example.com",
+        "bap_uri": "https://bap.example.com",
+        "ttl": "PT30S",
+        "version": "2.0.0",
+        "location": {
+          "country": {
+            "code": "IND"
+          },
+          "city": {
+            "code": "std:011"
+          }
+        }
+      },
+      "message": {
+        "intent": {
+          "category": {
+            "descriptor": {
+              "code": "CULTURE_HERITAGE"
+            }
+          },
+          "tags": [
+            {
+              "descriptor": {
+                "code": "BAP_TERMS",
+                "name": "BAP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_BASIS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_WINDOW"
+                  },
+                  "value": "P30D"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "INCREMENTAL_PULL",
+                "name": "Incremental Pull"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "REGISTER",
+                    "name": "Register"
+                  },
+                  "value": "true"
+                }
+              ]
+            }
+          ],
+          "fulfillment": {
+            "stops": [
+              {
+                "location": {
+                  "city": {
+                    "code": "std:011"
+                  }
+                },
+                "time": {
+                  "range": {
+                    "start": "2026-06-28T05:00:16.000Z",
+                    "end": "2026-06-28T06:00:16.000Z"
+                  }
+                },
+                "type": "START"
+              }
+            ],
+            "vehicle": {
+              "category": "SITE"
+            }
+          },
+          "payment": {
+            "collected_by": "BPP"
+          }
+        }
+      }
+    },
+    "jsonResponse": {
+      "message": {
+        "ack": {
+          "status": "ACK"
+        }
+      }
+    },
+    "httpStatus": 200,
+    "createdAt": "2026-11-06T09:08:56.000Z",
+    "updatedAt": "2026-11-06T09:08:56.000Z",
+    "sessionDetails": {
+      "npType": "BPP",
+      "owner": "BAP"
+    }
+  },
+  {
+    "id": 2,
+    "messageId": "f85efffc-47da-4220-87df-482d1533b186",
+    "transactionId": "8c6088d0-6091-4583-b471-fd789b06f808",
+    "flowId": "seller_app_pagination_journey",
+    "action": "ON_SEARCH",
+    "action_id": "on_search_seller_pagination_1",
+    "bppId": "bpp.example.com",
+    "bapId": "bap.example.com",
+    "payloadId": "seller_app_pagination_journey-2",
+    "jsonRequest": {
+      "context": {
+        "domain": "ONDC:TRV14",
+        "action": "on_search",
+        "timestamp": "2026-11-06T09:09:01.000Z",
+        "transaction_id": "8c6088d0-6091-4583-b471-fd789b06f808",
+        "message_id": "f85efffc-47da-4220-87df-482d1533b186",
+        "bap_id": "bap.example.com",
+        "bap_uri": "https://bap.example.com",
+        "ttl": "PT30S",
+        "bpp_id": "bpp.example.com",
+        "bpp_uri": "https://bpp.example.com",
+        "version": "2.0.0",
+        "location": {
+          "country": {
+            "code": "IND"
+          },
+          "city": {
+            "code": "std:011"
+          }
+        }
+      },
+      "message": {
+        "catalog": {
+          "descriptor": {
+            "name": "India tourism",
+            "short_desc": "Online ticket booking service",
+            "long_desc": "Online ticket booking service",
+            "images": [
+              {
+                "url": "https://api.unreserved-entry-pass.com/logos/logo.ico",
+                "size_type": "xs"
+              }
+            ]
+          },
+          "providers": [
+            {
+              "id": "P1",
+              "descriptor": {
+                "name": "India tourism",
+                "short_desc": "Online Ticket Booking Service",
+                "images": [
+                  {
+                    "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png",
+                    "size_type": "xs"
+                  }
+                ]
+              },
+              "categories": [
+                {
+                  "descriptor": {
+                    "name": "Culture & Heritage",
+                    "code": "CULTURE_HERITAGE"
+                  },
+                  "id": "C1"
+                },
+                {
+                  "descriptor": {
+                    "name": "Standard"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C2"
+                },
+                {
+                  "descriptor": {
+                    "name": "Premium"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C3"
+                },
+                {
+                  "descriptor": {
+                    "name": "Monument & Historical Site",
+                    "code": "MONUMENT_HISTORICAL_SITE"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C4"
+                },
+                {
+                  "descriptor": {
+                    "name": "Museum & Galleries",
+                    "code": "MUSEUM_GALLERIES",
+                    "short_desc": "Represents type of category."
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C5"
+                },
+                {
+                  "descriptor": {
+                    "name": "Others",
+                    "code": "OTHERS"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C8"
+                }
+              ],
+              "time": {
+                "range": {
+                  "start": "2026-06-28T05:00:16.000Z",
+                  "end": "2026-06-28T06:00:16.000Z"
+                }
+              },
+              "locations": [
+                {
+                  "id": "L1",
+                  "gps": "28.524596, 77.185577",
+                  "descriptor": {
+                    "name": "Qutab Minar",
+                    "short_desc": "Seth Sarai, Mehrauli, New Delhi, Delhi. The Qutb Minar, also spelled Qutub Minar and Qutab Minar, is a minaret and \"victory tower\" that forms part of the Qutb complex",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "5",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1,2,3,4,5,6,7",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      },
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "L2",
+                  "gps": "28.5244946, 77.1855177",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "descriptor": {
+                    "name": "Red Fort",
+                    "short_desc": "Red Fort, Mughal fort in Old Delhi, India. It was built by Shah Jah\u0101n in the mid-17th century and remains a major tourist attraction.",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "4",
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "2",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "3",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "4",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "5",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "6",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "7",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "HOLIDAY",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "payments": [
+                {
+                  "collected_by": "BAP"
+                }
+              ]
+            }
+          ],
+          "tags": [
+            {
+              "descriptor": {
+                "code": "BAP_TERMS",
+                "name": "BAP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_BASIS"
+                  },
+                  "value": "INVOICE_RECEIPT"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_WINDOW"
+                  },
+                  "value": "P30D"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "BPP_TERMS",
+                "name": "BPP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "MANDATORY_ARBITRATION"
+                  },
+                  "value": "true"
+                },
+                {
+                  "descriptor": {
+                    "code": "COURT_JURISDICTION"
+                  },
+                  "value": "New Delhi"
+                },
+                {
+                  "descriptor": {
+                    "code": "DELAY_INTEREST"
+                  },
+                  "value": "2.5 %"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "PAGINATION",
+                "name": "Pagination"
+              },
+              "display": true,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "PAGINATION_ID"
+                  },
+                  "value": "P1"
+                },
+                {
+                  "descriptor": {
+                    "code": "MAX_PAGE_NUMBER"
+                  },
+                  "value": "2"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "jsonResponse": {
+      "message": {
+        "ack": {
+          "status": "ACK"
+        }
+      }
+    },
+    "httpStatus": 200,
+    "createdAt": "2026-11-06T09:09:01.000Z",
+    "updatedAt": "2026-11-06T09:09:01.000Z",
+    "sessionDetails": {
+      "npType": "BAP",
+      "owner": "BPP"
+    }
+  },
+  {
+    "id": 3,
+    "messageId": "86887d76-49a1-4c4c-bd3d-9940a26896b6",
+    "transactionId": "8c6088d0-6091-4583-b471-fd789b06f808",
+    "flowId": "seller_app_pagination_journey",
+    "action": "ON_SEARCH",
+    "action_id": "on_search_seller_pagination_2",
+    "bppId": "bpp.example.com",
+    "bapId": "bap.example.com",
+    "payloadId": "seller_app_pagination_journey-3",
+    "jsonRequest": {
+      "context": {
+        "domain": "ONDC:TRV14",
+        "action": "on_search",
+        "timestamp": "2026-11-06T09:09:06.000Z",
+        "transaction_id": "8c6088d0-6091-4583-b471-fd789b06f808",
+        "message_id": "86887d76-49a1-4c4c-bd3d-9940a26896b6",
+        "bap_id": "bap.example.com",
+        "bap_uri": "https://bap.example.com",
+        "ttl": "PT30S",
+        "bpp_id": "bpp.example.com",
+        "bpp_uri": "https://bpp.example.com",
+        "version": "2.0.0",
+        "location": {
+          "country": {
+            "code": "IND"
+          },
+          "city": {
+            "code": "std:011"
+          }
+        }
+      },
+      "message": {
+        "catalog": {
+          "descriptor": {
+            "name": "India tourism",
+            "long_desc": "Online ticket booking service",
+            "images": [
+              {
+                "url": "https://api.unreserved-entry-pass.com/logos/logo.ico",
+                "size_type": "xs"
+              }
+            ]
+          },
+          "providers": [
+            {
+              "id": "P1",
+              "descriptor": {
+                "name": "India tourism",
+                "short_desc": "Online Ticket Booking Service",
+                "images": [
+                  {
+                    "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png",
+                    "size_type": "xs"
+                  }
+                ]
+              },
+              "categories": [
+                {
+                  "descriptor": {
+                    "name": "Culture & Heritage",
+                    "code": "CULTURE_HERITAGE"
+                  },
+                  "id": "C1"
+                },
+                {
+                  "descriptor": {
+                    "name": "Standard"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C2"
+                },
+                {
+                  "descriptor": {
+                    "name": "Premium"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C3"
+                },
+                {
+                  "descriptor": {
+                    "name": "Monument & Historical Site",
+                    "code": "MONUMENT_HISTORICAL_SITE"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C4"
+                },
+                {
+                  "descriptor": {
+                    "name": "Museum & Galleries",
+                    "code": "MUSEUM_GALLERIES",
+                    "short_desc": "Represents type of category."
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C5"
+                },
+                {
+                  "descriptor": {
+                    "name": "Others",
+                    "code": "OTHERS"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C8"
+                }
+              ],
+              "time": {
+                "range": {
+                  "start": "2026-11-06T05:30:00.000Z",
+                  "end": "2026-11-06T23:30:00.000Z"
+                }
+              },
+              "locations": [
+                {
+                  "id": "L1",
+                  "gps": "28.524596, 77.185577",
+                  "descriptor": {
+                    "name": "Qutab Minar",
+                    "short_desc": "Seth Sarai, Mehrauli, New Delhi, Delhi. The Qutb Minar, also spelled Qutub Minar and Qutab Minar, is a minaret and \"victory tower\" that forms part of the Qutb complex",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "5",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1,2,3,4,5,6,7",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      },
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "L2",
+                  "gps": "28.5244946, 77.1855177",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "descriptor": {
+                    "name": "Red Fort",
+                    "short_desc": "Red Fort, Mughal fort in Old Delhi, India. It was built by Shah Jah\u0101n in the mid-17th century and remains a major tourist attraction.",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "4",
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "2",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "3",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "4",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "5",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "6",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "7",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "HOLIDAY",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "items": [
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        },
+                        {
+                          "value": "photography"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I1",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "350"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I2",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "150"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0_1",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I3",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_1",
+                  "price": {
+                    "currency": "INR",
+                    "value": "400"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "FALSE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I4",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_1",
+                  "price": {
+                    "currency": "INR",
+                    "value": "250"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "FALSE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ADD_ON",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "name": "Add on item"
+                  },
+                  "id": "I5",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "100"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 3
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0_2",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        },
+                        {
+                          "value": "photography"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "convenience_terms": [
+                    {
+                      "convenience_eligible": true
+                    }
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I6",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_2",
+                  "price": {
+                    "currency": "INR",
+                    "value": "350"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "convenience_terms": [
+                    {
+                      "convenience_eligible": true
+                    }
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I7",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_2",
+                  "price": {
+                    "currency": "INR",
+                    "value": "150"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                }
+              ],
+              "fulfillments": [
+                {
+                  "id": "F1",
+                  "type": "VISIT",
+                  "stops": [
+                    {
+                      "type": "START",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "timestamp": "2026-06-28T05:00:16.000Z",
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S1"
+                    },
+                    {
+                      "type": "CHECKPOINT",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S2",
+                      "parent_stop_id": "F1_S1"
+                    },
+                    {
+                      "type": "CHECKPOINT",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S3",
+                      "parent_stop_id": "F1_S2"
+                    },
+                    {
+                      "type": "END",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S4",
+                      "parent_stop_id": "F1_S3"
+                    }
+                  ],
+                  "agent": {
+                    "organization": {
+                      "contact": {
+                        "phone": "+91-9999999999",
+                        "email": "john.doe@example.com"
+                      }
+                    }
+                  },
+                  "vehicle": {
+                    "category": "SITE"
+                  }
+                },
+                {
+                  "id": "F2",
+                  "type": "VISIT",
+                  "stops": [
+                    {
+                      "type": "START",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "range": {
+                          "start": "2026-06-28T05:00:16.000Z",
+                          "end": "2026-06-28T06:00:16.000Z"
+                        }
+                      },
+                      "id": "F2_S1"
+                    }
+                  ],
+                  "agent": {
+                    "person": {
+                      "name": "John Doe",
+                      "descriptor": {
+                        "name": "John Doe",
+                        "short_desc": "Descriptoion about host details",
+                        "images": [
+                          {
+                            "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png",
+                            "size_type": "xs"
+                          }
+                        ]
+                      }
+                    },
+                    "organization": {
+                      "contact": {
+                        "phone": "+91-9999999999",
+                        "email": "john.doe@example.com"
+                      }
+                    }
+                  },
+                  "vehicle": {
+                    "category": "SITE"
+                  }
+                }
+              ],
+              "payments": [
+                {
+                  "collected_by": "BAP"
+                }
+              ]
+            }
+          ],
+          "tags": [
+            {
+              "descriptor": {
+                "code": "BAP_TERMS",
+                "name": "BAP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_BASIS"
+                  },
+                  "value": "INVOICE_RECEIPT"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_WINDOW"
+                  },
+                  "value": "P30D"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "BPP_TERMS",
+                "name": "BPP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "MANDATORY_ARBITRATION"
+                  },
+                  "value": "true"
+                },
+                {
+                  "descriptor": {
+                    "code": "COURT_JURISDICTION"
+                  },
+                  "value": "New Delhi"
+                },
+                {
+                  "descriptor": {
+                    "code": "DELAY_INTEREST"
+                  },
+                  "value": "2.5 %"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "PAGINATION",
+                "name": "Pagination"
+              },
+              "display": true,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "PAGINATION_ID"
+                  },
+                  "value": "P1"
+                },
+                {
+                  "descriptor": {
+                    "code": "CURRENT_PAGE_NUMBER"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "MAX_PAGE_NUMBER"
+                  },
+                  "value": "2"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "jsonResponse": {
+      "message": {
+        "ack": {
+          "status": "ACK"
+        }
+      }
+    },
+    "httpStatus": 200,
+    "createdAt": "2026-11-06T09:09:06.000Z",
+    "updatedAt": "2026-11-06T09:09:06.000Z",
+    "sessionDetails": {
+      "npType": "BAP",
+      "owner": "BPP"
+    }
+  },
+  {
+    "id": 4,
+    "messageId": "785d6272-06a3-4825-845c-fe1dfc4c096b",
+    "transactionId": "8c6088d0-6091-4583-b471-fd789b06f808",
+    "flowId": "seller_app_pagination_journey",
+    "action": "ON_SEARCH",
+    "action_id": "on_search_seller_pagination_3",
+    "bppId": "bpp.example.com",
+    "bapId": "bap.example.com",
+    "payloadId": "seller_app_pagination_journey-4",
+    "jsonRequest": {
+      "context": {
+        "domain": "ONDC:TRV14",
+        "action": "on_search",
+        "timestamp": "2026-11-06T09:09:11.000Z",
+        "transaction_id": "8c6088d0-6091-4583-b471-fd789b06f808",
+        "message_id": "785d6272-06a3-4825-845c-fe1dfc4c096b",
+        "bap_id": "bap.example.com",
+        "bap_uri": "https://bap.example.com",
+        "ttl": "PT30S",
+        "bpp_id": "bpp.example.com",
+        "bpp_uri": "https://bpp.example.com",
+        "version": "2.0.0",
+        "location": {
+          "country": {
+            "code": "IND"
+          },
+          "city": {
+            "code": "std:011"
+          }
+        }
+      },
+      "message": {
+        "catalog": {
+          "descriptor": {
+            "name": "India tourism",
+            "long_desc": "Online ticket booking service",
+            "images": [
+              {
+                "url": "https://api.unreserved-entry-pass.com/logos/logo.ico",
+                "size_type": "xs"
+              }
+            ]
+          },
+          "providers": [
+            {
+              "id": "P1",
+              "descriptor": {
+                "name": "India tourism",
+                "short_desc": "Online Ticket Booking Service",
+                "images": [
+                  {
+                    "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png",
+                    "size_type": "xs"
+                  }
+                ]
+              },
+              "categories": [
+                {
+                  "descriptor": {
+                    "name": "Culture & Heritage",
+                    "code": "CULTURE_HERITAGE"
+                  },
+                  "id": "C1"
+                },
+                {
+                  "descriptor": {
+                    "name": "Standard"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C2"
+                },
+                {
+                  "descriptor": {
+                    "name": "Premium"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C3"
+                },
+                {
+                  "descriptor": {
+                    "name": "Monument & Historical Site",
+                    "code": "MONUMENT_HISTORICAL_SITE"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C4"
+                },
+                {
+                  "descriptor": {
+                    "name": "Museum & Galleries",
+                    "code": "MUSEUM_GALLERIES",
+                    "short_desc": "Represents type of category."
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C5"
+                },
+                {
+                  "descriptor": {
+                    "name": "Others",
+                    "code": "OTHERS"
+                  },
+                  "parent_category_id": "C1",
+                  "id": "C8"
+                }
+              ],
+              "time": {
+                "range": {
+                  "start": "2026-11-06T05:30:00.000Z",
+                  "end": "2026-11-06T23:30:00.000Z"
+                }
+              },
+              "locations": [
+                {
+                  "id": "L1",
+                  "gps": "28.524596, 77.185577",
+                  "descriptor": {
+                    "name": "Qutab Minar",
+                    "short_desc": "Seth Sarai, Mehrauli, New Delhi, Delhi. The Qutb Minar, also spelled Qutub Minar and Qutab Minar, is a minaret and \"victory tower\" that forms part of the Qutb complex",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "5",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1,2,3,4,5,6,7",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      },
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "L2",
+                  "gps": "28.5244946, 77.1855177",
+                  "city": {
+                    "code": "std:011"
+                  },
+                  "descriptor": {
+                    "name": "Red Fort",
+                    "short_desc": "Red Fort, Mughal fort in Old Delhi, India. It was built by Shah Jah\u0101n in the mid-17th century and remains a major tourist attraction.",
+                    "additional_desc": {
+                      "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                      "content_type": "text/plain"
+                    },
+                    "images": [
+                      {
+                        "url": "https://api.unreserved-entry-pass.com/sites/images/location.png",
+                        "size_type": "md"
+                      }
+                    ]
+                  },
+                  "rating": "4",
+                  "time": [
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "1",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "2",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "3",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "4",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "5",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "6",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "OPERATIONAL_HOURS",
+                      "days": "7",
+                      "range": {
+                        "start": "2026-06-28T05:00:16.000Z",
+                        "end": "2026-06-28T06:00:16.000Z"
+                      }
+                    },
+                    {
+                      "label": "HOLIDAY",
+                      "schedule": {
+                        "holidays": [
+                          "2026-01-26T00:00:00.000Z",
+                          "2026-08-15T00:00:00.000Z"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "items": [
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        },
+                        {
+                          "value": "photography"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I1",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "350"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I2",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "150"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0_1",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I3",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_1",
+                  "price": {
+                    "currency": "INR",
+                    "value": "400"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "FALSE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C3"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I4",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_1",
+                  "price": {
+                    "currency": "INR",
+                    "value": "250"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "FALSE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ADD_ON",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "name": "Add on item"
+                  },
+                  "id": "I5",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "parent_item_id": "I0",
+                  "price": {
+                    "currency": "INR",
+                    "value": "100"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 3
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "cancellation_terms": [
+                    {
+                      "cancel_by": {
+                        "duration": "PT1H30M",
+                        "label": "DURATION"
+                      },
+                      "cancellation_eligible": true,
+                      "cancellation_fee": {
+                        "percentage": "10"
+                      },
+                      "fulfillment_state": {
+                        "descriptor": {
+                          "code": "CONFIRMED"
+                        }
+                      }
+                    },
+                    {
+                      "cancellation_eligible": true,
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass.com/beckn/tnc.html"
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ABSTRACT",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Parent Item for Culture & Heritage",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I0_2",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "replacement_terms": [
+                    {
+                      "external_ref": {
+                        "mimetype": "text/html",
+                        "url": "https://api.unreserved-entry-pass/beckn/replacement.html"
+                      }
+                    }
+                  ],
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "INCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "water"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "EXCLUSIONS"
+                      },
+                      "list": [
+                        {
+                          "value": "out side food"
+                        },
+                        {
+                          "value": "photography"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "convenience_terms": [
+                    {
+                      "convenience_eligible": true
+                    }
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Adult-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I6",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_2",
+                  "price": {
+                    "currency": "INR",
+                    "value": "350"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 6
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "18"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                },
+                {
+                  "add_ons": [
+                    {
+                      "descriptor": {
+                        "name": "Audio Assistance"
+                      },
+                      "id": "A1",
+                      "price": {
+                        "currency": "INR",
+                        "value": "100"
+                      },
+                      "quantity": {
+                        "available": {
+                          "count": 1
+                        }
+                      }
+                    }
+                  ],
+                  "category_ids": [
+                    "C2"
+                  ],
+                  "convenience_terms": [
+                    {
+                      "convenience_eligible": true
+                    }
+                  ],
+                  "creds": [
+                    {
+                      "type": "Provided By KSTDC"
+                    }
+                  ],
+                  "descriptor": {
+                    "code": "ENTRY_PASS",
+                    "images": [
+                      {
+                        "size_type": "xs",
+                        "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png"
+                      }
+                    ],
+                    "long_desc": "This ticket grants entry to the Qutab Minar.",
+                    "name": "Child-Ticket Culture & Heritage Item",
+                    "short_desc": "Ticket for Qutab Minar"
+                  },
+                  "fulfillment_ids": [
+                    "F1",
+                    "F2"
+                  ],
+                  "id": "I7",
+                  "location_ids": [
+                    "L1"
+                  ],
+                  "margin": {
+                    "maximum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "10"
+                      }
+                    },
+                    "minimum": {
+                      "measure": {
+                        "unit": "PERCENT",
+                        "value": "8"
+                      }
+                    }
+                  },
+                  "parent_item_id": "I0_2",
+                  "price": {
+                    "currency": "INR",
+                    "value": "150"
+                  },
+                  "quantity": {
+                    "maximum": {
+                      "count": 4
+                    },
+                    "minimum": {
+                      "count": 1
+                    }
+                  },
+                  "tags": [
+                    {
+                      "descriptor": {
+                        "code": "FARE_POLICY"
+                      },
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "MIN_AGE"
+                          },
+                          "value": "1"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "MAX_AGE"
+                          },
+                          "value": "70"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "GENDER"
+                          },
+                          "value": "MALE"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "NATIONALITY"
+                          },
+                          "value": "INDIAN"
+                        },
+                        {
+                          "descriptor": {
+                            "code": "ADDITIONAL_DETAILS_REQUIRED"
+                          },
+                          "value": "TRUE"
+                        }
+                      ]
+                    },
+                    {
+                      "descriptor": {
+                        "code": "INFO",
+                        "name": "Info"
+                      },
+                      "display": false,
+                      "list": [
+                        {
+                          "descriptor": {
+                            "code": "TNC_LINK",
+                            "name": "Terms & Conditions"
+                          },
+                          "value": "https://api.unreserved-entry-pass/beckn/tnc.html"
+                        },
+                        {
+                          "descriptor": {
+                            "name": "What to pack"
+                          },
+                          "value": "Expect the weather to be very cold, so pack winter clothes. Trekking shoes are a must, without a trekking shoe, you will not be allowed to participate in the trek. Also, carry 2 torches per person along with a spare battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "time": {
+                    "duration": "P2D",
+                    "label": "VALIDITY"
+                  }
+                }
+              ],
+              "fulfillments": [
+                {
+                  "id": "F1",
+                  "type": "VISIT",
+                  "stops": [
+                    {
+                      "type": "START",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "timestamp": "2026-06-28T05:00:16.000Z",
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S1"
+                    },
+                    {
+                      "type": "CHECKPOINT",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S2",
+                      "parent_stop_id": "F1_S1"
+                    },
+                    {
+                      "type": "CHECKPOINT",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S3",
+                      "parent_stop_id": "F1_S2"
+                    },
+                    {
+                      "type": "END",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "duration": "PT2H"
+                      },
+                      "id": "F1_S4",
+                      "parent_stop_id": "F1_S3"
+                    }
+                  ],
+                  "agent": {
+                    "organization": {
+                      "contact": {
+                        "phone": "+91-9999999999",
+                        "email": "john.doe@example.com"
+                      }
+                    }
+                  },
+                  "vehicle": {
+                    "category": "SITE"
+                  }
+                },
+                {
+                  "id": "F2",
+                  "type": "VISIT",
+                  "stops": [
+                    {
+                      "type": "START",
+                      "instructions": {
+                        "additional_desc": {
+                          "url": "https://api.unreserved-entry-pass.com/sites/additional-info",
+                          "content_type": "text/plain"
+                        }
+                      },
+                      "time": {
+                        "range": {
+                          "start": "2026-06-28T05:00:16.000Z",
+                          "end": "2026-06-28T06:00:16.000Z"
+                        }
+                      },
+                      "id": "F2_S1"
+                    }
+                  ],
+                  "agent": {
+                    "person": {
+                      "name": "John Doe",
+                      "descriptor": {
+                        "name": "John Doe",
+                        "short_desc": "Descriptoion about host details",
+                        "images": [
+                          {
+                            "url": "https://api.unreserved-entry-pass.com/sites/default/files/event/logo/event_logo_2.png",
+                            "size_type": "xs"
+                          }
+                        ]
+                      }
+                    },
+                    "organization": {
+                      "contact": {
+                        "phone": "+91-9999999999",
+                        "email": "john.doe@example.com"
+                      }
+                    }
+                  },
+                  "vehicle": {
+                    "category": "SITE"
+                  }
+                }
+              ],
+              "payments": [
+                {
+                  "collected_by": "BAP"
+                }
+              ]
+            }
+          ],
+          "tags": [
+            {
+              "descriptor": {
+                "code": "BAP_TERMS",
+                "name": "BAP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_BASIS"
+                  },
+                  "value": "INVOICE_RECEIPT"
+                },
+                {
+                  "descriptor": {
+                    "code": "SETTLEMENT_WINDOW"
+                  },
+                  "value": "P30D"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "BPP_TERMS",
+                "name": "BPP Terms of Engagement"
+              },
+              "display": false,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_PERCENTAGE"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "BUYER_FINDER_FEES_TYPE"
+                  },
+                  "value": "percent"
+                },
+                {
+                  "descriptor": {
+                    "code": "STATIC_TERMS"
+                  },
+                  "value": "https://api.example-bap.com/booking/terms"
+                },
+                {
+                  "descriptor": {
+                    "code": "MANDATORY_ARBITRATION"
+                  },
+                  "value": "true"
+                },
+                {
+                  "descriptor": {
+                    "code": "COURT_JURISDICTION"
+                  },
+                  "value": "New Delhi"
+                },
+                {
+                  "descriptor": {
+                    "code": "DELAY_INTEREST"
+                  },
+                  "value": "2.5 %"
+                }
+              ]
+            },
+            {
+              "descriptor": {
+                "code": "PAGINATION",
+                "name": "Pagination"
+              },
+              "display": true,
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "PAGINATION_ID"
+                  },
+                  "value": "P1"
+                },
+                {
+                  "descriptor": {
+                    "code": "CURRENT_PAGE_NUMBER"
+                  },
+                  "value": "1"
+                },
+                {
+                  "descriptor": {
+                    "code": "MAX_PAGE_NUMBER"
+                  },
+                  "value": "2"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "jsonResponse": {
+      "message": {
+        "ack": {
+          "status": "ACK"
+        }
+      }
+    },
+    "httpStatus": 200,
+    "createdAt": "2026-11-06T09:09:11.000Z",
+    "updatedAt": "2026-11-06T09:09:11.000Z",
+    "sessionDetails": {
+      "npType": "BAP",
+      "owner": "BPP"
+    }
+  }
+]

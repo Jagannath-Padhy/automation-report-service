@@ -1,0 +1,5 @@
+save-data:
+  context: "$.context"
+  order_id: "$.message.order_id"
+  cancellation_reason_id: "$.message.cancellation_reason_id"
+  descriptor_code: "$.message.descriptor.code"

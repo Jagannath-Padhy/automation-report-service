@@ -51,6 +51,7 @@ export class ReportService {
 
       const payloads = await fetchPayloads(payloadIdsFromStates);
       this.annotatePayloadsWithActionId(payloads, payloadIdToActionId);
+      const unfetchedActionIds = this.findUnfetchedActionIds(payloadIdsFromStates, payloads, payloadIdToActionId);
 
       const flows = sortPayloadsByCreatedAt(payloads);
 
@@ -75,7 +76,7 @@ export class ReportService {
       }
 
       const htmlReport = generateCustomHTMLReport(
-        await validationModule(flows, sessionId),
+        await validationModule(flows, sessionId, undefined, unfetchedActionIds),
         sessionId,
         flowMap
       );
@@ -262,6 +263,28 @@ export class ReportService {
       });
     });
     return map;
+  }
+
+  /**
+   * Per flow, the action_ids whose payloads the workbench flow state lists but the
+   * payload DB did not return — the step ran, its payload just can't be read, so
+   * the report can say that instead of "mandatory step missing".
+   */
+  findUnfetchedActionIds(
+    requested: Record<string, string[]>,
+    fetched: Record<string, any[]>,
+    payloadIdToActionId: Map<string, string>
+  ): Record<string, string[]> {
+    const result: Record<string, string[]> = {};
+    for (const [flowId, ids] of Object.entries(requested)) {
+      const got = new Set((fetched[flowId] ?? []).map((p: any) => p?.payloadId));
+      const missing = ids
+        .filter((id) => !got.has(id))
+        .map((id) => payloadIdToActionId.get(id))
+        .filter((a): a is string => !!a);
+      if (missing.length > 0) result[flowId] = Array.from(new Set(missing));
+    }
+    return result;
   }
 
   annotatePayloadsWithActionId(

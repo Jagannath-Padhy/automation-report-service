@@ -33,11 +33,18 @@ export function failureGate(result: TestResult): () => boolean {
   return () => result.failed.length === before;
 }
 
+/**
+ * `order_value.min_value` is "required" (fn 94), and every full spec catalog sends it
+ * (`500.00`). Its absence used to pass as "nothing to validate", so a seller omitting the
+ * group passed every layer (the Vistar tester's V3,
+ * docs/RETeB2B-vistar-seller-tester-coverage.md). Only the full catalog reaches this check;
+ * the incremental and P2P on_search forms carry no provider tags and are never validated here.
+ */
 export function validateOrderValueTag(provider: any, result: TestResult): void {
   const group = tagGroupsByCode(provider?.tags, "order_value")[0];
   if (!group) {
-    result.passed.push(
-      `on_search: ${providerLabel(provider)} no order_value tag declared — nothing to validate`
+    result.failed.push(
+      `on_search: ${providerLabel(provider)} is missing the required 'order_value' tag group — it must declare the minimum order value (min_value)`
     );
     return;
   }
@@ -58,12 +65,8 @@ export function validateOrderValueTag(provider: any, result: TestResult): void {
 
 export function validateTimingTags(provider: any, result: TestResult): void {
   const groups = tagGroupsByCode(provider?.tags, "timing");
-  if (groups.length === 0) {
-    result.passed.push(
-      `on_search: ${providerLabel(provider)} no timing tags declared — nothing to validate`
-    );
-    return;
-  }
+  // Absence is reported once, as a failure, by validateOrderTimingPresence.
+  if (groups.length === 0) return;
 
   const cleanRun = failureGate(result);
 
@@ -156,7 +159,7 @@ export function validateBrandImagesConsistency(provider: any, result: TestResult
   const group = tagGroupsByCode(provider?.tags, "brand_images")[0];
   if (!group) {
     result.failed.push(
-      `on_search: ${providerLabel(provider)} brand_images configuration is required`
+      `on_search: ${providerLabel(provider)} provider.tags must include a 'brand_images' group with an image for each brand used in the items' attribute tags`
     );
     return;
   }
@@ -198,7 +201,7 @@ export function validateRetailerInfoRequiredTags(provider: any, result: TestResu
 
   if (groups.length === 0) {
     result.failed.push(
-      `on_search: ${providerLabel(provider)} retailer_info_required configuration is required`
+      `on_search: ${providerLabel(provider)} provider.tags must include at least one 'retailer_info_required' group — a non-empty list of code/value entries naming the retailer details the seller needs from the buyer`
     );
     return;
   }
@@ -233,18 +236,114 @@ export function validateRetailerInfoRequiredTags(provider: any, result: TestResu
   }
 }
 
+/**
+ * Resolves a variant attribute path — the `name` of a variant_group category's `attr` tag
+ * — against an item. Two forms occur in the wild: an object path
+ * (`item.quantity.unitized.measure`) and a tag path (`item.tags.<group>.<code>`, e.g.
+ * `item.tags.attribute.colour`). Returns `undefined` when the path does not resolve.
+ */
+function resolveVariantAttr(item: any, name: string): any {
+  const parts = String(name).split(".");
+  if (parts[0] !== "item" || parts.length < 2) return undefined;
+
+  if (parts[1] === "tags") {
+    if (parts.length !== 4) return undefined;
+    for (const group of tagGroupsByCode(item?.tags, parts[2])) {
+      const value = tagValue(group.list, parts[3]);
+      if (value !== undefined) return value;
+    }
+    return undefined;
+  }
+
+  let node: any = item;
+  for (const part of parts.slice(1)) {
+    if (node === null || typeof node !== "object") return undefined;
+    node = node[part];
+  }
+  return node;
+}
+
+/**
+ * Serialises a resolved variant value so that two logically equal values compare equal.
+ * `JSON.stringify` alone is key-order sensitive, and an object leaf such as
+ * `item.quantity.unitized.measure` (`{unit, value}`) is authored in either order — which
+ * would let two identical variants pass as distinct.
+ */
+function canonicalize(value: any): string {
+  if (value === null || value === undefined) return "null";
+  if (typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(canonicalize).join(",")}]`;
+  return `{${Object.keys(value)
+    .sort()
+    .map((key) => `${JSON.stringify(key)}:${canonicalize(value[key])}`)
+    .join(",")}}`;
+}
+
+/**
+ * A variant group is only meaningful if the attributes it declares exist on its members
+ * and actually tell them apart. `attr.name` was previously checked for non-emptiness only,
+ * so a path naming a field no item carries — e.g. `item.tags.unitized.count`, where the
+ * real field is `item.quantity.unitized.count` — passed silently.
+ */
+function validateVariantGroupAttributes(
+  provider: any,
+  category: any,
+  members: any[],
+  result: TestResult
+): void {
+  if (members.length === 0) return;
+
+  const names = tagGroupsByCode(category?.tags, "attr")
+    .map((group: any) => tagValue(group.list, "name"))
+    .filter((name: any): name is string => typeof name === "string" && name.trim().length > 0);
+  // A missing `attr.name` is reported by validateCategoryTags.
+  if (names.length === 0) return;
+
+  const label = `${providerLabel(provider)} variant group ${category?.id ?? "?"}`;
+  let allResolved = true;
+
+  for (const name of names) {
+    const absent = members.filter((item: any) => resolveVariantAttr(item, name) === undefined);
+    if (absent.length === 0) continue;
+
+    allResolved = false;
+    result.failed.push(
+      absent.length === members.length
+        ? `on_search: ${label} varies on '${name}', which resolves on none of its ${members.length} item(s) — check the path`
+        : `on_search: ${label} varies on '${name}', which is absent on item(s) ${absent.map((i: any) => i.id).join(", ")}`
+    );
+  }
+
+  // Only worth comparing once every declared attribute resolves — otherwise the collisions
+  // reported would just be an echo of the broken path above.
+  if (!allResolved) return;
+
+  const seen = new Map<string, string>();
+  for (const item of members) {
+    const fingerprint = names
+      .map((name) => canonicalize(resolveVariantAttr(item, name)))
+      .join("|");
+    const twin = seen.get(fingerprint);
+    if (twin === undefined) {
+      seen.set(fingerprint, item.id);
+    } else {
+      result.failed.push(
+        `on_search: ${label} items ${twin} and ${item.id} are identical on ${names.join(", ")} — items in a variant group must differ on the attributes it varies on`
+      );
+    }
+  }
+}
+
 export function validateVariantGroupConsistency(provider: any, result: TestResult): void {
   const cleanRun = failureGate(result);
 
+  const variantGroups = (provider?.categories || []).filter((category: any) =>
+    tagGroupsByCode(category?.tags, "type").some(
+      (group: any) => tagValue(group.list, "type") === "variant_group"
+    )
+  );
   const variantGroupIds = new Set(
-    (provider?.categories || [])
-      .filter((category: any) =>
-        tagGroupsByCode(category?.tags, "type").some(
-          (group: any) => tagValue(group.list, "type") === "variant_group"
-        )
-      )
-      .map((category: any) => category?.id)
-      .filter(Boolean)
+    variantGroups.map((category: any) => category?.id).filter(Boolean)
   );
 
   const itemsWithParent = (provider?.items || []).filter((item: any) => item?.parent_item_id);
@@ -268,6 +367,15 @@ export function validateVariantGroupConsistency(provider: any, result: TestResul
         `on_search: ${providerLabel(provider)} ${itemLabel(item)} parent_item_id '${item.parent_item_id}' does not match any declared variant_group category`
       );
     }
+  }
+
+  for (const category of variantGroups) {
+    validateVariantGroupAttributes(
+      provider,
+      category,
+      itemsWithParent.filter((item: any) => item.parent_item_id === category?.id),
+      result
+    );
   }
 
   if (cleanRun()) {
@@ -454,8 +562,29 @@ export function validateConsumerCareContact(items: any[] | undefined, result: Te
   }
 }
 
+/**
+ * The provider's GSTIN credential, and its descriptor `name` / `short_desc` (fn 30).
+ *
+ * The descriptor fields are checked for emptiness only WHEN SENT: the incremental-catalog
+ * and P2P on_search forms legitimately carry no provider descriptor. L1's
+ * `PROVIDERS_DESCRIPTOR_SHORT_DESC must be present` treats `""` as present, so an empty
+ * short_desc (the Vistar tester's V1, docs/RETeB2B-vistar-seller-tester-coverage.md)
+ * passed every layer. Every spec catalog that sends a descriptor sends both values.
+ */
 export function validateProviderIdentity(provider: any, result: TestResult): void {
   const cleanRun = failureGate(result);
+
+  const descriptor = provider?.descriptor;
+  if (descriptor && typeof descriptor === "object") {
+    for (const field of ["name", "short_desc"]) {
+      const value = descriptor[field];
+      if (value !== undefined && value !== null && !String(value).trim()) {
+        result.failed.push(
+          `on_search: ${providerLabel(provider)} descriptor.${field} must not be empty when sent`
+        );
+      }
+    }
+  }
 
   const creds = provider?.creds || [];
   const gstin = creds.find((cred: any) => cred?.descriptor?.code === "GSTIN");
@@ -474,6 +603,11 @@ export function validateProviderIdentity(provider: any, result: TestResult): voi
         ? `on_search: ${providerLabel(provider)} GSTIN credential present ('${gstin.id}')`
         : `on_search: ${providerLabel(provider)} no GSTIN credential declared — nothing to validate`
     );
+    if (descriptor && typeof descriptor === "object") {
+      result.passed.push(
+        `on_search: ${providerLabel(provider)} descriptor name/short_desc are non-empty where sent`
+      );
+    }
   }
 }
 
@@ -562,6 +696,67 @@ export function validateP2PDescriptor(descriptor: any, result: TestResult): void
     );
     result.passed.push(
       "on_search-1: no retailer-specific scheme_progress/credit/poc tags present, as required"
+    );
+  }
+}
+
+/**
+ * The mapping-lookup leg of Retailer_Mapping (`on_search-1`) answers a retailer-to-distributor
+ * lookup, not a catalog request: it returns the mapping as `retailer_mapping` tag groups on
+ * catalog['bpp/descriptor'] and carries no `bpp/providers` at all. Every non-Discovery flow used
+ * to fall through to validateCatalogStructure, whose non-empty-provider rule made that a false
+ * failure. What must be present instead is, per group, the distributor it resolves to and the
+ * customer_id the mapping gives the retailer there.
+ *
+ * Shape note: here `bpp/descriptor` is the ordinary descriptor object and the groups sit on its
+ * `tags`. On Discovery's P2P leg `bpp/descriptor` is itself the array of groups — that one is
+ * validateP2PDescriptor's, and the two shapes are deliberately not merged.
+ */
+export function validateRetailerMappingResponse(catalog: any, result: TestResult): void {
+  const descriptor = catalog?.["bpp/descriptor"];
+
+  if (!descriptor || typeof descriptor !== "object" || Array.isArray(descriptor)) {
+    result.failed.push(
+      "on_search: the mapping response must carry catalog['bpp/descriptor'] holding the retailer_mapping tag groups"
+    );
+    return;
+  }
+
+  const groups = tagGroupsByCode(descriptor.tags, "retailer_mapping");
+  if (groups.length === 0) {
+    result.failed.push(
+      "on_search: the mapping response carries no retailer_mapping tag group — the lookup resolved nothing"
+    );
+    return;
+  }
+
+  const cleanRun = failureGate(result);
+
+  for (const [index, group] of groups.entries()) {
+    const label = `retailer_mapping[${index}]`;
+
+    if (!Array.isArray(group.list) || group.list.length === 0) {
+      result.failed.push(`on_search: ${label} list must not be empty`);
+      continue;
+    }
+    if (!tagValue(group.list, "provider_id")) {
+      result.failed.push(
+        `on_search: ${label} is missing provider_id — the mapping must name the distributor it resolves to`
+      );
+    }
+    if (!tagValue(group.list, "customer_id")) {
+      result.failed.push(
+        `on_search: ${label} is missing customer_id — the mapping must return the retailer's id at that distributor`
+      );
+    }
+  }
+
+  if (cleanRun()) {
+    const providerIds = groups
+      .map((group: any) => tagValue(group?.list, "provider_id"))
+      .filter(Boolean);
+    result.passed.push(
+      `on_search: all ${groups.length} retailer_mapping group(s) resolve to a provider_id and customer_id (provider_id: ${providerIds.join(", ")})`
     );
   }
 }

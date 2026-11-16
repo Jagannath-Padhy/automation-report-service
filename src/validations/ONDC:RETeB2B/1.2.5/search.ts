@@ -52,7 +52,7 @@ export default async function search(
         validateP2PRetailerIdentification(intent, result);
       } else {
         result.failed.push(
-          `search: unexpected action_id '${actionId}' for flow '${flowId}' — expected '${ACTION_ID_BROADCAST}' or '${ACTION_ID_P2P}'`
+          `search: this call does not match a step of ${flowId} — the flow expects a broadcast search (no bpp_id/bpp_uri) followed by a search sent directly to one seller (with bpp_id/bpp_uri); check the order of calls`
         );
       }
     } else {

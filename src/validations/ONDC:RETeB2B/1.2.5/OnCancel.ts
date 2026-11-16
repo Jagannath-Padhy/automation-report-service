@@ -1,15 +1,16 @@
 import { TestResult, Payload } from "../../../types/payload";
 import { saveFromElement } from "../../../utils/specLoader";
 import { getActionData } from "../../../services/actionDataService";
-import { validateOrderState, compareOrderIdContinuity } from "./commonChecks";
+import { validateOrderState, compareOrderIdContinuity, validateQuoteAmountSigns } from "./commonChecks";
 import { validateOnSelectFulfillmentRefs } from "./selectChecks";
-import { validateAdjustmentArithmetic } from "./returnChecks";
+import { validateAdjustmentArithmetic, asArray } from "./returnChecks";
 import { validatePaymentParamsEcho, validateCreatedAtNotBeforeOrder } from "./orderFormationChecks";
 import {
   validateCancelledFulfillmentStates,
   validateCancellationAttribution,
   validatePrecancelState,
   validateRtoInitiation,
+  validateCancelFulfillmentIdContinuity,
 } from "./rtoChecks";
 
 // Two on_cancel shapes reach this validator:
@@ -56,6 +57,9 @@ export default async function on_cancel(
     validateCancellationAttribution(order, context, label, testResults);
     validateRtoInitiation(order, actionId, label, testResults);
     validateOnSelectFulfillmentRefs(order, testResults, label);
+    // S8: only discount/offer lines may be negative. The sum check (validateQuoteBreakup) is
+    // deliberately NOT applied after confirm; the sign rule holds on every leg that quotes.
+    if (order?.quote) validateQuoteAmountSigns(order.quote, testResults, label);
 
     const txnId = context?.transaction_id as string | undefined;
     if (txnId) {
@@ -77,6 +81,8 @@ export default async function on_cancel(
           ? { state: onConfirmData.delivery_state, source: "on_confirm" }
           : null;
       validatePrecancelState(order, prior, label, testResults);
+      // Vistar V16/V17: the Delivery keeps its confirmed id; Cancel/RTO ids are new.
+      validateCancelFulfillmentIdContinuity(order, asArray(onConfirmData?.fulfillment_ids), label, testResults);
     }
   } catch (_) {}
 
