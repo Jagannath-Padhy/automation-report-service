@@ -874,6 +874,7 @@ domains:
             - on_status
             - on_status
             - on_status
+            - on_status
           IMMEDIATE_DELIVERY_FLOW:
             - search
             - on_search
@@ -883,6 +884,8 @@ domains:
             - on_confirm
             - update
             - on_update
+            - on_status
+            - on_status
             - on_status
             - track
             - on_track
@@ -1183,6 +1186,8 @@ domains:
             - on_init
             - confirm
             - on_confirm
+            - update
+            - on_update
             - on_status
             - on_status
             - on_status

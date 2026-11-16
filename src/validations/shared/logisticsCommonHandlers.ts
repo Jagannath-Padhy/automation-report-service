@@ -619,7 +619,12 @@ export async function checkOnCancelCommon(
     testResults.passed.push("precancel_state tag validation passed");
 
     try {
-        if (flowId === "RTO_FLOW") { assert.ok(orderState === "In-progress", `Order state should be 'In-progress', got '${orderState}'`); }
+        // RTO is triggered by this very on_cancel whenever an "RTO" fulfillment is
+        // present — regardless of the flow's name (STATIC_OTP_RTO_DELIVERY, etc. all
+        // push the same RTO fulfillment as RTO_FLOW does). Order only moves to
+        // "Cancelled" for a genuine buyer-initiated /cancel with no RTO involved.
+        const hasRtoFulfillment = fulfillments.some((f) => f.type === "RTO");
+        if (hasRtoFulfillment) { assert.ok(orderState === "In-progress", `Order state should be 'In-progress', got '${orderState}'`); }
         else { assert.ok(orderState === "Cancelled", `Order state should be 'Cancelled', got '${orderState}'`); }
         testResults.passed.push(`Order state is ${orderState} validation passed`);
     } catch (e: any) { testResults.failed.push(e.message); }
