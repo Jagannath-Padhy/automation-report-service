@@ -18,7 +18,7 @@ export default async function on_issue_status(
   const igmVersion = detectIgmVersion(message);
   
   // Initialize result
-  const result: TestResult = { response: {}, passed: [], failed: [] };
+  const result: TestResult = { response: element?.jsonResponse?.response || {}, passed: [], failed: [] };
   
   if (igmVersion === '1.0.0') {
     validateIgm1OnIssueStatus(message, result);

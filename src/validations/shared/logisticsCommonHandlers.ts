@@ -37,6 +37,16 @@ import {
 // Private tag-structure helpers  (shared by checkConfirmCommon + checkOnConfirmCommon)
 // ─────────────────────────────────────────────────────────────────────────────
 
+// SURGE_FEE_FLOW legitimately has the LSP add a new surge-fee item (tags:
+// type=surge) between confirm and on_confirm, bumping the quote price and
+// item list by design — not an inconsistency. Detected by content (the tag),
+// not by flowId, so any flow that does this gets the same treatment.
+function isSurgeItem(item: any): boolean {
+    return !!item?.tags?.some(
+        (t: any) => t?.code === "type" && t?.list?.some((l: any) => l?.code === "type" && l?.value === "surge")
+    );
+}
+
 function validateLinkedOrderTag(action: string, tags: any[], testResults: TestResult): void {
     const tag = tags.find((t: any) => t.code === "linked_order");
     if (!tag) return;
@@ -412,10 +422,20 @@ export async function checkOnConfirmCommon(
         if (confirmCreatedAt) { assert.ok(updatedAt !== confirmCreatedAt, "order.updated_at should be updated w.r.t /confirm created_at"); testResults.passed.push("order.updated_at is updated correctly"); }
     } catch (e: any) { testResults.failed.push(e.message); }
 
+    const onConfirmItems: any[] = message?.order?.items || [];
+    const surgeItemIds = onConfirmItems.filter(isSurgeItem).map((i: any) => i.id);
+    const surgeBreakupTotal = (onConfirmQuote?.breakup || [])
+        .filter((b: any) => surgeItemIds.includes(b?.["@ondc/org/item_id"]))
+        .reduce((sum: number, b: any) => sum + parseFloat(b?.price?.value || "0"), 0);
+
     await validateOrderIdConsistency(action, onConfirmOrderId, sessionID, transactionId, "confirm_order_id", testResults);
-    await validateQuoteConsistency(action, onConfirmQuote, sessionID, transactionId, "confirm_quote", testResults);
+    await validateQuoteConsistency(action, onConfirmQuote, sessionID, transactionId, "confirm_quote", testResults, surgeBreakupTotal);
     await validateProviderIdConsistency(action, message?.order?.provider?.id, sessionID, transactionId, "on_search_provider_id", testResults);
-    await validateItemIdsConsistency(action, message?.order?.items || [], sessionID, transactionId, "init_items", testResults);
+    await validateItemIdsConsistency(
+        action,
+        onConfirmItems.filter((i: any) => !surgeItemIds.includes(i.id)),
+        sessionID, transactionId, "init_items", testResults
+    );
 
     const deliveryFf = fulfillments.find((f) => f.type === "Delivery" || f.type === "FTL" || f.type === "PTL");
     await validateAndSaveFulfillmentIds(action, fulfillments, sessionID, transactionId, "confirm_delivery_fulfillment_id", "confirm_rto_fulfillment_id", "on_confirm_delivery_fulfillment_id", "on_confirm_rto_fulfillment_id", testResults);
