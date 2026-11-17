@@ -67,12 +67,23 @@ export function contextValidators(expected?: ExpectedContext): Validation[] {
         const action = ctx?.action;
         const isSearchOrOnSearch = action === 'search' || action === 'on_search';
         const hasBppId = !!ctx?.bpp_id;
-        const cityOptional = isTrv11 && (
+        const cityOptionalForTrv11 = isTrv11 && (
           (action === 'search' && !hasBppId) ||  // master/GPS search (no bpp_id)
           (action === 'on_search')                // on_search may or may not have city
         );
 
-        if (!city && !cityOptional) missing.push('context.city|location.city.code');
+        // IGM (issue/on_issue/issue_status/on_issue_status) context is
+        // standardized across ONDC domains and never carries a city — it's
+        // a grievance/issue thread, not a location-scoped catalog lookup.
+        // Confirmed against real nic2004:60232 traffic (2026-11-16): this
+        // unconditional requirement was silently forcing checkPayload to
+        // short-circuit with response:{} for every IGM call, in every
+        // domain, overriding whatever the domain's own IGM validator
+        // actually returned.
+        const igmActions = ['issue', 'on_issue', 'issue_status', 'on_issue_status'];
+        const cityOptionalForIgm = igmActions.includes(action);
+
+        if (!city && !cityOptionalForTrv11 && !cityOptionalForIgm) missing.push('context.city|location.city.code');
         return missing.length
           ? { valid: false, results: missing.map(f => ({ valid: false, description: `${f} is required`, code: 400 })) }
           : { valid: true, results: [] };
