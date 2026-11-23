@@ -93,15 +93,25 @@ export const PURCHASE_FINANCE_FLOWS_SKIP_VALIDATION = [
 
 export const HEALTH_INSURANCE_FLOWS = [
   "Health_Insurance_Application(Individual)",
+  "Health_Insurance_Application(Individual_With_IGM)",
   "Health_Insurance_Application(PRE-ORDER-Individual)",
+  "Health_Insurance_Application(PRE-ORDER-Individual-With-ManualReview)",
+  "Health_Insurance_Application(PRE-ORDER-Individual-Without-CIS)",
   "Claim_Health_Insurance(Individual)",
   "Renew_Health_Insurance(Individual)",
   "Cancel_Health_Insurance(Individual)",
+  "Payment_Failure_Health_Insurance(Individual)",
+  "Payment_Failure_Health_Insurance(PRE-ORDER-Individual-With-ManualReview)",
   "Health_Insurance_Application(Family)",
+  "Health_Insurance_Application(Family_With_IGM)",
   "Health_Insurance_Application(PRE-ORDER-Family)",
+  "Health_Insurance_Application(PRE-ORDER-Family-With-ManualReview)",
+  "Health_Insurance_Application(PRE-ORDER-Family-Without-CIS)",
   "Claim_Health_Insurance(Family)",
   "Renew_Health_Insurance(Family)",
-  "Cancel_Health_Insurance(Family)"
+  "Cancel_Health_Insurance(Family)",
+  "Payment_Failure_Health_Insurance(Family)",
+  "Payment_Failure_Health_Insurance(PRE-ORDER-Family-With-ManualReview)"
 ]
 
 export const GIFT_CARD_FLOWS = [
