@@ -472,15 +472,17 @@ export async function validateQuoteConsistency(
     sessionID: string,
     transactionId: string,
     savedQuoteKey: string,
-    testResults: TestResult
+    testResults: TestResult,
+    allowedDelta: number = 0
 ): Promise<void> {
     const savedQuote = await fetchData(sessionID, transactionId, savedQuoteKey);
     if (savedQuote && currentQuote) {
         try {
+            const expected = parseFloat((savedQuote as any)?.price?.value) + allowedDelta;
             assert.strictEqual(
                 parseFloat(currentQuote?.price?.value),
-                parseFloat((savedQuote as any)?.price?.value),
-                `Quote price in ${action} (${currentQuote?.price?.value}) does not match saved (${(savedQuote as any)?.price?.value})`
+                expected,
+                `Quote price in ${action} (${currentQuote?.price?.value}) does not match saved (${expected})`
             );
             testResults.passed.push(`Quote price consistent between on_confirm and ${action}`);
         } catch (error: any) {

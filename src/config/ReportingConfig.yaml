@@ -695,9 +695,17 @@ domains:
         validationModules: "../validations/ONDC:TRV11/validator#validate"
   "nic2004:60232":
     versions:
-      "1.2.5":
+      "1.2.0":
+        # Sourced from automation-specifications' config/flows/Logistics
+        # (NIC2004:60232)/*.yaml (meta.version: "1.2.0"), cross-checked
+        # against config/flows/index.yaml for tags — all 5 flows there are
+        # tagged MANDATORY, 4 of 5 also REPORTABLE (the IGM flow is
+        # MANDATORY only). Business rules sourced from the "API Contract
+        # for Logistics (v1.2.0)" Google Doc. See
+        # ../validations/nic2004:60232/1.2.0/README.md for the rules
+        # implemented and deliberate scope cuts.
         flows:
-          ORDER_FLOW_BASE_LINE:
+          ORDER_FLOW_BASELINE:
             - search
             - on_search
             - init
@@ -711,6 +719,93 @@ domains:
             - track
             - on_track
             - on_status
+            - on_status
+          "ORDER_FLOW_BASELINE(without rts)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+          RTO_FLOW:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
+          BUYER_SIDE_ORDER_CANCELLATION:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - cancel
+            - on_cancel
+          "ORDER_FLOW_BASELINE_WITH_IGM(v-1.0.0)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+
+        optional_flows:
+
+        validationModules: "../validations/nic2004:60232/validator#validate"
+      "1.2.5":
+        # Sequences corrected 2026-11-16 against automation-specifications'
+        # draft-logistics-1.2.5 branch, config/flows/Logistics (P2P)/*.yaml
+        # (the real source — this section had drifted from it, missing an
+        # extra on_status mid-flow and one at the end on every flow that has
+        # them; QUICK_COMMERCE_FLOW's order was wrong entirely). All flows
+        # here are tagged MANDATORY+REPORTABLE in config/flows/index.yaml,
+        # contradicting the old optional_flows list below, which has been
+        # cleared accordingly. Only 6 of that branch's 30 real flow
+        # definitions are configured here so far (the 2 pre-existing ones
+        # that needed fixing, plus the 4 this session's real-session test
+        # curl exercised) — the remaining ~24 share the same drift risk and
+        # haven't been individually re-verified yet.
+        flows:
+          ORDER_FLOW_BASE_LINE:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
 
           RTO_FLOW:
             - search
@@ -721,6 +816,7 @@ domains:
             - on_confirm
             - update
             - on_update
+            - on_status
             - on_status
             - on_status
             - on_status
@@ -738,8 +834,10 @@ domains:
             - on_update
             - on_status
             - on_status
+            - on_status
             - track
             - on_track
+            - on_status
             - on_status
           PREPAID_PAYMENT_FLOW:
             - search
@@ -752,8 +850,10 @@ domains:
             - on_update
             - on_status
             - on_status
+            - on_status
             - track
             - on_track
+            - on_status
             - on_status
           QUICK_COMMERCE_FLOW:
             - search
@@ -762,12 +862,12 @@ domains:
             - on_init
             - confirm
             - on_confirm
+            - on_status
             - update
             - on_update
             - on_status
             - on_status
-            - track
-            - on_track
+            - on_status
             - on_status
           IMMEDIATE_DELIVERY_FLOW:
             - search
@@ -780,16 +880,67 @@ domains:
             - on_update
             - on_status
             - on_status
+            - on_status
             - track
             - on_track
             - on_status
+            - on_status
+          "ORDER_FLOW_BASE_LINE_WITH_IGM(v-1.0.0)":
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+            - issue
+            - on_issue
+            - on_issue_status
+            - issue
+          "RATE_CARD (P2P)":
+            - search
+            - on_search
+          SELLER_BUYER_INSTRUCTIONS:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - track
+            - on_track
+            - on_status
+            - on_status
+          STATIC_OTP_RTO_DELIVERY:
+            - search
+            - on_search
+            - init
+            - on_init
+            - confirm
+            - on_confirm
+            - update
+            - on_update
+            - on_status
+            - on_status
+            - on_status
+            - on_status
+            - on_cancel
+            - on_status
 
         optional_flows:
-          - RTO_FLOW
-          - CASH_ON_DELIVERY_FLOW
-          - PREPAID_PAYMENT_FLOW
-          - QUICK_COMMERCE_FLOW
-          - IMMEDIATE_DELIVERY_FLOW
         validationModules: "../validations/nic2004:60232/validator#validate"
   ONDC:LOG10:
     versions:

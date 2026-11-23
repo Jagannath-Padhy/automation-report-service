@@ -8,7 +8,7 @@ export default async function on_issue(
   actionId: string
 ): Promise<TestResult> {
   const result: TestResult = {
-    response: {},
+    response: element?.jsonResponse?.response || {},
     passed: [],
     failed: []
   };
