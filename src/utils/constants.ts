@@ -19,6 +19,9 @@ export const actions: String[] = [
   "on_issue",
   "issue_status",
   "on_issue_status",
+  // RSF 2.1.0 (ONDC:NTS10) reconciliation
+  "recon",
+  "on_recon",
   // Non-standard pseudo-action recorded by the mock for ONDC:RET10's
   // Catalog_Rejection_Flow — a real recorded payload (context.action:
   // "catalog_rejection"), not one of Beckn's 20 canonical actions.
@@ -90,15 +93,25 @@ export const PURCHASE_FINANCE_FLOWS_SKIP_VALIDATION = [
 
 export const HEALTH_INSURANCE_FLOWS = [
   "Health_Insurance_Application(Individual)",
+  "Health_Insurance_Application(Individual_With_IGM)",
   "Health_Insurance_Application(PRE-ORDER-Individual)",
+  "Health_Insurance_Application(PRE-ORDER-Individual-With-ManualReview)",
+  "Health_Insurance_Application(PRE-ORDER-Individual-Without-CIS)",
   "Claim_Health_Insurance(Individual)",
   "Renew_Health_Insurance(Individual)",
   "Cancel_Health_Insurance(Individual)",
+  "Payment_Failure_Health_Insurance(Individual)",
+  "Payment_Failure_Health_Insurance(PRE-ORDER-Individual-With-ManualReview)",
   "Health_Insurance_Application(Family)",
+  "Health_Insurance_Application(Family_With_IGM)",
   "Health_Insurance_Application(PRE-ORDER-Family)",
+  "Health_Insurance_Application(PRE-ORDER-Family-With-ManualReview)",
+  "Health_Insurance_Application(PRE-ORDER-Family-Without-CIS)",
   "Claim_Health_Insurance(Family)",
   "Renew_Health_Insurance(Family)",
-  "Cancel_Health_Insurance(Family)"
+  "Cancel_Health_Insurance(Family)",
+  "Payment_Failure_Health_Insurance(Family)",
+  "Payment_Failure_Health_Insurance(PRE-ORDER-Family-With-ManualReview)"
 ]
 
 export const GIFT_CARD_FLOWS = [
@@ -189,6 +202,7 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:FIS12:2.3.0",
   "ONDC:FIS12:SL:2.3.0",
   "ONDC:FIS12:BL:2.3.0",
+  "ONDC:NTS10:2.1.0",
   "ONDC:FIS13:2.0.1",
   "ONDC:FIS13:2.0.0:HEALTH INSURANCE",
   "ONDC:FIS13:2.0.0:MOTOR INSURANCE",
@@ -196,6 +210,7 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:FIS13:2.0.0:TRANSIT INSURANCE",
   "ONDC:FIS13:2.0.0:ACCIDENTAL INSURANCE",
   "ONDC:TRV10:2.1.0",
+  "ONDC:TRV11:2.0.0",
   "ONDC:TRV11:2.0.1",
   "ONDC:TRV11:2.1.0",
   "ONDC:TRV13:2.0.1",
@@ -217,14 +232,15 @@ export const ENABLED_DOMAINS: String[] = [
   "ONDC:RET16:1.2.0",
   "ONDC:RET16:1.2.5",
   "ONDC:RET18:1.2.0",
-  "ONDC:RET18:1.2.5"
+  "ONDC:RET18:1.2.5",
+  "nic2004:60232:1.2.0",
 ];
 
 // Usecase-level enabling: Map of domain:version -> allowed usecases
 // If a domain:version is in ENABLED_DOMAINS but not in this map, all usecases are allowed
 // If present in this map, only listed usecases will use internal validations
 export const ENABLED_USECASES: Record<string, string[]> = {
-  "ONDC:TRV11:2.0.0": ["metro"],  // Only Metro enabled for 2.0.0
+  "ONDC:TRV11:2.0.0": ["metro", "bus"],  // Metro and Bus enabled for 2.0.0
   "ONDC:TRV11:2.0.1": ["metro"],  // Only Metro enabled for 2.0.1, Bus will use Pramaan
   "ONDC:TRV11:2.1.0": ["metro", "bus"],  // Metro and Bus enabled for 2.1.0
 };

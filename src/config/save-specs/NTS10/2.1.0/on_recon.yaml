@@ -1,0 +1,6 @@
+save-data:
+  message_id: "$.context.message_id"
+  transaction_id: "$.context.transaction_id"
+  timestamp: "$.context.timestamp"
+  orders: "$.message.orders[*]"
+  error: "$.error"

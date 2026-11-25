@@ -41,6 +41,8 @@ const INITIAL_ACTION_COUNTERS: Record<ValidationAction, number> = {
   on_issue: 1,
   issue_status: 1,
   on_issue_status: 1,
+  recon: 1,
+  on_recon: 1,
   catalog_rejection: 1,
 };
 
